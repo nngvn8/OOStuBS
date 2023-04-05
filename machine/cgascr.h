@@ -21,11 +21,13 @@ private:
 
 public:
 	CGA_Screen(const CGA_Screen &copy) = delete; // prevent copying
-	CGA_Screen()
-/* Add your code here */ 
-{}
+    //hier war ein default contructor
+    void show(int x, int y, char c, unsigned char attrib);
 
-/* Add your code here */ 
+    void setpos (int x, int y);
+
+    void print (char* text, int length, unsigned char attrib);
+
 };
 
 /* Add your code here */ 
