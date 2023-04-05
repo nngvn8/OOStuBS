@@ -1,4 +1,5 @@
-build
+build/*
+!build/bootdisk.iso
 dep
 .idea
 isofiles/

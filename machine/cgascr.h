@@ -20,8 +20,9 @@ private:
 /* Add your code here */ 
 
 public:
+    CGA_Screen(){}
 	CGA_Screen(const CGA_Screen &copy) = delete; // prevent copying
-    //hier war ein default contructor
+
     void show(int x, int y, char c, unsigned char attrib);
 
     void setpos (int x, int y);
