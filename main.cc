@@ -9,17 +9,14 @@ void cgascr_test_application(){
 
     // TODO: Test Attribute for blinking
 
-    // Move cursor one step to the right (hardcoded)
-    cga_screen.setpos(6, 8);
-
-    /*
-    For later debugging
-
     // Move cursor one step to the right (dynamic)
-    int x, y;
-    cga_screen.getpos(&x, &y);
+    int x = 0;
+    int y = 0;
+    cga_screen.getpos(x, y);
     cga_screen.setpos(x+1, y);
-     */
+    cga_screen.getpos(x, y);
+    cga_screen.show(x,y,'X',0x02);
+    cga_screen.setpos(x+1, y);
 }
 
 void string_buff_and_o_strem_test_application(){

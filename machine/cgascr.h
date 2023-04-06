@@ -20,6 +20,7 @@
 #define INDEX_REGISTER_PORT 0x3d4
 #define DATA_REGISTER_PORT 0x3d5
 #define CURSOR_ADDRESS_HIGH_INDEX 14
+#define CURSOR_ADDRESS_LOW_INDEX 15
 
 class CGA_Screen {
 private:
