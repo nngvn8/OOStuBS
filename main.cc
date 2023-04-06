@@ -1,5 +1,15 @@
 #include "machine/cgascr.h"
 
+void clear_screen(){
+    CGA_Screen cga_screen = CGA_Screen();
+    for (int i = 0; i < 25; ++i) {
+        for (int j = 0; j < 80; ++j) {
+            cga_screen.show(j, i, 'X', 0xFF);
+        }
+    }
+    cga_screen.setpos(0, 0);
+}
+
 void cgascr_test_application(){
     // Initialize the one CGA_Screen
     CGA_Screen cga_screen = CGA_Screen();
@@ -17,6 +27,13 @@ void cgascr_test_application(){
     cga_screen.getpos(x, y);
     cga_screen.show(x,y,'X',0x02);
     cga_screen.setpos(x+1, y);
+}
+
+void print_hello_message(){
+    clear_screen();
+    CGA_Screen cga_screen = CGA_Screen();
+    char message[] = "Hello, World!"
+    cga_screen.print(message, 13, 0x02);
 }
 
 void string_buff_and_o_strem_test_application(){
