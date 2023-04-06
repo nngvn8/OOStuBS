@@ -4,7 +4,7 @@ void clear_screen(){
     CGA_Screen cga_screen = CGA_Screen();
     for (int i = 0; i < 25; ++i) {
         for (int j = 0; j < 80; ++j) {
-            cga_screen.show(j, i, 'X', 0xFF);
+            cga_screen.show(j, i, 'X', 0x00);
         }
     }
     cga_screen.setpos(0, 0);
@@ -32,7 +32,7 @@ void cgascr_test_application(){
 void print_hello_message(){
     clear_screen();
     CGA_Screen cga_screen = CGA_Screen();
-    char message[] = "Hello, World!"
+    char message[] = "Hello, World!";
     cga_screen.print(message, 13, 0x02);
 }
 
@@ -47,9 +47,11 @@ void cga_stream_test_application(){
 int main() {
     cgascr_test_application();
 
+    print_hello_message();
+
     string_buff_and_o_strem_test_application();
 
     cga_stream_test_application();
- 
+
 	return 0;
 }
