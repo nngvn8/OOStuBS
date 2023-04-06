@@ -32,8 +32,19 @@ void cgascr_test_application(){
 void print_hello_message(){
     clear_screen();
     CGA_Screen cga_screen = CGA_Screen();
+    cga_screen.setpos(33, 5);
     char message[] = "Hello, World!";
     cga_screen.print(message, 13, 0x02);
+}
+
+void test_wrapping(){
+    // clear_screen();
+    CGA_Screen cga_screen = CGA_Screen();
+    char message[] = "This message wraps around.";
+    cga_screen.setpos(67, 14);
+    cga_screen.print(message, 25, 0x02);
+    cga_screen.setpos(67, 24);
+    cga_screen.print(message, 25, 0x02);
 }
 
 void string_buff_and_o_strem_test_application(){
@@ -48,6 +59,8 @@ int main() {
     cgascr_test_application();
 
     print_hello_message();
+
+    test_wrapping();
 
     string_buff_and_o_strem_test_application();
 

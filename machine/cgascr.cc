@@ -63,6 +63,9 @@ void CGA_Screen::print (char* text, int length, unsigned char attrib){
         if (current_x > MAX_X){
             current_x = 0;
             current_y++;
+            if (current_y > MAX_Y){
+                current_y = 0;
+            }
         }
         show(current_x, current_y, text[i], attrib);
     }
