@@ -15,10 +15,14 @@
 
 #include "machine/io_port.h"
 
+#define MAX_X 79
+#define MAX_Y 24
+#define INDEX_REGISTER_PORT 0x3d4
+#define DATA_REGISTER_PORT 0x3d5
+#define CURSOR_ADDRESS_HIGH_INDEX 14
+
 class CGA_Screen {
 private:
-/* Add your code here */ 
-
 public:
     CGA_Screen(){}
 	CGA_Screen(const CGA_Screen &copy) = delete; // prevent copying
@@ -26,6 +30,8 @@ public:
     void show(int x, int y, char c, unsigned char attrib);
 
     void setpos (int x, int y);
+
+    void getpos (int &x, int &y);
 
     void print (char* text, int length, unsigned char attrib);
 

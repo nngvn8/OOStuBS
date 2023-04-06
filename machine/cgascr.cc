@@ -10,25 +10,41 @@
 /* I/O ports.                                                                */
 /*****************************************************************************/
 
-/* Add your code here */ 
-#include "machine/cgascr.h"
-
-/* Add your code here */
-
-
+#include "cgascr.h"
+#include "io_port.h"
 
 void CGA_Screen::show(int x, int y, char c, unsigned char attrib){
     char *CGA_START = (char *) 0xb8000;
-    char *pos;
-    pos = CGA_START + 2*(x + y * 80);
+    char *pos = CGA_START + 2*(x + y * 80);
     *pos = c;
     *(pos + 1) = (char) attrib;
 }
 
 void CGA_Screen::setpos (int x, int y){
+    // Since errors can not be thrown yet, an illegal x and y value will simply wrap around at the end
+    int current_x = x % MAX_X;
+    int current_y = y % MAX_Y;
+    // Calculate the cursor offset from top left
+    int rel_pos =  current_x + current_y * 80; // offset without attribute bit
+    // Use IO_Port to write offset
+    IO_Port index(INDEX_REGISTER_PORT);
+    index.outb(CURSOR_ADDRESS_HIGH_INDEX)
+    IO_Port data(DATA_REGISTER_PORT);
+    data.outw(rel_pos);
+}
 
+void CGA_Screen::getpos (int &x, int &y){
+    // Use IO_Port to read offset
+    IO_Port index(INDEX_REGISTER_PORT);
+    index.outb(CURSOR_ADDRESS_HIGH_INDEX)
+    IO_Port data(DATA_REGISTER_PORT);
+    int rel_pos = data.inw();
+    int local_x = rel_pos % 80;
+    int local_y = (rel_pos - local_x) / 80;
+    *x = local_x;
+    *y = local_y;
 }
 
 void CGA_Screen::print (char* text, int length, unsigned char attrib){
-
+    // TODO: Implement
 }
