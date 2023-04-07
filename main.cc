@@ -4,7 +4,7 @@ void clear_screen(){
     CGA_Screen cga_screen = CGA_Screen();
     for (int i = 0; i < 25; ++i) {
         for (int j = 0; j < 80; ++j) {
-            cga_screen.show(j, i, 'X', 0x00);
+            cga_screen.show(j, i, '\0', 0x02);
         }
     }
     cga_screen.setpos(0, 0);
