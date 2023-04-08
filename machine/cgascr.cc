@@ -13,6 +13,17 @@
 #include "cgascr.h"
 #include "io_port.h"
 
+void CGA_Screen::move_up_screen(){
+    // Read all lines and move them up one after the other
+    for (int i = 1; i < 25; ++i) {
+        for (int j = 0; j < 80; ++j) {
+            char *pos_origin = (char *) 0xb8000 + 2*(j + i * 80);
+            char *pos_target = (char *) 0xb8000 + 2*(j + (i-1) * 80);
+            *pos_target = *pos_origin;
+        }
+    }
+}
+
 void CGA_Screen::show(int x, int y, char c, unsigned char attrib){
     char *CGA_START = (char *) 0xb8000;
     char *pos = CGA_START + 2*(x + y * 80);
@@ -64,7 +75,8 @@ void CGA_Screen::print (char* text, int length, unsigned char attrib){
             current_x = 0;
             current_y++;
             if (current_y > MAX_Y){
-                current_y = 0;
+                move_up_screen();
+                current_y = MAX_Y;
             }
         }
         show(current_x, current_y, text[i], attrib);

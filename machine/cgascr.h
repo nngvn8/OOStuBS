@@ -24,6 +24,8 @@
 
 class CGA_Screen {
 private:
+    void move_up_screen();
+
 public:
     CGA_Screen(){}
 	CGA_Screen(const CGA_Screen &copy) = delete; // prevent copying
@@ -37,7 +39,5 @@ public:
     void print (char* text, int length, unsigned char attrib);
 
 };
-
-/* Add your code here */ 
 
 #endif
