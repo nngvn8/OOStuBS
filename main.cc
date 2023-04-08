@@ -38,13 +38,17 @@ void print_hello_message(){
 }
 
 void test_wrapping(){
-    // clear_screen();
+    clear_screen();
     CGA_Screen cga_screen = CGA_Screen();
-    char message[] = "This message wraps around.";
-    cga_screen.setpos(67, 14);
-    cga_screen.print(message, 25, 0x02);
+    char message[] = "This line should get cut off.";
+    char message2[] = "This used to be the second line.";
+    char message3[] = "This message wraps around.";
+    cga_screen.setpos(0, 0);
+    cga_screen.print(message, 29, 0x02);
+    cga_screen.setpos(0, 1);
+    cga_screen.print(message2, 32, 0x02);
     cga_screen.setpos(67, 24);
-    cga_screen.print(message, 25, 0x02);
+    cga_screen.print(message3, 25, 0x02);
 }
 
 void string_buff_and_o_strem_test_application(){

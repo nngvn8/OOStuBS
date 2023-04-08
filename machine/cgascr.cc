@@ -14,13 +14,17 @@
 #include "io_port.h"
 
 void CGA_Screen::move_up_screen(){
-    // Read all lines and move them up one after the other
+    // Do some pointer arithmatic to move all characters and attributes up by one line 
     for (int i = 1; i < 25; ++i) {
         for (int j = 0; j < 80; ++j) {
             char *pos_origin = (char *) 0xb8000 + 2*(j + i * 80);
             char *pos_target = (char *) 0xb8000 + 2*(j + (i-1) * 80);
             *pos_target = *pos_origin;
         }
+    }
+    // Clear last line
+    for(int i = 0; i < 80; ++i){
+        show(i, MAX_Y, '\0', 0x0F); // TODO: Make color of last line choosable
     }
 }
 
