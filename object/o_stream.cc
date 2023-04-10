@@ -26,6 +26,21 @@ void O_Stream::flush() {
 }
 
 
+
+O_Stream& O_Stream::operator<< (unsigned short number) {
+    return (*this << (long) number);
+}
+O_Stream& O_Stream::operator<< (short number) {
+    return (*this << (long) number);
+}
+O_Stream& O_Stream::operator<< (unsigned int number) {
+    return (*this << (long) number);
+}
+O_Stream& O_Stream::operator<< (int number) {
+    return (*this << (long) number);
+}
+
+
 O_Stream& O_Stream::operator<< (long number){
 
     //get int as char list
