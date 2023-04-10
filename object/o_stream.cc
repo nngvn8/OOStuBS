@@ -25,7 +25,15 @@ void O_Stream::flush() {
     this->index = 0;
 }
 
+O_Stream& O_Stream::operator<<(const char c){
+    this->put(c);
+    return *this;
+}
 
+O_Stream& O_Stream::operator<< (unsigned char u_c){
+    this->put(u_c);
+    return *this;
+}
 
 O_Stream& O_Stream::operator<< (unsigned short number) {
     return (*this << (long) number);
