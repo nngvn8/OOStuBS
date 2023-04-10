@@ -25,6 +25,23 @@ void O_Stream::flush() {
     this->index = 0;
 }
 
+
+O_Stream& O_Stream::operator<< (long number){
+
+    //get int as char list
+    std::list<char> int_to_list_list = convert_long_to_list((long)number);
+
+    //for elem in char list: put it in the stringbuffer
+    for(const auto& ch : int_to_list_list){
+        this->put(ch);
+    }
+    return *this;
+}
+
+
+
+
+
 std::list<char> convert_long_to_list(long i){
     bool is_negative = false;
 
