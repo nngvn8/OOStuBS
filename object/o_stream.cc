@@ -48,7 +48,6 @@ O_Stream& O_Stream::operator<< (int number) {
     return (*this << (long) number);
 }
 
-
 O_Stream& O_Stream::operator<< (long number){
 
     //get int as char list
@@ -62,8 +61,9 @@ O_Stream& O_Stream::operator<< (long number){
 }
 
 
-//TODO unsigned long to list
+//TODO unsigned long, is ez, but increases code size by copying some code
 //TODO void pointer
+//TODO manipulators!
 
 
 
