@@ -62,6 +62,22 @@ O_Stream& O_Stream::operator<< (long number){
 }
 
 
+//TODO unsigned long to list
+//TODO void pointer
+
+
+
+//pointer arithmetic :D for strings
+O_Stream& O_Stream::operator<< (char* pointer){
+    while (*pointer != '\0'){
+        this->put(*pointer);
+        pointer += 1;
+    }
+    return *this;
+}
+
+
+
 
 
 
