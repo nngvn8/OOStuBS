@@ -19,6 +19,11 @@
 #include "object/o_stream.h"
 #include <list>
 
+void O_Stream::flush() {
+    //TODO print it to the console
+    //clear string necessary? i dont think so
+    this->index = 0;
+}
 
 std::list<char> convert_long_to_list(long i){
     bool is_negative = false;

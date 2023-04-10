@@ -23,7 +23,7 @@
 #include <list>
 
 
-class O_Stream
+class O_Stream : public Stringbuffer
 /* Add your code here */ 
 {
 public:
