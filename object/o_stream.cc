@@ -115,6 +115,8 @@ O_Stream& O_Stream::hex(O_Stream& os)  {
 
 O_Stream& convert_long_to_list(O_Stream& os, long i){
 
+    //TODO respcetively to the selected_nr_ystem implement the conversion!
+
     bool is_negative = false;
 
     if (i < 0){
