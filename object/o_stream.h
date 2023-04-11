@@ -62,7 +62,7 @@ public:
 
 
 };
-std::list<char> convert_long_to_list(long i);
+O_Stream&  convert_long_to_list(O_Stream&, long i);
 
 
 /*---------------------------------------------------------------------------*/

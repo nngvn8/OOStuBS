@@ -35,30 +35,24 @@ O_Stream& O_Stream::operator<< (unsigned char u_c){
     return *this;
 }
 
+
 O_Stream& O_Stream::operator<< (unsigned short number) {
-    return (*this << (long) number);
+    return convert_long_to_list(*this, number);
 }
 O_Stream& O_Stream::operator<< (short number) {
-    return (*this << (long) number);
+    return convert_long_to_list(*this, number);
 }
 O_Stream& O_Stream::operator<< (unsigned int number) {
-    return (*this << (long) number);
+    return convert_long_to_list(*this, number);
 }
 O_Stream& O_Stream::operator<< (int number) {
-    return (*this << (long) number);
+    return convert_long_to_list(*this, number);
 }
 
 O_Stream& O_Stream::operator<< (long number){
-
-    //get int as char list
-    std::list<char> int_to_list_list = convert_long_to_list((long)number);
-
-    //for elem in char list: put it in the stringbuffer
-    for(const auto& ch : int_to_list_list){
-        this->put(ch);
-    }
-    return *this;
+    return convert_long_to_list(*this, number);
 }
+
 
 //pointer arithmetic :D for strings
 O_Stream& O_Stream::operator<< (char* pointer){
@@ -74,7 +68,7 @@ O_Stream& O_Stream::operator<< (char* pointer){
 
 //TODO unsigned long, is ez, but increases code size by copying some code
 //TODO void pointer
-//TODO manipulators!
+
 
 //makes o_stream accept endl for example
 O_Stream& O_Stream::operator<< (O_Stream& (*fkt) (O_Stream&)){
@@ -119,7 +113,8 @@ O_Stream& O_Stream::hex(O_Stream& os)  {
 
 
 
-std::list<char> convert_long_to_list(long i){
+O_Stream& convert_long_to_list(O_Stream& os, long i){
+
     bool is_negative = false;
 
     if (i < 0){
@@ -145,7 +140,12 @@ std::list<char> convert_long_to_list(long i){
     // '-' is the 45 in the ascii table
     if(is_negative) char_list.push_front(45);
     //char list is reversed since we use push front
-    return char_list;
+    //for elem in char list: put it in the stringbuffer
+
+    for(const auto& ch : char_list){
+        os.put(ch);
+    }
+    return os;
 
 }
 
