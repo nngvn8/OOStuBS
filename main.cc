@@ -1,13 +1,22 @@
 #include "machine/cgascr.h"
+#include "tests/cga_wrapping_test.h"
+
+void string_buff_and_o_strem_test_application(){
+    // TODO: Implement
+}
+
+void cga_stream_test_application(){
+    // TODO: Implement
+}
 
 int main() {
+    cga_wrapping_test();
 
-    CGA_Screen cga_screen = CGA_Screen();
-    cga_screen.show(4,8, 'X', 0x22);
- 
-/* Add your code here */ 
- 
-/* Add your code here */ 
- 
+    string_buff_and_o_strem_test_application();
+
+    cga_stream_test_application();
+
+    // TODO: Add routine for choosing a test to run, via keyboard input
+
 	return 0;
 }
