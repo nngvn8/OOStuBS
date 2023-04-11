@@ -24,7 +24,7 @@
 
 class CGA_Screen {
 private:
-    void move_up_screen();
+    void move_up_screen(unsigned char attrib);
 
 public:
     CGA_Screen(){}
