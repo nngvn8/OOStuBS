@@ -35,6 +35,7 @@ class O_Stream : public Stringbuffer
 public:
 	O_Stream(const O_Stream &copy) = delete; // prevent copying
 public:
+    int selected_nr_system = DEC_NR_SYS;
     void flush();
     O_Stream& operator<<(char c);
     O_Stream& operator<< (unsigned char c);

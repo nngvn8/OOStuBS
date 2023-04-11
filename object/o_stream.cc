@@ -60,6 +60,17 @@ O_Stream& O_Stream::operator<< (long number){
     return *this;
 }
 
+//pointer arithmetic :D for strings
+O_Stream& O_Stream::operator<< (char* pointer){
+    while (*pointer != '\0'){
+        this->put(*pointer);
+        pointer += 1;
+    }
+    return *this;
+}
+
+
+
 
 //TODO unsigned long, is ez, but increases code size by copying some code
 //TODO void pointer
@@ -71,21 +82,37 @@ O_Stream& O_Stream::operator<< (O_Stream& (*fkt) (O_Stream&)){
     return (*this);
 }
 
+//inserts a line break
 O_Stream& O_Stream::endl(O_Stream& os)  {
-    //TODO here we do the flush
     return os << 'e'<<'n'<<'d'<<'l';
 }
-
-
-
-//pointer arithmetic :D for strings
-O_Stream& O_Stream::operator<< (char* pointer){
-    while (*pointer != '\0'){
-        this->put(*pointer);
-        pointer += 1;
-    }
-    return *this;
+//selects the binary number system
+O_Stream& O_Stream::bin(O_Stream& os)  {
+    os.selected_nr_system = BIN_NR_SYS;
+    return os << 'b'<<'i'<<'n';
 }
+
+
+//selects the binary number system
+O_Stream& O_Stream::oct(O_Stream& os)  {
+    os.selected_nr_system = OCT_NR_SYS;
+    return os << 'o'<<'c'<<'t';
+}
+
+//selects the decimal number system
+O_Stream& O_Stream::dec(O_Stream& os)  {
+    os.selected_nr_system = DEC_NR_SYS;
+
+    return os << 'd'<<'e'<<'c';
+}
+
+//selects the hexadecimal number system
+O_Stream& O_Stream::hex(O_Stream& os)  {
+    os.selected_nr_system = HEX_NR_SYS;
+
+    return os << 'h'<<'e'<<'x';
+}
+
 
 
 
