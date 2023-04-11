@@ -23,6 +23,12 @@
 #include <list>
 
 
+#define BIN_NR_SYS 0
+#define OCT_NR_SYS 1
+#define DEC_NR_SYS 2
+#define HEX_NR_SYS 3
+
+
 class O_Stream : public Stringbuffer
 /* Add your code here */ 
 {
