@@ -13,7 +13,7 @@
 #include "cgascr.h"
 #include "io_port.h"
 
-void CGA_Screen::move_up_screen(){
+void CGA_Screen::move_up_screen(unsigned char attrib){
     // Do some pointer arithmatic to move all characters and attributes up by one line 
     for (int i = 1; i < 25; ++i) {
         for (int j = 0; j < 80; ++j) {
@@ -24,7 +24,7 @@ void CGA_Screen::move_up_screen(){
     }
     // Clear last line
     for(int i = 0; i < 80; ++i){
-        show(i, MAX_Y, '\0', 0x0F); // TODO: Make color of last line choosable
+        show(i, MAX_Y, '\0', attrib);
     }
 }
 
@@ -79,7 +79,7 @@ void CGA_Screen::print (char* text, int length, unsigned char attrib){
             current_x = 0;
             current_y++;
             if (current_y > MAX_Y){
-                move_up_screen();
+                move_up_screen(attrib);
                 current_y = MAX_Y;
             }
         }
