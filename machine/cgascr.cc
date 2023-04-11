@@ -74,6 +74,7 @@ void CGA_Screen::print (char* text, int length, unsigned char attrib){
     getpos(current_x, current_y);
     // Print all the characters
     for (int i = 0; i < length; ++i) {
+        show(current_x, current_y, text[i], attrib);
         current_x++;
         if (current_x > MAX_X){
             current_x = 0;
@@ -83,7 +84,6 @@ void CGA_Screen::print (char* text, int length, unsigned char attrib){
                 current_y = MAX_Y;
             }
         }
-        show(current_x, current_y, text[i], attrib);
     }
     // Set current cursor position once to be more performant
     setpos(current_x+1, current_y);
