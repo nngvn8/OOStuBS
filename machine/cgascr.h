@@ -25,7 +25,7 @@
 class CGA_Screen {
 private:
     void move_up_screen(unsigned char attrib);
-
+    void line_break(int &current_x, int &current_y, unsigned char attrib);
 public:
     CGA_Screen(){}
 	CGA_Screen(const CGA_Screen &copy) = delete; // prevent copying

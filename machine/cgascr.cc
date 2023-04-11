@@ -38,7 +38,7 @@ void CGA_Screen::show(int x, int y, char c, unsigned char attrib){
 void CGA_Screen::setpos (int x, int y){
     // Wrap the x value to the next line specifically
     if (x>MAX_X){
-        x = x % MAX_X;
+        x = x % (MAX_X+1);
         y++;
     }
     // Calculate the cursor offset from top left
@@ -68,23 +68,31 @@ void CGA_Screen::getpos (int &x, int &y){
     y = (rel_pos - x) / 80;
 }
 
+void CGA_Screen::line_break(int &current_x, int &current_y, unsigned char attrib){
+    current_x = 0;
+    current_y++;
+    if(current_y > MAX_Y){
+        move_up_screen(attrib);
+        current_y = MAX_Y;
+    }
+}
+
 void CGA_Screen::print (char* text, int length, unsigned char attrib){
     // Find current x and y coordinates
     int current_x, current_y;
     getpos(current_x, current_y);
     // Print all the characters
     for (int i = 0; i < length; ++i) {
+        if (text[i]=='\n'){
+            line_break(current_x, current_y, attrib);
+            continue;
+        }
+        if (current_x > MAX_X){
+            line_break(current_x, current_y, attrib);
+        }
         show(current_x, current_y, text[i], attrib);
         current_x++;
-        if (current_x > MAX_X){
-            current_x = 0;
-            current_y++;
-            if (current_y > MAX_Y){
-                move_up_screen(attrib);
-                current_y = MAX_Y;
-            }
-        }
     }
     // Set current cursor position once to be more performant
-    setpos(current_x+1, current_y);
+    setpos(current_x, current_y);
 }
