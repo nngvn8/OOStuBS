@@ -65,6 +65,17 @@ O_Stream& O_Stream::operator<< (long number){
 //TODO void pointer
 //TODO manipulators!
 
+//makes o_stream accept endl for example
+O_Stream& O_Stream::operator<< (O_Stream& (*fkt) (O_Stream&)){
+    (*fkt)(*(O_Stream *)this);
+    return (*this);
+}
+
+O_Stream& O_Stream::endl(O_Stream& os)  {
+    //TODO here we do the flush
+    return os << 'e'<<'n'<<'d'<<'l';
+}
+
 
 
 //pointer arithmetic :D for strings
