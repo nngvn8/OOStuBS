@@ -1,9 +1,6 @@
 #include "o_stream.h"
 
 
-void O_Stream::flush() {
-    this->index = 0;
-}
 O_Stream& O_Stream::operator<<(const char c){
     this->put(c);
     return *this;
@@ -68,6 +65,8 @@ O_Stream& O_Stream::operator<< (O_Stream& (*fkt) (O_Stream&)){
 
 //inserts a line break
 O_Stream& O_Stream::endl(O_Stream& os)  {
+    os.put('\n');
+    os.flush();
     return os;
 }
 //selects the binary number system
