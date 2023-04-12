@@ -3,3 +3,4 @@ build/*
 dep
 .idea
 isofiles/
+.DS_Store
