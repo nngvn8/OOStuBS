@@ -1,6 +1,6 @@
 #include "machine/cgascr.h"
-#include "tests/cga_wrapping_test.h"
-#include "tests/keyboard_test.h"
+//#include "tests/cga_wrapping_test.h"
+//#include "tests/keyboard_test.h"
 #include "tests/flashy_test.h"
 
 

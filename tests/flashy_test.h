@@ -3,7 +3,7 @@
 //
 
 #include "device/cgastr.h"
-#include "machine/keyctr.h"
+#include "machine/keyctrl.h"
 #include "cga_wrapping_test.h"
 
 /// The idea of this class is to encompass all other test and make them be callable by the user
