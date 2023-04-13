@@ -1,23 +1,16 @@
 #include "machine/cgascr.h"
 #include "tests/cga_wrapping_test.h"
 #include "tests/keyboard_test.h"
+#include "tests/flashy_test.h"
 
-void string_buff_and_o_strem_test_application(){
-    // TODO: Implement
-}
-
-void cga_stream_test_application(){
-    // TODO: Implement
-}
 
 int main() {
-    cga_wrapping_test();
+    // cga_wrapping_test();
 
-    test();
+    // test();
 
-    string_buff_and_o_strem_test_application();
+    test_all_tests();
 
-    cga_stream_test_application();
 
     // TODO: Add routine for choosing a test to run, via keyboard input
 
