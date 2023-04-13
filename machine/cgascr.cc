@@ -15,10 +15,11 @@
 
 void CGA_Screen::move_up_screen(unsigned char attrib_of_last_line){
     // Do some pointer arithmetic to move all characters and attributes up by one line
-    for (int i = 1; i < 25; ++i) {
-        for (int j = 0; j < 80; ++j) {
-            char *pos_origin = (char *) 0xb8000 + 2*(j + i * LINE_WIDTH);
-            char *pos_target = (char *) 0xb8000 + 2*(j + (i-1) * LINE_WIDTH);
+    int line_width_bytes = 2 * LINE_WIDTH;
+    for (int i = 1; i < SCREEN_HEIGHT; ++i) {
+        for (int j = 0; j < line_width_bytes; ++j) {
+            char *pos_origin = (char *) 0xb8000 + (j + i * line_width_bytes);
+            char *pos_target = (char *) 0xb8000 + (j + (i-1) * line_width_bytes);
             *pos_target = *pos_origin;
         }
     }

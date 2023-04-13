@@ -28,9 +28,9 @@ static void cga_wrapping_test(){
     cga_screen.setpos(0, 4);
     cga_screen.print(message2, 32, 0x02);
     cga_screen.setpos(44, 5);
-    cga_screen.print(message3, 36, 0x02);
-    cga_screen.print(message4, 6, 0x02);
+    cga_screen.print(message3, 36, 0x0F);
+    cga_screen.print(message4, 6, 0x0A);
     cga_screen.setpos(67, 24);
-    cga_screen.print(message5, 25, 0x02);
-    cga_screen.print(message6, 45, 0x02);
+    cga_screen.print(message5, 25, 0x03);
+    cga_screen.print(message6, 45, 0x04);
 }
