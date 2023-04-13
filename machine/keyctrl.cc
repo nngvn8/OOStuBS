@@ -11,7 +11,8 @@
 /* INCLUDES */
 
 #include "machine/keyctrl.h"
- 
+#include "machine/cgascr.h" //for debugging purposes
+
 /* STATIC MEMBERS */
 
 unsigned char Keyboard_Controller::normal_tab[] = {
@@ -233,11 +234,28 @@ Keyboard_Controller::Keyboard_Controller() : ctrl_port(0x64), data_port(0x60)
 
 Key Keyboard_Controller::key_hit()
 {
-	Key invalid; // not explicitly initialized Key objects are invalid
-/* Add your code here */ 
-/* Add your code here */ 
- 
-/* Add your code here */ 
+	CGA_Screen cga_screen = CGA_Screen();
+    Key invalid; // not explicitly initialized Key objects are invalid
+
+    IO_Port status_port(0x64);
+    IO_Port out_port(0x60);
+
+    while (true) {
+        char status = status_port.inb();
+
+        if (status & 0x01) {
+            char key = out_port.inb();
+            code = key;
+            get_ascii_code();
+
+            cga_screen.print("hit", 3, 0x02);
+            char code_ascii = (char)gather.ascii();
+            cga_screen.print(&code_ascii, 1, 0x02);
+        }
+
+
+    }
+
 	return invalid;
 }
 
