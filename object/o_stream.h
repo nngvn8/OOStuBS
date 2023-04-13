@@ -20,14 +20,50 @@
 #define __o_stream_include__
 
 #include "object/strbuf.h"
+#include <list>
 
-class O_Stream
+
+#define BIN_NR_SYS 0
+#define OCT_NR_SYS 1
+#define DEC_NR_SYS 2
+#define HEX_NR_SYS 3
+
+
+class O_Stream : public Stringbuffer
 /* Add your code here */ 
 {
 public:
 	O_Stream(const O_Stream &copy) = delete; // prevent copying
-/* Add your code here */ 
+public:
+    int selected_nr_system = DEC_NR_SYS;
+    void flush();
+    O_Stream& operator<<(char c);
+    O_Stream& operator<< (unsigned char c);
+    O_Stream& operator<< (unsigned short number);
+    O_Stream& operator<< (short number);
+    O_Stream& operator<< (unsigned int number);
+    O_Stream& operator<< (int number);
+    O_Stream& operator<< (unsigned long number);
+    O_Stream& operator<< (long number);
+    O_Stream& operator<< (void* pointer);
+    O_Stream& operator<< (char* text);
+
+    O_Stream& operator<< (O_Stream& (*fkt) (O_Stream&));
+
+    O_Stream& endl (O_Stream& os);
+
+    O_Stream& bin (O_Stream& os);
+
+    O_Stream& oct (O_Stream& os);
+
+    O_Stream& dec (O_Stream& os);
+
+    O_Stream& hex (O_Stream& os);
+
+
 };
+O_Stream&  convert_long_to_list(O_Stream&, long i);
+
 
 /*---------------------------------------------------------------------------*/
 /*                                                                           */
