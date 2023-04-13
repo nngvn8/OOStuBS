@@ -11,7 +11,6 @@
 /* INCLUDES */
 
 #include "machine/keyctrl.h"
-#include "machine/cgascr.h" //for debugging purposes
 
 /* STATIC MEMBERS */
 
@@ -232,30 +231,21 @@ Keyboard_Controller::Keyboard_Controller() : ctrl_port(0x64), data_port(0x60)
 //          Otherwise, key_hit () returns an invalid value, which can be
 //          checked by calling Key::valid ().
 
-Key Keyboard_Controller::key_hit()
-{
-	CGA_Screen cga_screen = CGA_Screen();
+Key Keyboard_Controller::key_hit() {
     Key invalid; // not explicitly initialized Key objects are invalid
 
+    // run until full key is decoded and saved in gather
     do {
+        // block until outb-bit of status register is 1 aka output available
         while (true) {
             unsigned char status = ctrl_port.inb();
             if (status & 0x01) {
                 break;
             }
         }
-
-        code = data_port.inb();;
-
-        // for debugging
-        cga_screen.print("hit", 3, 0x02);
-        char code_ascii = (char)gather.ascii();
-        cga_screen.print(&code_ascii, 1, 0x02);
+        // read and save make/break-code
+        code = data_port.inb();
     } while (!key_decoded());
-
-
-
-
 
     if (gather.valid()) {
         return gather;

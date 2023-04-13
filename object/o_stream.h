@@ -14,6 +14,7 @@
 class O_Stream : public Stringbuffer {
 private:
 public:
+    O_Stream(){}
     int selected_nr_system = DEC_NR_SYS;
     O_Stream& operator<<(char c);
     O_Stream& operator<< (unsigned char c);
