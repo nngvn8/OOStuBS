@@ -9,7 +9,10 @@
 void test () {
     Keyboard_Controller contrlr =  Keyboard_Controller();
 
-    contrlr.key_hit();
+    while (true) {
+        contrlr.key_hit();
+    }
+
 
 }
 

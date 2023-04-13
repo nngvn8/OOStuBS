@@ -237,23 +237,28 @@ Key Keyboard_Controller::key_hit()
 	CGA_Screen cga_screen = CGA_Screen();
     Key invalid; // not explicitly initialized Key objects are invalid
 
-    IO_Port status_port(0x64);
-    IO_Port out_port(0x60);
-
-    while (true) {
-        char status = status_port.inb();
-
-        if (status & 0x01) {
-            char key = out_port.inb();
-            code = key;
-            get_ascii_code();
-
-            cga_screen.print("hit", 3, 0x02);
-            char code_ascii = (char)gather.ascii();
-            cga_screen.print(&code_ascii, 1, 0x02);
+    do {
+        while (true) {
+            unsigned char status = ctrl_port.inb();
+            if (status & 0x01) {
+                break;
+            }
         }
 
+        code = data_port.inb();;
 
+        // for debugging
+        cga_screen.print("hit", 3, 0x02);
+        char code_ascii = (char)gather.ascii();
+        cga_screen.print(&code_ascii, 1, 0x02);
+    } while (!key_decoded());
+
+
+
+
+
+    if (gather.valid()) {
+        return gather;
     }
 
 	return invalid;
