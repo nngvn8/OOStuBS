@@ -40,6 +40,8 @@ class CGA_Stream: public O_Stream, public CGA_Screen{
 private:
     unsigned char current_text_colour = 0x0F;
 public:
+
+    CGA_Stream(){};
 	CGA_Stream(CGA_Stream &copy) = delete; // prevent copying
     void flush();
     void set_current_text_colour(unsigned char foreground, unsigned char brackground);

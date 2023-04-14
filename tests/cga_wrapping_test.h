@@ -34,3 +34,5 @@ static void cga_wrapping_test(){
     cga_screen.print(message5, 25, 0x02);
     cga_screen.print(message6, 45, 0x02);
 }
+
+
