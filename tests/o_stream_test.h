@@ -8,7 +8,7 @@ void o_stream_hello_w(){
     cga_stream << "93248093284032" << O_Stream::endl;
 
 
-    int a = 69000;
+    int a = 69;
     int b = 0;
     unsigned long c = 2131212323423322342;
     short d = -1;

@@ -37,13 +37,12 @@ O_Stream& O_Stream::operator<< (long number){
     return convert_long_to_list(*this, abs_number, this->selected_nr_system, number < 0, 64 );
 }
 
-
+// print pointers
 O_Stream & O_Stream::operator<<(void * ptr) {
     auto address = (unsigned long) ptr;
     int tmp = this->selected_nr_system;
     this->selected_nr_system = HEX_NR_SYS;
     *this << address;
-
     this->selected_nr_system = tmp;
     return (*this);
 
@@ -99,7 +98,15 @@ O_Stream& O_Stream::hex(O_Stream& os)  {
 
 
 
-
+/**
+ * given a nr converts to different base and inserts into string
+ * @param os given o_stream
+ * @param abs_number given number to insert, now the absolute value
+ * @param selected_nr_system number system to print the nr in
+ * @param is_negative whether the nr was negative before
+ * @param bit_length_nr only important if nr_sys = 2 and its a negative number: important for 2 complement, determines the number of stuffed 1s
+ * @return
+ */
 O_Stream& convert_long_to_list(O_Stream& os, unsigned long abs_number, int selected_nr_system, bool is_negative,  int bit_length_nr){
 
 
@@ -118,11 +125,13 @@ O_Stream& convert_long_to_list(O_Stream& os, unsigned long abs_number, int selec
     char array_of_digits[64];
     int ctr = 0;
 
+    //now also prints given the number 0
     if(abs_number == 0){
         os.put('0');
         return os;
     }
 
+    // number magic that converts to a different base
     while(abs_number != 0){
         auto digit = abs_number % selected_nr_system;
 
@@ -130,11 +139,14 @@ O_Stream& convert_long_to_list(O_Stream& os, unsigned long abs_number, int selec
         abs_number /= selected_nr_system;
         ctr++;
     }
+
+    //only the case if the selected base is 2 and supposed to be negative: print as 2complement
     if(selected_nr_system == 2 && is_negative){
         t2er_complement(os, array_of_digits, bit_length_nr, ctr);
         return os;
     }
 
+    //put into os.string
     while (ctr > 0){
         ctr--;
         os.put(array_of_digits[ctr]);
@@ -144,11 +156,11 @@ O_Stream& convert_long_to_list(O_Stream& os, unsigned long abs_number, int selec
 }
 
 /**
- *
- * @param os
- * @param array__of_digits
- * @param array_length
- * @param bit_length_nr
+ * given an array of digits the function inserts into the string a nr as 2-complement
+ * @param os given O_stream
+ * @param array__of_digits given array, still reversed ({1,0,0,0,0,1,0,1, ....} would represent the nr 10100001)
+ * @param bit_length_nr nr of bits (short : 16, int : 32 , long : 64)
+ * @param ctr length of given nr
  * @return
  */
 
@@ -161,7 +173,7 @@ void t2er_complement(O_Stream& os ,char* array__of_digits, int bit_length_nr, in
     int runner = bit_length_nr - ctr;
     //error case , ctr > bit_length_nr
     if (runner < 0){
-        os << "Fehlerfall: Wert passt nicht ins Array rein" << O_Stream::endl;
+        os << "Error: t2er_complement: nr to big for given array" << O_Stream::endl;
         return;
     }
 
