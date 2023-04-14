@@ -21,7 +21,7 @@ private:
 	unsigned char code;
 	unsigned char prefix;
 	Key gather;
-	char leds;
+	char leds = 0;
 
 	// the two used ports of the keyboard controller
 	const IO_Port ctrl_port; // status (R) and control register (W)
@@ -66,6 +66,10 @@ private:
 	//                 code from the scan code and set modifier bits.
 	void get_ascii_code();
 
+    bool byte_acknowledged();
+
+    bool check_input_buffer_empty();
+
 public:
 	// KEYBOARD_CONTROLLER: keyboard initialization: disables all LEDs and
 	//                      sets the repeat rate to maximum.
@@ -95,6 +99,8 @@ public:
 
 	// SET_LED: sets or clears the specified LED
 	void set_led(char led, bool on);
+
+
 };
 
 #endif

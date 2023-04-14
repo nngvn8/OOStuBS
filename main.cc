@@ -13,7 +13,7 @@ void cga_stream_test_application(){
 int main() {
     cga_wrapping_test();
 
-    test();
+    keyboard_test();
 
     string_buff_and_o_strem_test_application();
 
