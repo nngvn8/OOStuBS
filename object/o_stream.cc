@@ -43,6 +43,7 @@ O_Stream & O_Stream::operator<<(void * ptr) {
     int tmp = this->selected_nr_system;
     this->selected_nr_system = HEX_NR_SYS;
     *this << address;
+
     this->selected_nr_system = tmp;
     return (*this);
 
@@ -115,6 +116,9 @@ O_Stream& convert_long_to_list(O_Stream& os, unsigned long abs_number, int selec
     char array_of_digits[64];
     int ctr = 0;
 
+    if(abs_number == 0){
+        os.put('0');
+    }
     while(abs_number != 0){
         auto digit = abs_number % selected_nr_system;
 
