@@ -38,6 +38,18 @@ void o_stream_hello_w(){
 
     cga_stream << '\n'<< O_Stream::endl;
 
+    cga_stream << a << O_Stream::bin<< O_Stream::endl;
+
+    cga_stream << -8 << O_Stream::endl;
+    cga_stream << -0 << O_Stream::endl;
+    cga_stream << (long)-1 << O_Stream::endl;
+
+
+    //01000
+    //10111
+    //11000
+
+
 
 
 

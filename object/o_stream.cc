@@ -12,29 +12,29 @@ O_Stream& O_Stream::operator<< (unsigned char u_c){
 }
 
 O_Stream& O_Stream::operator<< (unsigned short number) {
-    return convert_long_to_list(*this, (unsigned long)number, this->selected_nr_system, false );
+    return convert_long_to_list(*this, (unsigned long)number, this->selected_nr_system, false , 16);
 }
 O_Stream& O_Stream::operator<< (short number) {
     unsigned long abs_number;
     number < 0 ? abs_number = -1*number : abs_number = (number) ;
-    return convert_long_to_list(*this, abs_number, this->selected_nr_system, number < 0 );
+    return convert_long_to_list(*this, abs_number, this->selected_nr_system, number < 0, 16 );
 }
 O_Stream& O_Stream::operator<< (unsigned int number) {
-    return convert_long_to_list(*this, (unsigned long)number, this->selected_nr_system, false);
+    return convert_long_to_list(*this, (unsigned long)number, this->selected_nr_system, false, 32);
 }
 O_Stream& O_Stream::operator<< (int number) {
     unsigned long abs_number;
     number < 0 ? abs_number = -1*number : abs_number = (number) ;
-    return convert_long_to_list(*this, abs_number, this->selected_nr_system, number < 0 );
+    return convert_long_to_list(*this, abs_number, this->selected_nr_system, number < 0 , 32);
 }
 O_Stream& O_Stream::operator<< (unsigned long number){
-    return convert_long_to_list(*this, (unsigned long)number, this->selected_nr_system, false );
+    return convert_long_to_list(*this, (unsigned long)number, this->selected_nr_system, false , 64);
 }
 
 O_Stream& O_Stream::operator<< (long number){
     unsigned long abs_number;
     number < 0 ? abs_number = -1*number : abs_number = (number) ;
-    return convert_long_to_list(*this, abs_number, this->selected_nr_system, number < 0 );
+    return convert_long_to_list(*this, abs_number, this->selected_nr_system, number < 0, 64 );
 }
 
 
@@ -100,7 +100,7 @@ O_Stream& O_Stream::hex(O_Stream& os)  {
 
 
 
-O_Stream& convert_long_to_list(O_Stream& os, unsigned long abs_number, int selected_nr_system, bool is_negative){
+O_Stream& convert_long_to_list(O_Stream& os, unsigned long abs_number, int selected_nr_system, bool is_negative,  int bit_length_nr){
 
 
     //val to compute modula with
@@ -111,14 +111,18 @@ O_Stream& convert_long_to_list(O_Stream& os, unsigned long abs_number, int selec
 
     }
     // '-' is the 45 in the ascii table
-    if(is_negative) os << '-';
+    //a & (-b or -a)
+    // a&-b or a&-a
+    if(is_negative && !(selected_nr_system == 2)) os << '-';
 
     char array_of_digits[64];
     int ctr = 0;
 
     if(abs_number == 0){
         os.put('0');
+        return os;
     }
+
     while(abs_number != 0){
         auto digit = abs_number % selected_nr_system;
 
@@ -126,6 +130,11 @@ O_Stream& convert_long_to_list(O_Stream& os, unsigned long abs_number, int selec
         abs_number /= selected_nr_system;
         ctr++;
     }
+    if(selected_nr_system == 2 && is_negative){
+        t2er_complement(os, array_of_digits, bit_length_nr, ctr);
+        return os;
+    }
+
     while (ctr > 0){
         ctr--;
         os.put(array_of_digits[ctr]);
@@ -177,6 +186,7 @@ void t2er_complement(O_Stream& os ,char* array__of_digits, int bit_length_nr, in
     if(final_array[array_iterator] == 48) final_array[bit_length_nr-1] = 49;
     else if(final_array[array_iterator] == 49){
         while(final_array[array_iterator] == 49){
+            final_array[array_iterator] = 48;
             array_iterator --;
         }
         final_array[array_iterator] = 49;
