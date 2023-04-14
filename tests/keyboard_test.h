@@ -8,17 +8,17 @@
 //#define OOSTUBBS_MBJ_KEYBOARD_TEST_H
 
 void set_led_test(Keyboard_Controller contrlr, CGA_Stream cga) {
-
-    cga << "Select a LED! (caps_lock, num_lock, scroll_lock)" << CGA_Stream::endl;
-
-    cga << "Select Mode! (on, off)" << CGA_Stream::endl;
-
-    contrlr.set_led(4,1);
-    contrlr.set_led(1,1);
-    contrlr.set_led(2,1);
-    contrlr.set_led(2,0);
-    contrlr.set_led(4,0);
-    contrlr.set_led(1,0);
+//
+//    cga << "Select a LED! (caps_lock, num_lock, scroll_lock)" << CGA_Stream::endl;
+//
+//    cga << "Select Mode! (on, off)" << CGA_Stream::endl;
+//
+//    contrlr.set_led(4,1);
+//    contrlr.set_led(1,1);
+//    contrlr.set_led(2,1);
+//    contrlr.set_led(2,0);
+//    contrlr.set_led(4,0);
+//    contrlr.set_led(1,0);
 }
 
 void keyboard_test() {
@@ -30,7 +30,7 @@ void keyboard_test() {
         cga << (char)test_key.ascii() << CGA_Stream::endl;
     }
 
-    set_led_test(contrlr, cga);
+//    set_led_test(contrlr, cga);
 }
 
 

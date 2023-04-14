@@ -66,9 +66,9 @@ private:
 	//                 code from the scan code and set modifier bits.
 	void get_ascii_code();
 
-    bool byte_acknowledged();
+    void wait_until_byte_acknowledged();
 
-    bool check_input_buffer_empty();
+    void wait_until_input_buffer_empty();
 
 public:
 	// KEYBOARD_CONTROLLER: keyboard initialization: disables all LEDs and

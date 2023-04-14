@@ -209,25 +209,23 @@ void Keyboard_Controller::get_ascii_code()
 	 }
 }
 
-bool Keyboard_Controller::check_input_buffer_empty(){
+void Keyboard_Controller::wait_until_input_buffer_empty(){
     // auxb correct here? (supposed to make sure that information is from keyboard)
     while (true) {
-        unsigned int buffer_full = (ctrl_port.inb() & inpb) && !(ctrl_port.inb() & auxb);
+        bool buffer_full = ctrl_port.inb() & inpb;
         if (!buffer_full) {
-            return true
+            return;
         }
     }
 }
 
-bool Keyboard_Controller::byte_acknowledged(){
+void Keyboard_Controller::wait_until_byte_acknowledged(){
     // auxb correct here? (supposed to make sure that information is from keyboard)
     while (true) {
         // character available to read and
-        unsigned int response_keyboard = (ctrl_port.inb() & outb) && !(ctrl_port.inb() & auxb);
-        if (response_keyboard) {
-            if (data_port.inb() == 0xf3) {
-                return true
-            }
+        bool response_keyboard = ctrl_port.inb() & outb;
+        if (response_keyboard && data_port.inb() == kbd_reply::ack) {
+            return;
         }
     }
 }
@@ -312,17 +310,17 @@ void Keyboard_Controller::set_repeat_rate(int speed, int delay)
     //NEEDS to be commented out so that typing works
 
 //    // send command code for "speed and dealy"
-//    check_input_buffer_empty();
+//    wait_until_input_buffer_empty();
 //    data_port.outb(kbd_cmd::set_speed);
-//    byte_acknowledged();
+//    wait_until_byte_acknowledged();
 //
 //    // calculate user data byte (speed: bit 0-4, delay: bit 5-6)
 //    int usr_data = (delay << 5) + speed;
 //
 //    // send user data for "speed"
-//    check_input_buffer_empty();
+//    wait_until_input_buffer_empty();
 //    data_port.outb(usr_data);
-//    byte_acknowledged();
+//    wait_until_byte_acknowledged();
 }
 
 // SET_LED: sets or clears the specified LED
@@ -330,21 +328,21 @@ void Keyboard_Controller::set_repeat_rate(int speed, int delay)
 void Keyboard_Controller::set_led(char led, bool on)
 {
     // send command code for "led"
-    check_input_buffer_empty();
+    wait_until_input_buffer_empty();
     data_port.outb(kbd_cmd::set_led);
-    byte_acknowledged();
+    wait_until_byte_acknowledged();
 
-    // update leds
+    // update leds variable
     if (on) {
-        leds = leds | led; // casting from int to signed char?!
+        leds |= led;
     }
     else {
-        leds = leds & (0xff ^ led); // casting from int to signed char?!
+        leds &= (0xff ^ led);
     }
 
-    // send leds
-    check_input_buffer_empty();
+    // send leds variable
+    wait_until_input_buffer_empty();
     data_port.outb(leds);
-    byte_acknowledged();
+    wait_until_byte_acknowledged();
 }
 
