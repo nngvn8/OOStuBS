@@ -261,7 +261,7 @@ Key Keyboard_Controller::key_hit() {
         // block until outb-bit of status register is 1 aka output available
         while (true) {
             unsigned char status = ctrl_port.inb();
-            if (status & 0x01) {
+            if (status & outb) {
                 break;
             }
         }
@@ -307,30 +307,41 @@ void Keyboard_Controller::reboot()
 
 void Keyboard_Controller::set_repeat_rate(int speed, int delay)
 {
-    //NEEDS to be commented out so that typing works
+    if (speed > 31 || delay > 3) {
+        // please insert error, when possible
+        return;
+    }
 
-//    // send command code for "speed and dealy"
-//    wait_until_input_buffer_empty();
-//    data_port.outb(kbd_cmd::set_speed);
-//    wait_until_byte_acknowledged();
-//
-//    // calculate user data byte (speed: bit 0-4, delay: bit 5-6)
-//    int usr_data = (delay << 5) + speed;
-//
-//    // send user data for "speed"
-//    wait_until_input_buffer_empty();
-//    data_port.outb(usr_data);
-//    wait_until_byte_acknowledged();
+    // send command code for "speed and delay"
+    wait_until_input_buffer_empty();
+    data_port.outb(kbd_cmd::set_speed);
+    wait_until_byte_acknowledged();
+
+    // calculate user data byte (speed: bit 0-4, delay: bit 5-6)
+    int usr_data = (delay << 5) + speed;
+
+    // send user data for "speed"
+    wait_until_input_buffer_empty();
+    data_port.outb(usr_data);
+    wait_until_byte_acknowledged();
 }
 
 // SET_LED: sets or clears the specified LED
 
 void Keyboard_Controller::set_led(char led, bool on)
 {
+    if (led != led::caps_lock && led != led::num_lock && led != led::scroll_lock) {
+        // insert error message, when possible
+        return;
+    }
+
     // send command code for "led"
     wait_until_input_buffer_empty();
     data_port.outb(kbd_cmd::set_led);
     wait_until_byte_acknowledged();
+
+    CGA_Stream cga = CGA_Stream();
+    cga << "leds: " << CGA_Stream::bin << (int)leds << CGA_Stream::endl;
 
     // update leds variable
     if (on) {
@@ -339,6 +350,9 @@ void Keyboard_Controller::set_led(char led, bool on)
     else {
         leds &= (0xff ^ led);
     }
+
+    cga << "led:  " << CGA_Stream::bin << (int)led   << CGA_Stream::endl;
+    cga << "leds: " << CGA_Stream::bin << (int)leds << CGA_Stream::endl;
 
     // send leds variable
     wait_until_input_buffer_empty();
