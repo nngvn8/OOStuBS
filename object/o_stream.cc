@@ -15,7 +15,7 @@ O_Stream& O_Stream::operator<< (unsigned short number) {
     return convert_long_to_list(*this, (unsigned long)number, this->selected_nr_system, false );
 }
 O_Stream& O_Stream::operator<< (short number) {
-    unsigned long abs_number = 0;
+    unsigned long abs_number;
     number < 0 ? abs_number = -1*number : abs_number = (number) ;
     return convert_long_to_list(*this, abs_number, this->selected_nr_system, number < 0 );
 }
@@ -23,7 +23,7 @@ O_Stream& O_Stream::operator<< (unsigned int number) {
     return convert_long_to_list(*this, (unsigned long)number, this->selected_nr_system, false);
 }
 O_Stream& O_Stream::operator<< (int number) {
-    unsigned long abs_number = 0;
+    unsigned long abs_number;
     number < 0 ? abs_number = -1*number : abs_number = (number) ;
     return convert_long_to_list(*this, abs_number, this->selected_nr_system, number < 0 );
 }
@@ -32,7 +32,7 @@ O_Stream& O_Stream::operator<< (unsigned long number){
 }
 
 O_Stream& O_Stream::operator<< (long number){
-    unsigned long abs_number = 0;
+    unsigned long abs_number;
     number < 0 ? abs_number = -1*number : abs_number = (number) ;
     return convert_long_to_list(*this, abs_number, this->selected_nr_system, number < 0 );
 }

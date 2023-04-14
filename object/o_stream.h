@@ -43,6 +43,9 @@ public:
 
 O_Stream& convert_long_to_list(O_Stream& os, unsigned long abs_number, int selected_nr_system, bool is_negative);
 
+void t2er_complement(O_Stream& os, char* array__of_digits, int bit_length_nr, int ctr);
+
+
 #endif
 
 
