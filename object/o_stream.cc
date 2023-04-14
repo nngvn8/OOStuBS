@@ -134,5 +134,64 @@ O_Stream& convert_long_to_list(O_Stream& os, unsigned long abs_number, int selec
 
 }
 
+/**
+ *
+ * @param os
+ * @param array__of_digits
+ * @param array_length
+ * @param bit_length_nr
+ * @return
+ */
+
+void t2er_complement(O_Stream& os ,char* array__of_digits, int bit_length_nr, int ctr){
+
+    char not_complemented_array[bit_length_nr];
+    char final_array[bit_length_nr];
+    //starts at 56, 57, 58, ... for ctr = 8 and bit_length_nr = 64
+    //array_vals from 55,56, ... are meant to be set
+    int runner = bit_length_nr - ctr;
+    //error case , ctr > bit_length_nr
+    if (runner < 0){
+        os << "Fehlerfall: Wert passt nicht ins Array rein" << O_Stream::endl;
+        return;
+    }
+
+    //fill with '0' until [runner-1]
+    for(int i= 0; i < runner; i++ ){
+        not_complemented_array[i] = 48;
+    }
+    //fill with given number until the rest of the array
+    while(ctr > 0){
+        ctr--;
+        not_complemented_array[runner] = array__of_digits[ctr];
+        runner++;
+    }
+
+    //flipping bits
+    for(int i = 0 ; i < bit_length_nr; i ++ ){
+        not_complemented_array[i] == 48 ? final_array[i] = 49 : final_array[i] = 48;
+    }
+
+    // calculate + 1
+    int array_iterator = bit_length_nr -1 ;
+    if(final_array[array_iterator] == 48) final_array[bit_length_nr-1] = 49;
+    else if(final_array[array_iterator] == 49){
+        while(final_array[array_iterator] == 49){
+            array_iterator --;
+        }
+        final_array[array_iterator] = 49;
+    }
+    else{
+        os << "Error: t2er_complement: neither a '1' nor a '2' at the end of the complemented number" << O_Stream::endl;
+    }
+    //put into the stream
+    for(int i = 0; i < bit_length_nr; i++ ){
+        os.put(final_array[i]);
+    }
+
+}
+
+
+
 
 
