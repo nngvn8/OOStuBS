@@ -21,5 +21,5 @@ void CGA_Stream::flush(){
 }
 
 void CGA_Stream::set_current_text_colour(unsigned char foreground, unsigned char background){
-    this->current_text_colour = (brackground << 4) | foreground;
+    this->current_text_colour = (background << 4) | foreground;
 }
