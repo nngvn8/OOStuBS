@@ -43,22 +43,17 @@ void o_stream_hello_w(){
     cga_stream << -8 << O_Stream::endl;
     cga_stream << -0 << O_Stream::endl;
     cga_stream << (long)-1 << O_Stream::endl;
-
-
-    //01000
-    //10111
-    //11000
 }
 
 void cga_stream_color_setting_test(){
     CGA_Stream cga_stream = CGA_Stream();
     cga_stream << "Initial color is white on black." << CGA_Stream::endl;
-    cga_stream.set_current_text_colour(GREEN, BLACK);
+    cga_stream.set_current_text_colour(CGA_COLORS::GREEN, CGA_COLORS::BLACK);
     cga_stream << "Now it should be green on black." << CGA_Stream::endl;
-    cga_stream.set_current_text_colour(BLACK, WHITE);
+    cga_stream.set_current_text_colour(CGA_COLORS::BLACK, CGA_COLORS::WHITE);
     cga_stream << "Now it should be black on white and the next line should not be readable" << CGA_Stream::endl;
-    cga_stream.set_current_text_colour(WHITE, WHITE);
+    cga_stream.set_current_text_colour(CGA_COLORS::WHITE, CGA_COLORS::WHITE);
     cga_stream << "White on white is silly." << CGA_Stream::endl;
-    cga_stream.set_current_text_colour(LIGHT_CYAN, LIGHT_MAGENTA);
+    cga_stream.set_current_text_colour(CGA_COLORS::LIGHT_CYAN, CGA_COLORS::LIGHT_MAGENTA);
     cga_stream << "This color combo (light cyan on light magenta) should be illegal." << CGA_Stream::endl;
 }
