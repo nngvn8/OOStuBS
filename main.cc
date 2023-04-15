@@ -6,7 +6,8 @@
 int main() {
     // cga_wrapping_test();
     // o_stream_hello_w();
-    cga_stream_color_setting_test();
+    cga_stream_edge_case_test();
+    // cga_stream_color_setting_test();
 
 	return 0;
 }
