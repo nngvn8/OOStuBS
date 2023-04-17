@@ -323,7 +323,7 @@ void Keyboard_Controller::set_repeat_rate(int speed, int delay)
     int usr_data = (delay << 5) + speed;
 
 
-    cga << "The delay-speed-byte to be sent is:"                   << CGA_Stream::endl
+    cga << "The delay-speed-byte to be sent is:"        << CGA_Stream::endl
         << "BIN:" << CGA_Stream::bin << (int)usr_data   << CGA_Stream::endl
         << "HEX:" << CGA_Stream::hex << (int)usr_data   << CGA_Stream::endl;
 
@@ -358,7 +358,7 @@ void Keyboard_Controller::set_led(char led, bool on)
         leds |= led;
     }
     else {
-        leds &= (0xff ^ led);
+        leds &= ~led;
     }
 
     cga << "led:  " << CGA_Stream::bin << (int)led  << CGA_Stream::endl;

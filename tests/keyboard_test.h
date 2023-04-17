@@ -14,7 +14,6 @@ unsigned char user_answer(Keyboard_Controller &contrlr, CGA_Stream &cga, char* u
     return key_content;
 }
 
-
 void set_led_test(Keyboard_Controller &contrlr, CGA_Stream &cga) {
     unsigned char key_content;
     bool valid_input = false;
