@@ -13,7 +13,7 @@
 #include "cgascr.h"
 #include "io_port.h"
 
-static void CGA_Screen::clear_screen_with(unsigned char color){
+void CGA_Screen::clear_screen_with(unsigned char color){
     for (int i = 0; i < 25; ++i) {
         for (int j = 0; j < 80; ++j) {
             show(j, i, '\0', color);
