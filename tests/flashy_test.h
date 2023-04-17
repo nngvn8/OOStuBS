@@ -9,12 +9,6 @@
 #include "o_stream_test.h"
 
 /// The idea of this class is to encompass all other test and make them be callable by the user
-/*
- * Current list of tests:
- * cga: cga_wrapping_test
- * keyboard: user_answer, set_led_test, set_repeat_rate_test, keyboard_test
- * stream: o_stream_hello_w, cga_stream_edge_case_test, cga_stream_manipulator_test, cga_stream_color_setting_test
- */
 
 void test_all_tests(){
     CGA_Stream cga = CGA_Stream();
@@ -30,7 +24,7 @@ void test_all_tests(){
         cga << "4. Testing the cga stream manipulators" << CGA_Stream::endl;
         cga << "5. Testing the colors of the cga stream" << CGA_Stream::endl;
         cga << "6. Running the hello_w program for the cga stream" << CGA_Stream::endl;
-        cga << "Please input one of the numbers to select a program.";
+        cga << "Please input one of the numbers to select a program." << CGA_Stream::endl;
         cga << "Rerun this prompt by hitting any button." << CGA_Stream::endl;
         Key number = keyboard.key_hit();
         switch (number.ascii()) {
