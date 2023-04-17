@@ -61,7 +61,7 @@ void test_all_tests(){
                 cga << "Your input was " << number.ascii() << ", which is supported" << CGA_Stream::endl;
                 break;
         }
-        //TODO hab ich mal auskommentiert, können wir wieder reinmachen
-        //keyboard.key_hit();
+
+        keyboard.key_hit();
     }
 }
