@@ -17,14 +17,8 @@ void CGA_Stream::flush(){
     //this->string ohne irgendwas gibt mir den pointer auf den anfang
     this->print(this->string, this->index, this->current_text_colour);
     this->index = 0;
-    // cga_screen << acutelle Farbe
-
 }
 
-void CGA_Stream::set_current_text_colour(unsigned char foreground, unsigned char brackground){
-
-    this->current_text_colour = (brackground << 4) | foreground;
-
+void CGA_Stream::set_current_text_colour(unsigned char foreground, unsigned char background){
+    this->current_text_colour = (background << 4) | foreground;
 }
-
-/* Add your code here */ 
