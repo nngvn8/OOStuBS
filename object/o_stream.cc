@@ -167,6 +167,13 @@ O_Stream& O_Stream::endl(O_Stream& os)  {
     os.flush();
     return os;
 }
+
+//prints without linebreak
+O_Stream& O_Stream::inst_print(O_Stream& os)  {
+    os.flush();
+    return os;
+}
+
 //selects the binary number system
 O_Stream& O_Stream::bin(O_Stream& os)  {
     os.selected_nr_system = BIN_NR_SYS;
