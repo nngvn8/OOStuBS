@@ -4,9 +4,6 @@
 #include "machine/keyctrl.h"
 #include "device/cgastr.h"
 
-//#ifndef OOSTUBBS_MBJ_KEYBOARD_TEST_H
-//#define OOSTUBBS_MBJ_KEYBOARD_TEST_H
-
 unsigned char user_answer(Keyboard_Controller &contrlr, CGA_Stream &cga, char* user_input) {
     cga << user_input << CGA_Stream::endl;
     unsigned char key_content = contrlr.key_hit().ascii();
@@ -150,9 +147,3 @@ void keyboard_test() {
 
     cga << "You left \"keyboard test\"!" << CGA_Stream::endl;
 }
-
-
-
-//#endif //OOSTUBBS_MBJ_KEYBOARD_TEST_H
-
-
