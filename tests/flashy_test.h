@@ -9,7 +9,6 @@
 /// The idea of this class is to encompass all other test and make them be callable by the user
 
 
-
 void test_all_tests(){
     clear_screen(); // from wrapping test
 
