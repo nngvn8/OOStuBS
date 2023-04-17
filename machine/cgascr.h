@@ -28,6 +28,12 @@ class CGA_Screen {
 private:
 
     /**
+     * Prints the empty ascii symbol to every part of the screen
+     * @param color the color of the empty ascii symbol, which influences the cursor color
+     */
+    static void clear_screen_with(unsigned char color);
+
+    /**
      * Copies everything (char and attrib) from the second line to the first and so on.
      * Also clears the last line in one color.
      * @param attrib is the color in which the last line will be formatted

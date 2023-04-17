@@ -15,7 +15,7 @@ void test_all_tests(){
     Keyboard_Controller keyboard = Keyboard_Controller();
 
     while (true){
-        clear_screen(); // from wrapping test
+        cga.clear_screen(); // from wrapping test
 
         cga << "Welcome. Please select a program. We have:" << CGA_Stream::endl;
         cga << "1. Screen wrapping test" << CGA_Stream::endl;
@@ -29,27 +29,27 @@ void test_all_tests(){
         Key number = keyboard.key_hit();
         switch (number.ascii()) {
             case '1':
-                clear_screen();
+                cga.clear_screen();
                 cga_wrapping_test();
                 break;
             case '2':
-                clear_screen();
+                cga.clear_screen();
                 keyboard_test();
                 break;
             case '3':
-                clear_screen();
+                cga.clear_screen();
                 cga_stream_edge_case_test();
                 break;
             case '4':
-                clear_screen();
+                cga.clear_screen();
                 cga_stream_manipulator_test();
                 break;
             case '5':
-                clear_screen();
+                cga.clear_screen();
                 cga_stream_color_setting_test();
                 break;
             case '6':
-                clear_screen();
+                cga.clear_screen();
                 o_stream_hello_w();
                 break;
             default:

@@ -4,18 +4,7 @@
 
 #include "machine/cgascr.h"
 
-static void clear_screen(){
-    CGA_Screen cga_screen = CGA_Screen();
-    for (int i = 0; i < 25; ++i) {
-        for (int j = 0; j < 80; ++j) {
-            cga_screen.show(j, i, '\0', 0x02);
-        }
-    }
-    cga_screen.setpos(0, 0);
-}
-
 static void cga_wrapping_test(){
-    clear_screen();
     CGA_Screen cga_screen = CGA_Screen();
     char message[] = "This line should get cut off.";
     char message2[] = "This used to be the fourth line.";
@@ -34,5 +23,3 @@ static void cga_wrapping_test(){
     cga_screen.print(message5, 25, 0x03);
     cga_screen.print(message6, 45, 0x04);
 }
-
-
