@@ -24,6 +24,7 @@ void test_all_tests(){
         cga << "4. Testing the cga stream manipulators" << CGA_Stream::endl;
         cga << "5. Testing the colors of the cga stream" << CGA_Stream::endl;
         cga << "6. Running the hello_w program for the cga stream" << CGA_Stream::endl;
+        cga << "7. Running the classic keyboard program" << CGA_Stream::endl;
         cga << "Please input one of the numbers to select a program." << CGA_Stream::endl;
         cga << "Rerun this prompt by hitting any button." << CGA_Stream::endl;
         Key number = keyboard.key_hit();
@@ -52,10 +53,15 @@ void test_all_tests(){
                 cga.clear_screen();
                 o_stream_hello_w();
                 break;
+            case '7':
+                cga.clear_screen();
+                classic_key_board_test();
+                break;
             default:
                 cga << "Your input was " << number.ascii() << ", which is supported" << CGA_Stream::endl;
                 break;
         }
-        keyboard.key_hit();
+        //TODO hab ich mal auskommentiert, können wir wieder reinmachen
+        //keyboard.key_hit();
     }
 }
