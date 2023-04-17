@@ -1,22 +1,13 @@
 #include "machine/cgascr.h"
 #include "tests/cga_wrapping_test.h"
+#include "tests/o_stream_test.h"
 
-void string_buff_and_o_strem_test_application(){
-    // TODO: Implement
-}
-
-void cga_stream_test_application(){
-    // TODO: Implement
-}
 
 int main() {
-    cga_wrapping_test();
-
-    string_buff_and_o_strem_test_application();
-
-    cga_stream_test_application();
-
-    // TODO: Add routine for choosing a test to run, via keyboard input
+    // cga_wrapping_test();
+    // o_stream_hello_w();
+    cga_stream_edge_case_test();
+    // cga_stream_color_setting_test();
 
 	return 0;
 }

@@ -17,12 +17,47 @@
 #include "object/o_stream.h"
 #include "machine/cgascr.h"
 
-class CGA_Stream
-/* Add your code here */ 
-{
+enum CGA_COLORS{
+    BLACK = 0,
+    BLUE = 1,
+    GREEN = 2,
+    CYAN = 3,
+    RED = 4,
+    MAGENTA = 5,
+    YELLOW = 6,
+    LIGHT_GREY = 7,
+    DARK_GREY = 8,
+    LIGHT_BLUE = 9,
+    LIGHT_GREEN = 10,
+    LIGHT_CYAN = 11,
+    LIGHT_RED = 12,
+    LIGHT_MAGENTA = 13,
+    LIGHT_YELLOW = 14,
+    WHITE = 15
+};
+
+
+class CGA_Stream: public O_Stream, public CGA_Screen{
+private:
+    unsigned char current_text_colour = 0x0F; // Initialize to white on black
+
 public:
+    CGA_Stream(){};
 	CGA_Stream(CGA_Stream &copy) = delete; // prevent copying
-/* Add your code here */ 
+
+    /**
+     * Writes the buffer to the CGA screen in the currently selected color.
+     * Can be called directly or by shifting "endl" into the buffer.
+     */
+    void flush();
+
+    /**
+     * Sets the fore- and background color for the next time the buffer will be flushed.
+     * For all options see CGA_COLORS.
+     * @param foreground color of the ascii symbol
+     * @param background color behind the ascii symbol
+     */
+    void set_current_text_colour(unsigned char foreground, unsigned char background);
 };
 
 #endif
