@@ -11,7 +11,8 @@
 /* INCLUDES */
 
 #include "machine/keyctrl.h"
- 
+#include "device/cgastr.h" // for debugging
+
 /* STATIC MEMBERS */
 
 unsigned char Keyboard_Controller::normal_tab[] = {
@@ -208,6 +209,27 @@ void Keyboard_Controller::get_ascii_code()
 	 }
 }
 
+void Keyboard_Controller::wait_until_input_buffer_empty(){
+    // auxb correct here? (supposed to make sure that information is from keyboard)
+    while (true) {
+        bool buffer_full = ctrl_port.inb() & inpb;
+        if (!buffer_full) {
+            return;
+        }
+    }
+}
+
+void Keyboard_Controller::wait_until_byte_acknowledged(){
+    // auxb correct here? (supposed to make sure that information is from keyboard)
+    while (true) {
+        // character available to read and
+        bool response_keyboard = ctrl_port.inb() & outb;
+        if (response_keyboard && data_port.inb() == kbd_reply::ack) {
+            return;
+        }
+    }
+}
+
 /* PUBLIC METHODS */
 
 // KEYBOARD_CONTROLLER: keyboard initialization: disables all LEDs and
@@ -231,13 +253,26 @@ Keyboard_Controller::Keyboard_Controller() : ctrl_port(0x64), data_port(0x60)
 //          Otherwise, key_hit () returns an invalid value, which can be
 //          checked by calling Key::valid ().
 
-Key Keyboard_Controller::key_hit()
-{
-	Key invalid; // not explicitly initialized Key objects are invalid
-/* Add your code here */ 
-/* Add your code here */ 
- 
-/* Add your code here */ 
+Key Keyboard_Controller::key_hit() {
+    Key invalid; // not explicitly initialized Key objects are invalid
+
+    // run until full key is decoded and saved in gather
+    do {
+        // block until outb-bit of status register is 1 aka output available
+        while (true) {
+            unsigned char status = ctrl_port.inb();
+            if (status & outb) {
+                break;
+            }
+        }
+        // read and save make/break-code
+        code = data_port.inb();
+    } while (!key_decoded());
+
+    if (gather.valid()) {
+        return gather;
+    }
+
 	return invalid;
 }
 
@@ -272,18 +307,66 @@ void Keyboard_Controller::reboot()
 
 void Keyboard_Controller::set_repeat_rate(int speed, int delay)
 {
-/* Add your code here */ 
- 
-/* Add your code here */ 
- 
+    CGA_Stream cga = CGA_Stream();
+
+    if (speed > 31 || delay > 3) {
+        // please insert error, when possible
+        return;
+    }
+
+    // send command code for "speed and delay"
+    wait_until_input_buffer_empty();
+    data_port.outb(kbd_cmd::set_speed);
+    wait_until_byte_acknowledged();
+
+    // calculate user data byte (speed: bit 0-4, delay: bit 5-6)
+    int usr_data = (delay << 5) + speed;
+
+
+    cga << "The delay-speed-byte to be sent is:"        << CGA_Stream::endl
+        << "BIN:" << CGA_Stream::bin << (int)usr_data   << CGA_Stream::endl
+        << "HEX:" << CGA_Stream::hex << (int)usr_data   << CGA_Stream::endl;
+
+    // send user data for "speed"
+    wait_until_input_buffer_empty();
+    data_port.outb(usr_data);
+    wait_until_byte_acknowledged();
+
+    cga << "The byte is sent!" << CGA_Stream::endl;
+
 }
 
 // SET_LED: sets or clears the specified LED
 
 void Keyboard_Controller::set_led(char led, bool on)
 {
-/* Add your code here */ 
- 
-/* Add your code here */ 
- 
+    if (led != led::caps_lock && led != led::num_lock && led != led::scroll_lock) {
+        // insert error message, when possible
+        return;
+    }
+
+    // send command code for "led"
+    wait_until_input_buffer_empty();
+    data_port.outb(kbd_cmd::set_led);
+    wait_until_byte_acknowledged();
+
+    CGA_Stream cga = CGA_Stream();
+    cga << "leds: " << CGA_Stream::bin << (int)leds << CGA_Stream::endl;
+
+    // update leds variable
+    if (on) {
+        leds |= led;
+    }
+    else {
+        leds &= ~led;
+    }
+
+    cga << "led:  " << CGA_Stream::bin << (int)led  << CGA_Stream::endl;
+    cga << "leds: " << CGA_Stream::bin << (int)leds << CGA_Stream::endl;
+
+    // send leds variable
+    wait_until_input_buffer_empty();
+    data_port.outb(leds);
+    wait_until_byte_acknowledged();
 }
+
