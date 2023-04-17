@@ -18,8 +18,9 @@
 
 class Stringbuffer {
 public:
-	Stringbuffer(){}
-    Stringbuffer(const Stringbuffer &copy) = delete; // prevent copying
+    Stringbuffer(){}
+	  Stringbuffer(const Stringbuffer &copy) = delete; // prevent copying
+    
     //TODO change length of array, what length should be good?
     char string[32];
     int index = 0;
