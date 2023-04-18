@@ -19,8 +19,8 @@ void CGA_Stream::flush(){
     this->index = 0;
 }
 
-void CGA_Stream::set_current_text_colour(unsigned char foreground, unsigned char background){
-    this->current_text_colour = (background << 4) | foreground;
+void CGA_Stream::set_current_text_colour(CGA_COLORS foreground, CGA_COLORS background, bool is_blinking){
+    this->current_text_colour = ((unsigned char)is_blinking << 7) | ((background & 0b111) << 4) | (foreground & 0b1111);
 }
 
 void CGA_Stream::clear_screen(){

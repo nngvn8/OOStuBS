@@ -51,13 +51,14 @@ public:
      */
     void flush();
 
-    /**
-     * Sets the fore- and background color for the next time the buffer will be flushed.
-     * For all options see CGA_COLORS.
-     * @param foreground color of the ascii symbol
-     * @param background color behind the ascii symbol
-     */
-    void set_current_text_colour(unsigned char foreground, unsigned char background);
+     /**
+      * Sets the fore- and background color for the next time the buffer will be flushed.
+      * For all options see CGA_COLORS.
+      * @param foreground color of the ascii symbol
+      * @param background color behind the ascii symbol
+      * @param is_blinking makes the symbol blink (does not work in qemu)
+      */
+    void set_current_text_colour(CGA_COLORS foreground, CGA_COLORS background, bool is_blinking);
 
     /**
      * Prints the empty ascii symbol to every part of the screen in the current text color
