@@ -58,6 +58,11 @@ public:
      * @param background color behind the ascii symbol
      */
     void set_current_text_colour(unsigned char foreground, unsigned char background);
+
+    /**
+     * Prints the empty ascii symbol to every part of the screen in the current text color
+     */
+    void clear_screen();
 };
 
 #endif

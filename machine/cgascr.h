@@ -25,8 +25,15 @@
 #define CURSOR_ADDRESS_LOW_INDEX 15
 
 class CGA_Screen {
-private:
+protected:
 
+    /**
+     * Prints the empty ascii symbol to every part of the screen
+     * @param color the color of the empty ascii symbol, which influences the cursor color
+     */
+    void clear_screen_with(unsigned char color);
+
+private:
     /**
      * Copies everything (char and attrib) from the second line to the first and so on.
      * Also clears the last line in one color.

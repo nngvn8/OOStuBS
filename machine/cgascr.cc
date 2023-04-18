@@ -13,6 +13,15 @@
 #include "cgascr.h"
 #include "io_port.h"
 
+void CGA_Screen::clear_screen_with(unsigned char color){
+    for (int i = 0; i < 25; ++i) {
+        for (int j = 0; j < 80; ++j) {
+            show(j, i, '\0', color);
+        }
+    }
+    setpos(0, 0);
+}
+
 void CGA_Screen::move_up_screen(unsigned char attrib_of_last_line){
     // Do some pointer arithmetic to move all characters and attributes up by one line
     int line_width_bytes = 2 * LINE_WIDTH;

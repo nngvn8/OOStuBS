@@ -4,9 +4,6 @@
 #include "machine/keyctrl.h"
 #include "device/cgastr.h"
 
-//#ifndef OOSTUBBS_MBJ_KEYBOARD_TEST_H
-//#define OOSTUBBS_MBJ_KEYBOARD_TEST_H
-
 unsigned char user_answer(Keyboard_Controller &contrlr, CGA_Stream &cga, char* user_input) {
     cga << user_input << CGA_Stream::endl;
     unsigned char key_content = contrlr.key_hit().ascii();
@@ -151,8 +148,19 @@ void keyboard_test() {
     cga << "You left \"keyboard test\"!" << CGA_Stream::endl;
 }
 
+void classic_key_board_test(){
+    Keyboard_Controller contrlr =  Keyboard_Controller();
+    CGA_Stream cga = CGA_Stream();
+    cga << "Test the classic keyboard (Press q to quit)" << CGA_Stream::endl;
+    unsigned char key_content = '0';
 
+    while (key_content != 'q') {
+        key_content = contrlr.key_hit().ascii();
+        if (key_content == 'q') break;
+        if (key_content == 13 ) cga<<CGA_Stream::endl;
+        cga << key_content << CGA_Stream::inst_print ;
+        }
+    }
 
-//#endif //OOSTUBBS_MBJ_KEYBOARD_TEST_H
 
 
