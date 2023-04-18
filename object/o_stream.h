@@ -35,6 +35,8 @@ private:
     void t2er_complement(O_Stream& os, char* array__of_digits, int bit_length_nr, int ctr);
 
 public:
+    O_Stream(){}
+
     /// Shifting data into buffer
     O_Stream& operator<< (char c);
     O_Stream& operator<< (unsigned char c);

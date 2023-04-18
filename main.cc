@@ -2,5 +2,5 @@
 
 int main() {
     test_all_tests();
-
+    return 0;
 }
