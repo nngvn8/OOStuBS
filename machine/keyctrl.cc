@@ -11,6 +11,7 @@
 /* INCLUDES */
 
 #include "machine/keyctrl.h"
+#include "device/cgastr.h"
 
 /* STATIC MEMBERS */
 
@@ -253,9 +254,10 @@ Keyboard_Controller::Keyboard_Controller() : ctrl_port(0x64), data_port(0x60)
 Key Keyboard_Controller::key_hit() {
     Key invalid; // not explicitly initialized Key objects are invalid
 
+//    CGA_Stream cga = CGA_Stream();
+    bool is_from_mouse;
     // run until full key is decoded and saved in gather
     do {
-        bool is_from_mouse = false;
         unsigned char status;
         // block until outb-bit of status register is 1 aka output available
         while (true) {
@@ -265,6 +267,7 @@ Key Keyboard_Controller::key_hit() {
             }
         }
         is_from_mouse = (bool)(status & auxb);
+//        cga << "Keypress is from mouse: " << is_from_mouse << CGA_Stream::endl;
         // read and save make/break-code
         code = data_port.inb();
     } while (is_from_mouse || !key_decoded());
