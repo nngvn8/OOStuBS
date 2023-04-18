@@ -19,13 +19,12 @@
 class Stringbuffer {
 public:
     Stringbuffer(){}
-	  Stringbuffer(const Stringbuffer &copy) = delete; // prevent copying
-    
-    //TODO change length of array, what length should be good?
-    char string[32];
+    Stringbuffer(const Stringbuffer &copy) = delete; // prevent copying
+
+    char string[32]; // seems ok
     int index = 0;
     void put(char c);
-    virtual void flush(){};
+    virtual void flush() = 0;
 };
 
 #endif

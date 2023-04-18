@@ -209,7 +209,6 @@ void Keyboard_Controller::get_ascii_code()
 }
 
 void Keyboard_Controller::wait_until_input_buffer_empty(){
-    // auxb correct here? (supposed to make sure that information is from keyboard)
     while (true) {
         bool buffer_full = ctrl_port.inb() & inpb;
         if (!buffer_full) {
@@ -219,7 +218,6 @@ void Keyboard_Controller::wait_until_input_buffer_empty(){
 }
 
 void Keyboard_Controller::wait_until_byte_acknowledged(){
-    // auxb correct here? (supposed to make sure that information is from keyboard)
     while (true) {
         // character available to read and
         bool response_keyboard = ctrl_port.inb() & outb;
@@ -257,16 +255,19 @@ Key Keyboard_Controller::key_hit() {
 
     // run until full key is decoded and saved in gather
     do {
+        bool is_from_mouse = false;
+        unsigned char status;
         // block until outb-bit of status register is 1 aka output available
         while (true) {
-            unsigned char status = ctrl_port.inb();
+            status = ctrl_port.inb();
             if (status & outb) {
                 break;
             }
         }
+        is_from_mouse = (bool)(status & auxb);
         // read and save make/break-code
         code = data_port.inb();
-    } while (!key_decoded());
+    } while (is_from_mouse || !key_decoded());
 
     if (gather.valid()) {
         return gather;

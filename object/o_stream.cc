@@ -143,7 +143,6 @@ O_Stream& O_Stream::operator<< (void * ptr) {
     *this << address;
     this->selected_nr_system = tmp;
     return (*this);
-
 }
 
 //pointer arithmetic :D for strings
@@ -157,8 +156,7 @@ O_Stream& O_Stream::operator<< (char* pointer){
 
 //makes o_stream accept endl for example
 O_Stream& O_Stream::operator<< (O_Stream& (*fkt) (O_Stream&)){
-    (*fkt)(*(O_Stream *)this);
-    return (*this);
+    return (*fkt)(*(O_Stream *)this);
 }
 
 //inserts a line break

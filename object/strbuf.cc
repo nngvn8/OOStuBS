@@ -16,7 +16,6 @@
 #include "object/strbuf.h"
 
 void Stringbuffer::put(char char_to_insert) {
-
     this->string[index] = char_to_insert;
     this->index += 1;
     if (this->index == sizeof(string)){
