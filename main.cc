@@ -11,7 +11,7 @@ Keyboard keyboard = Keyboard();
 
 int main() {
     cpu.enable_int();
-    pic.allow(1); // allow keyboard
+    keyboard.plugin();
 
     // test_all_tests();
 

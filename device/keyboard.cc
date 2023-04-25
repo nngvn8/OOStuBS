@@ -15,7 +15,7 @@ extern PIC pic;
 
 void Keyboard::plugin(){
     // Connect to plugbox
-    plugbox.assign(Plugbox::keyboard, this);
+    plugbox.assign(plugbox.keyboard, *this);
     // Tell pic to allow interrupts
     pic.allow(PIC::KEYBOARD);
 }
