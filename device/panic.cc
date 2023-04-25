@@ -8,10 +8,8 @@
 /* Default interrupt handler.                                                */
 /*****************************************************************************/
 #include "panic.h"
-#include "../machine/cpu.h"
 
 void Panic::trigger() {
-    // print error message
-
-    cpu_halt();
+    cga << msg << CGA_Stream::endl;
+    cpu->halt();
 }

@@ -14,7 +14,7 @@
 class Gate {
 
 public:
-    virtual void trigger();
+    virtual void trigger() = 0;
 };
 
 #endif
