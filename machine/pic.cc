@@ -19,14 +19,13 @@
 
 PIC::PIC() : slave_port_A(SLAVE_PORT_A), slave_port_B(SLAVE_PORT_B),
              master_port_A(MASTER_PORT_A),master_port_B(MASTER_PORT_B){
-
 }
 /**
  * OCW is simply a placeholder for the disabled-interrupts mask, beeing directly transferred
  * into the interrupt mask register, set bit X ensures that interrupt X is disabled
  * @param interrupt_device nr between 0 and 16
  */
-void PIC::allow(int interrupt_device){
+void PIC::forbid(int interrupt_device){
 
     int current_state_pic_IMR;
     //wirte to slave cuz 0-7 are connected to the slave
@@ -50,7 +49,7 @@ void PIC::allow(int interrupt_device){
 
 
 
-void PIC::forbid(int interrupt_device){
+void PIC::allow(int interrupt_device){
 
     int current_state_pic_IMR;
     //wirte to slave cuz 0-7 are connected to the slave
@@ -91,8 +90,8 @@ bool PIC::is_masked(int interrupt_device){
         return false;
     }
     //check wheter the bit is set
-    if(current_state_pic_IMR & (convert_to_one_hot(interrupt_device))) return true;
-    else return false;
+    return (current_state_pic_IMR & (convert_to_one_hot(interrupt_device)));
+
 }
 
 char PIC::convert_to_one_hot(int x){

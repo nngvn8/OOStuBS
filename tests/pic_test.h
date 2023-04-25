@@ -57,7 +57,7 @@ void pic_allow_forbid_is_masked_test(){
 
     //now the entire master pic
     cga << "\nForbidding the master, Shall the slave reign:" << O_Stream::endl;
-    for(int i = 8; i <= 15; i++) pic.forbid(i);
+    for(int i = 8; i <= 15; i++) pic.allow(i);
     print_curr_state_pic_irqs_in_one_row(pic, cga);
 
     //huh? no such thing as a 16th line
