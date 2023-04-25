@@ -23,6 +23,13 @@ void Keyboard::plugin(){
 
 void Keyboard::trigger(){
     Key key = keyboard_ctr.key_hit();
+
+    // Check for ctrl + alt + del
+    if (key.ctrl() && key.alt() && key.scancode()==Key::scan.del){
+        keyboard_ctr.reboot();
+    }
+
+    // Immediately print the character to the screen for now
     if (key.valid()){
         cga << key.ascii();
         cga.flush();
