@@ -1,4 +1,3 @@
-#include "tests/flashy_test.h"
 #include "machine/cpu.h"
 #include "machine/pic.h"
 #include "machine/plugbox.h"
@@ -8,7 +7,7 @@
 CPU cpu = CPU();
 PIC pic = PIC();
 Plugbox plugbox = Plugbox();
-Keyboard keyboard = Keyboard();
+Keyboard keyboard_ctr = Keyboard(); // must be weirdly named because of enum in pic
 
 int main() {
     cpu.enable_int();

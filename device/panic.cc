@@ -9,6 +9,8 @@
 /*****************************************************************************/
 #include "panic.h"
 
+extern CPU cpu; // declare global to exist somewhere
+
 void Panic::trigger() {
     cga << msg << CGA_Stream::endl;
     cpu.halt();

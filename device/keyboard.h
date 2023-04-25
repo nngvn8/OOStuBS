@@ -19,7 +19,8 @@ class Keyboard
 /* Add your code here */ 
 {
 public:
-	Keyboard(const Keyboard &copy) = delete; // prevent copying
+	Keyboard(){}
+    Keyboard(const Keyboard &copy) = delete; // prevent copying
 /* Add your code here */ 
  
 /* Add your code here */ 
