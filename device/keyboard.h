@@ -14,21 +14,22 @@
 #include "machine/keyctrl.h"
 #include "guard/gate.h"
 #include "machine/key.h"
+#include "machine/plugbox.h"
+#include "machine/pic.h"
+#include "cgastr.h"
  
-class Keyboard
-/* Add your code here */ 
-{
+class Keyboard : public Gate{
+private:
+    CGA_Stream cga = CGA_Stream();
+
 public:
 	Keyboard(){}
     Keyboard(const Keyboard &copy) = delete; // prevent copying
-/* Add your code here */ 
- 
-/* Add your code here */ 
  
 	// PLUGIN: "Plugs in" the keyboard (driver). From now on, keypresses are handled.
 	void plugin();
 
-/* Add your code here */ 
+    void trigger();
 
 };
 

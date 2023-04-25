@@ -7,7 +7,7 @@
 CPU cpu = CPU();
 PIC pic = PIC();
 Plugbox plugbox = Plugbox();
-Keyboard keyboard_ctr = Keyboard(); // must be weirdly named because of enum in pic
+Keyboard keyboard = Keyboard();
 
 int main() {
     cpu.enable_int();

@@ -22,11 +22,6 @@
 #define MASTER_PORT_A 0xa0
 #define MASTER_PORT_B 0xa1
 
-enum {
-    timer    = 0,
-    keyboard = 1
-};
-
 
 class PIC {
 private:
@@ -36,6 +31,11 @@ private:
     const IO_Port master_port_B;
 
 public:
+    enum {
+        TIMER    = 0,
+        KEYBOARD = 1
+    };
+
     PIC();
 	PIC(const PIC &copy) = delete; // prevent copying
 
