@@ -30,7 +30,7 @@ void Plugbox::assign(unsigned int slot, Gate& gate) {
 Gate& Plugbox::report(unsigned int slot) {
     if (slot >= TABLE_SIZE) {
         // add error message when possible
-        return NULL;
+        // return NULL;
     }
 
     return interrupt_vector_table[slot];

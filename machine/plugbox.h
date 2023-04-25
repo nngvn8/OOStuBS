@@ -28,7 +28,7 @@ public:
     Gate& report(unsigned int slot);
 private:
     Gate global_panic = Panic("Error: Gate not initialized!");
-    Gate interrupt_vector_table[TABLE_SIZE];
+    Gate& interrupt_vector_table[TABLE_SIZE];
 };
 
 #endif

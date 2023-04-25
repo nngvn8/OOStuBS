@@ -17,12 +17,12 @@
 class Panic : public Gate{
 private:
     char* msg;
-    CGA_Stream* cga;
-    CPU* cpu;
+    CGA_Stream cga();
+    CPU cpu();
 
 public:
 	Panic (const Panic &copy) = delete; // prevent copying
-	Panic (char* message, CGA_Stream* cga, CPU* cpu) : msg(message), cga(cga), cpu(cpu) {}
+	Panic (char* message) : msg(message){}
 
     void trigger();
  
