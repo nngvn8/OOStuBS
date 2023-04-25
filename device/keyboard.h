@@ -20,7 +20,6 @@
  
 class Keyboard : public Gate{
 private:
-    CGA_Stream cga = CGA_Stream();
     Keyboard_Controller keyboard_ctr = Keyboard_Controller();
 
 public:

@@ -12,6 +12,7 @@
 
 extern Plugbox plugbox;
 extern PIC pic;
+extern CGA_Stream cga;
 
 void Keyboard::plugin(){
     // Connect to plugbox
@@ -21,11 +22,9 @@ void Keyboard::plugin(){
 }
 
 void Keyboard::trigger(){
-    CGA_Stream cga = CGA_Stream(); // TODO: remove debugging statement
-
     Key key = keyboard_ctr.key_hit();
-
     if (key.valid()){
         cga << key.ascii();
+        cga.flush();
     }
 }

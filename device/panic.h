@@ -18,7 +18,6 @@
 class Panic : public Gate{
 private:
     char* msg;
-    CGA_Stream cga = CGA_Stream();
 
 public:
     Panic (char* message) : msg(message){}
