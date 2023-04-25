@@ -12,13 +12,23 @@
 #ifndef __Plugbox_include__
 #define __Plugbox_include__
 
-#include "guard/gate.h"
+#include "../guard/gate.h"
+#include "../device/panic.h"
+
+#define TABLE_SIZE 64
 
 class Plugbox {
 public:
-	Plugbox(const Plugbox &copy) = delete; // prevent copying
+	const int timer = 32;
+    const int keybaord = 33;
+
+    Plugbox();
+    Plugbox(const Plugbox &copy) = delete; // prevent copying
+    void assign(unsigned int slot, Gate& gate);
+    Gate& report(unsigned int slot);
 private:
-/* Add your code here */ 
+    Gate global_panic = Panic();
+    Gate interrupt_vector_table[TABLE_SIZE];
 };
 
 #endif

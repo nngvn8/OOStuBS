@@ -11,17 +11,18 @@
 #ifndef __panic_include__
 #define __panic_include__
 
+#include "../guard/gate.h"
+
 /* INCLUDES */
 
-#include "guard/gate.h"
-
-class Panic
+class Panic : public Gate
 /* Add your code here */ 
 {
 public:
 	Panic (const Panic &copy) = delete; // prevent copying
 	Panic () {}
-/* Add your code here */ 
+
+    void trigger();
  
 };
 

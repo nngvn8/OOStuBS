@@ -7,6 +7,11 @@
 /*---------------------------------------------------------------------------*/
 /* Default interrupt handler.                                                */
 /*****************************************************************************/
-/* Add your code here */ 
-/* Add your code here */ 
- 
+#include "panic.h"
+#include "../machine/cpu.h"
+
+void Panic::trigger() {
+    // print error message
+
+    cpu_halt();
+}
