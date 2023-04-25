@@ -42,6 +42,8 @@ void PIC::allow(int interrupt_device){
         current_state_pic_IMR |= convert_to_one_hot(interrupt_device);
         master_port_B.outb(current_state_pic_IMR);
     }
+    //do nothing, TODO error?
+    else return;
 
 }
 
@@ -64,6 +66,8 @@ void PIC::forbid(int interrupt_device){
         current_state_pic_IMR &= ~convert_to_one_hot(interrupt_device);
         master_port_B.outb(current_state_pic_IMR);
     }
+    //do nothing, TODO error?
+    else return;
 
 }
 
@@ -90,7 +94,7 @@ bool PIC::is_masked(int interrupt_device){
     if(current_state_pic_IMR & (convert_to_one_hot(interrupt_device))) return true;
     else return false;
 }
-//TODO besser doch int ?
+
 char PIC::convert_to_one_hot(int x){
     switch(x){
         case 0:return 0b1;
