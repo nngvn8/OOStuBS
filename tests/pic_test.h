@@ -11,7 +11,7 @@
 
 void print_curr_state_pic_irqs_line_by_line(PIC& pic, CGA_Stream& cga){
     for(int i = 0; i < 16; i++){
-        cga << "Line: " << i << ", enbaled? : " << pic.is_masked(i) << O_Stream::endl;
+        cga << "Line: " << i << ", enabled? : " << pic.is_masked(i) << O_Stream::endl;
     }
 
 }
@@ -27,9 +27,7 @@ void print_curr_state_pic_irqs_in_one_row(PIC& pic, CGA_Stream& cga){
         if(i == 7) cga << "\nMaster PIC \n";
     }
     cga << O_Stream::endl;
-
 }
-
 
 void pic_allow_forbid_is_masked_test(){
     CGA_Stream cga = CGA_Stream();
@@ -63,16 +61,6 @@ void pic_allow_forbid_is_masked_test(){
     //huh? no such thing as a 16th line
     pic.allow(16);
     print_curr_state_pic_irqs_in_one_row(pic, cga);
-
-
-
-
-
-
-
 }
-
-
-
 
 #endif //OOSTUBBS_MBJ_PIC_TEST_H

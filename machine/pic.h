@@ -35,7 +35,6 @@ private:
     const IO_Port master_port_A;
     const IO_Port master_port_B;
 
-    char convert_to_one_hot(int x);
 public:
     PIC();
 	PIC(const PIC &copy) = delete; // prevent copying
@@ -49,22 +48,19 @@ public:
     void allow (int interrupt_device);
 
     /**
-     * COnfigure the PIC so that is surpresses a specific hardware interrupt of the device number (interrupt device)
+     * Configure the PIC so that is surprises a specific hardware interrupt of the device number (interrupt device)
      * @param interrupt_device
      */
 
     void forbid (int interrupt_device);
 
     /**
-     * Determinte the current state of teh masking bit of a specific hardware interrupt with interrupt number interrupt_device.
+     * Determine the current state of teh masking bit of a specific hardware interrupt with interrupt number interrupt_device.
      * If interrupts of this device are not forwarded to the cpu, return true, otherwise return false
      * @param interrupt_device
      * @return
      */
     bool is_masked (int interrupt_device);
-
-
-/* Add your code here */ 
 };
 
 #endif
