@@ -252,30 +252,37 @@ Keyboard_Controller::Keyboard_Controller() : ctrl_port(0x64), data_port(0x60)
 //          checked by calling Key::valid ().
 
 Key Keyboard_Controller::key_hit() {
+
+    CGA_Stream cga = CGA_Stream(); // TODO: remove debugging statement
+
     Key invalid; // not explicitly initialized Key objects are invalid
 
-//    CGA_Stream cga = CGA_Stream();
-    bool is_from_mouse;
-    // run until full key is decoded and saved in gather
-    do {
-        unsigned char status;
-        // block until outb-bit of status register is 1 aka output available
-        while (true) {
-            status = ctrl_port.inb();
-            if (status & outb) {
-                break;
-            }
-        }
-        is_from_mouse = (bool)(status & auxb);
-//        cga << "Keypress is from mouse: " << is_from_mouse << CGA_Stream::endl;
-        // read and save make/break-code
-        code = data_port.inb();
-    } while (is_from_mouse || !key_decoded());
+    unsigned char status = ctrl_port.inb();
 
-    if (gather.valid()) {
+    // Check if any new code is available (and return if not)
+    if (!(status & outb)) {
+        return invalid;
+    }
+
+    // Check if the available code is from the mouse
+    if(status & auxb){
+        cga << "Keypress was from mouse" << CGA_Stream::endl; // TODO: remove debugging statement
+        data_port.inb(); // read the data to clear the flag (but discard it)
+        return invalid;
+    }
+
+    // Now the new data is definitely a scan code from the keyboard
+    code = data_port.inb();
+
+    cga << "Read scan code" << CGA_Stream::endl; // TODO: remove debugging statement
+
+    // Decode the scan code and check if it is already valid
+    if(key_decoded() && gather.valid()){
+        cga << "Code was decoded and valid" << CGA_Stream::endl; // TODO: remove debugging statement
         return gather;
     }
 
+    // Otherwise return invalid key
 	return invalid;
 }
 

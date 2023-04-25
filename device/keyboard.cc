@@ -21,5 +21,11 @@ void Keyboard::plugin(){
 }
 
 void Keyboard::trigger(){
-    cga << "Key was hit" << CGA_Stream::endl;
+    CGA_Stream cga = CGA_Stream(); // TODO: remove debugging statement
+
+    Key key = keyboard_ctr.key_hit();
+
+    if (key.valid()){
+        cga << key.ascii();
+    }
 }

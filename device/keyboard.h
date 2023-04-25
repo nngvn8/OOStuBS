@@ -11,8 +11,8 @@
 #ifndef __Keyboard_include__
 #define __Keyboard_include__
 
-#include "machine/keyctrl.h"
 #include "guard/gate.h"
+#include "machine/keyctrl.h"
 #include "machine/key.h"
 #include "machine/plugbox.h"
 #include "machine/pic.h"
@@ -21,6 +21,7 @@
 class Keyboard : public Gate{
 private:
     CGA_Stream cga = CGA_Stream();
+    Keyboard_Controller keyboard_ctr = Keyboard_Controller();
 
 public:
 	Keyboard(){}
