@@ -12,17 +12,18 @@
 #define __panic_include__
 
 #include "cgastr.h"
-#include "../machine/cpu.h"
+#include "machine/cpu.h"
+#include "guard/gate.h"
 
 class Panic : public Gate{
 private:
     char* msg;
-    CGA_Stream cga();
-    CPU cpu();
+    CGA_Stream cga = CGA_Stream();
+    CPU cpu = CPU();
 
 public:
-	Panic (const Panic &copy) = delete; // prevent copying
-	Panic (char* message) : msg(message){}
+    Panic (char* message) : msg(message){}
+    Panic (const Panic &copy) = delete; // prevent copying
 
     void trigger();
  

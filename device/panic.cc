@@ -9,7 +9,9 @@
 /*****************************************************************************/
 #include "panic.h"
 
+
+
 void Panic::trigger() {
     cga << msg << CGA_Stream::endl;
-    cpu->halt();
+    cpu.halt();
 }

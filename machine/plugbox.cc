@@ -13,8 +13,9 @@
 
 Plugbox::Plugbox() {
     for (int i = 0; i < TABLE_SIZE; i++) {
-        interrupt_vector_table[i] = global_panic;
+        interrupt_vector_table[i] = &global_panic;
     }
+
 }
 
 void Plugbox::assign(unsigned int slot, Gate& gate) {
@@ -23,7 +24,7 @@ void Plugbox::assign(unsigned int slot, Gate& gate) {
         return;
     }
 
-    interrupt_vector_table[slot] = gate;
+    interrupt_vector_table[slot] = &gate;
 }
 
 
@@ -33,5 +34,5 @@ Gate& Plugbox::report(unsigned int slot) {
         // return NULL;
     }
 
-    return interrupt_vector_table[slot];
+    return *interrupt_vector_table[slot];
 }

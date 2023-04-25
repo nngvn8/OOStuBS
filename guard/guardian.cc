@@ -28,5 +28,8 @@ extern "C" void guardian (unsigned int slot);
 
 void guardian (unsigned int slot){
     CGA_Stream cgaStream = CGA_Stream();
+    Plugbox pbox = Plugbox();
     cgaStream << "[Guardian] Interrupt occurred" << O_Stream::endl;
+    pbox.report(slot).trigger();
+
 }

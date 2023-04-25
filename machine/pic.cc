@@ -75,5 +75,5 @@ bool PIC::is_masked(int interrupt_device){
         return false;
     }
     //check whether the bit is set
-    return (current_state_pic_IMR & (convert_to_one_hot(interrupt_device)));
+    return (current_state_pic_IMR & (1 << interrupt_device));
 }

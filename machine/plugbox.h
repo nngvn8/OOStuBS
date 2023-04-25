@@ -27,8 +27,8 @@ public:
     void assign(unsigned int slot, Gate& gate);
     Gate& report(unsigned int slot);
 private:
-    Gate global_panic = Panic("Error: Gate not initialized!");
-    Gate& interrupt_vector_table[TABLE_SIZE];
+    Panic global_panic = Panic("Error: Gate not initialized!");
+    Gate* interrupt_vector_table[TABLE_SIZE];
 };
 
 #endif
