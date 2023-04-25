@@ -39,7 +39,6 @@ public:
     PIC();
 	PIC(const PIC &copy) = delete; // prevent copying
 
-
     /**
      * Configure the PIC so that it forwards interrupts for the device
      * with number interrupt_device to the cpu
@@ -51,7 +50,6 @@ public:
      * Configure the PIC so that is surprises a specific hardware interrupt of the device number (interrupt device)
      * @param interrupt_device
      */
-
     void forbid (int interrupt_device);
 
     /**

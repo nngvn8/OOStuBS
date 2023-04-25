@@ -15,7 +15,6 @@ Plugbox::Plugbox() {
     for (int i = 0; i < TABLE_SIZE; i++) {
         interrupt_vector_table[i] = &global_panic;
     }
-
 }
 
 void Plugbox::assign(unsigned int slot, Gate& gate) {
@@ -31,7 +30,6 @@ void Plugbox::assign(unsigned int slot, Gate& gate) {
 Gate& Plugbox::report(unsigned int slot) {
     if (slot >= TABLE_SIZE) {
         // add error message when possible
-        // return NULL;
     }
 
     return *interrupt_vector_table[slot];
