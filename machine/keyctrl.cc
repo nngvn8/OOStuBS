@@ -253,25 +253,28 @@ Keyboard_Controller::Keyboard_Controller() : ctrl_port(0x64), data_port(0x60)
 Key Keyboard_Controller::key_hit() {
     Key invalid; // not explicitly initialized Key objects are invalid
 
-    unsigned char status = ctrl_port.inb();
+    // Spurious interrupt will be caught here
+    while(true){
+        unsigned char status = ctrl_port.inb();
 
-    // Check if any new code is available (and return if not)
-    if (!(status & outb)) {
-        return invalid;
-    }
+        // Catch spurious interrupts or empty buffer
+        if (!(status & outb)){
+            return invalid;
+        }
 
-    // Check if the available code is from the mouse
-    if(status & auxb){
-        data_port.inb(); // read the data to clear the flag (but discard it)
-        return invalid;
-    }
+        // Check if the available code is from the mouse
+        if(status & auxb){
+            data_port.inb(); // read the data to clear the flag (but discard it)
+            continue; // Retry
+        }
 
-    // Now the new data is definitely a scan code from the keyboard
-    code = data_port.inb();
+        // Now the new data is definitely a scan code from the keyboard
+        code = data_port.inb();
 
-    // Decode the scan code and check if it is already valid
-    if(key_decoded() && gather.valid()){
-        return gather;
+        // Decode the scan code and check if it is already valid
+        if(key_decoded() && gather.valid()){
+            return gather;
+        }
     }
 
     // Otherwise return invalid key

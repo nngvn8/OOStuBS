@@ -22,16 +22,20 @@ void Keyboard::plugin(){
 }
 
 void Keyboard::trigger(){
-    Key key = keyboard_ctr.key_hit();
+    // Rerun until keyboard buffer is definitely empty
+    while(true){
+        Key key = keyboard_ctr.key_hit();
 
-    // Check for ctrl + alt + del
-    if (key.ctrl() && key.alt() && key.scancode()==Key::scan::del){
-        keyboard_ctr.reboot();
-    }
+        // Check for ctrl + alt + del
+        if (key.ctrl() && key.alt() && key.scancode()==Key::scan::del){
+            keyboard_ctr.reboot();
+        }
 
-    // Immediately print the character to the screen for now
-    if (key.valid()){
-        cga << key.ascii();
-        cga.flush();
+        // Immediately print the character to the screen for now
+        if (key.valid()){
+            cga << key.ascii() << CGA_Stream::inst_print;
+        } else{
+            return;
+        }
     }
 }
