@@ -14,6 +14,8 @@
 
 /* STATIC MEMBERS */
 
+extern PIC pic;
+
 unsigned char Keyboard_Controller::normal_tab[] = {
     0,   0,   '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', 225, 39,   '\b',
     0,   'q', 'w', 'e', 'r', 't', 'z', 'u', 'i', 'o', 'p', 129, '+', '\n', 0,
@@ -316,6 +318,12 @@ void Keyboard_Controller::set_repeat_rate(int speed, int delay){
         return;
     }
 
+    // Check if keyboard is already forbidden in pic
+    bool was_forbidden = pic.is_masked(PIC::KEYBOARD);
+    if(!was_forbidden){
+        pic.forbid(PIC::KEYBOARD);
+    }
+
     // send command code for "speed and delay"
     wait_until_input_buffer_empty();
     data_port.outb(kbd_cmd::set_speed);
@@ -328,6 +336,10 @@ void Keyboard_Controller::set_repeat_rate(int speed, int delay){
     wait_until_input_buffer_empty();
     data_port.outb(usr_data);
     wait_until_byte_acknowledged();
+
+    if(!was_forbidden){
+        pic.allow(PIC::KEYBOARD);
+    }
 }
 
 // SET_LED: sets or clears the specified LED
@@ -336,6 +348,12 @@ void Keyboard_Controller::set_led(char led, bool on){
     if (led != led::caps_lock && led != led::num_lock && led != led::scroll_lock) {
         // insert error message, when possible
         return;
+    }
+
+    // Check if keyboard is already forbidden in pic
+    bool was_forbidden = pic.is_masked(PIC::KEYBOARD);
+    if(!was_forbidden){
+        pic.forbid(PIC::KEYBOARD);
     }
 
     // send command code for "led"
@@ -355,4 +373,8 @@ void Keyboard_Controller::set_led(char led, bool on){
     wait_until_input_buffer_empty();
     data_port.outb(leds);
     wait_until_byte_acknowledged();
+
+    if(!was_forbidden){
+        pic.allow(PIC::KEYBOARD);
+    }
 }
