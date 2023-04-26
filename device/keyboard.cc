@@ -25,7 +25,7 @@ void Keyboard::trigger(){
     Key key = keyboard_ctr.key_hit();
 
     // Check for ctrl + alt + del
-    if (key.ctrl() && key.alt() && key.scancode()==Key::scan.del){
+    if (key.ctrl() && key.alt() && key.scancode()==Key::scan::del){
         keyboard_ctr.reboot();
     }
 
