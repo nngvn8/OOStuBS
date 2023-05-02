@@ -83,7 +83,6 @@ void CGA_Screen::getpos (int &x, int &y){
     x = rel_pos % LINE_WIDTH;
     y = (rel_pos - x) / LINE_WIDTH;
     cpu.enable_int();
-
 }
 
 void CGA_Screen::line_break(int &current_x, int &current_y, unsigned char attrib){
