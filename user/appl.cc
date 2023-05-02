@@ -24,6 +24,6 @@ void Application::action(){
 
     while(true){
         cga.setpos(35, 11);
-        cga << "Hello World!";
+        cga << "Hello World!" << CGA_Stream::inst_print;
     }
 }
