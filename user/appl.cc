@@ -16,14 +16,14 @@
  
 /* GLOBAL VARIABLES */
 
-extern CGA_Stream kout;
+extern CGA_Stream cga;
 /* Add your code here */ 
  
 void Application::action(){
-    kout.clear_screen();
+    cga.clear_screen();
 
     while(true){
-        kout.setpos(35, 11);
-        kout << "Hello World!"
+        cga.setpos(35, 11);
+        cga << "Hello World!";
     }
 }
