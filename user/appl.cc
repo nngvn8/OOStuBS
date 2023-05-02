@@ -19,8 +19,11 @@
 extern CGA_Stream kout;
 /* Add your code here */ 
  
-void Application::action()
-{
-/* Add your code here */ 
- 
+void Application::action(){
+    kout.clear_screen();
+
+    while(true){
+        kout.setpos(35, 11);
+        kout << "Hello World!"
+    }
 }

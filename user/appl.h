@@ -16,10 +16,9 @@ class Application
 {
 
 public:
-	Application (const Application &copy) = delete; // prevent copying
-/* Add your code here */ 
+	Application(const Application &copy) = delete; // prevent copying
  
-	void action ();
+	void action();
 };
 
 #endif

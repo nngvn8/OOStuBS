@@ -3,6 +3,7 @@
 #include "machine/plugbox.h"
 #include "device/keyboard.h"
 #include "device/cgastr.h"
+#include "user/appl.h"
 
 // Objects used everywhere => make them global
 CPU cpu = CPU();
@@ -15,7 +16,9 @@ int main() {
     cpu.enable_int();
     keyboard.plugin();
 
-    // test_all_tests();
+    Application app = Application();
+
+    app.action();
 
     while (1){}
 
