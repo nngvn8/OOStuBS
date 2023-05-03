@@ -29,6 +29,7 @@ void Keyboard::trigger(){
 
         // Immediately print the character to the screen for now
         if (key.valid()){
+            cga.setpos(0,0);
             cga << key.ascii() << CGA_Stream::inst_print;
         } else{
             return;
