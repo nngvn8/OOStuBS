@@ -66,4 +66,6 @@ public:
     void clear_screen();
 };
 
+extern CGA_Stream cga;
+
 #endif

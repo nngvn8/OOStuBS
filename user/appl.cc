@@ -12,12 +12,6 @@
 
 #include "user/appl.h"
 #include "device/cgastr.h"
-/* Add your code here */ 
- 
-/* GLOBAL VARIABLES */
-
-extern CGA_Stream cga;
-/* Add your code here */ 
  
 void Application::action(){
     cga.clear_screen();

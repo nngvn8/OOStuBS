@@ -13,7 +13,6 @@
 #include "machine/plugbox.h"
 
 extern "C" void guardian (unsigned int slot);
-extern Plugbox plugbox; // declare global object to exist somewhere
 
 /* GUARDIAN: Low-level interrupt handling. We will extend this function at */
 /*           a later point in time.                                        */

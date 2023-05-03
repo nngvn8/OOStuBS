@@ -10,10 +10,6 @@
 
 #include "keyboard.h"
 
-extern Plugbox plugbox;
-extern PIC pic;
-extern CGA_Stream cga;
-
 void Keyboard::plugin(){
     // Connect to plugbox
     plugbox.assign(plugbox.keyboard, *this);

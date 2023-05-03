@@ -14,8 +14,6 @@
 #include "io_port.h"
 #include "cpu.h"
 
-extern CPU cpu;
-
 void CGA_Screen::clear_screen_with(unsigned char color){
     for (int i = 0; i < 25; ++i) {
         for (int j = 0; j < 80; ++j) {

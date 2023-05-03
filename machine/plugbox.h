@@ -32,4 +32,6 @@ public:
     Gate& report(unsigned int slot);
 };
 
+extern Plugbox plugbox;
+
 #endif

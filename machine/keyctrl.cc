@@ -8,13 +8,8 @@
 /* The PC's keyboard controller.                                             */
 /*****************************************************************************/
 
-/* INCLUDES */
-
 #include "machine/keyctrl.h"
 
-/* STATIC MEMBERS */
-
-extern PIC pic;
 
 unsigned char Keyboard_Controller::normal_tab[] = {
     0,   0,   '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', 225, 39,   '\b',

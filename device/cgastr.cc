@@ -14,8 +14,6 @@
 #include "device/cgastr.h"
 #include "machine/cpu.h"
 
-extern CPU cpu;
-
 void CGA_Stream::flush(){
     //this->string ohne irgendwas gibt mir den pointer auf den anfang
     cpu.disable_int();

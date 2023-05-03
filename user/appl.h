@@ -11,9 +11,7 @@
 #ifndef __application_include__
 #define __application_include__
 
-class Application
- 
-{
+class Application{
 
 public:
     Application(){}
