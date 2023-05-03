@@ -12,7 +12,6 @@
 
 #include "cgascr.h"
 #include "io_port.h"
-#include "cpu.h"
 
 void CGA_Screen::clear_screen_with(unsigned char color){
     for (int i = 0; i < 25; ++i) {

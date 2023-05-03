@@ -6,17 +6,17 @@
 #include "user/appl.h"
 
 // Objects used everywhere => make them global
-CPU cpu = CPU();
-PIC pic = PIC();
-Plugbox plugbox = Plugbox();
-Keyboard keyboard = Keyboard();
-CGA_Stream cga = CGA_Stream();
+CPU cpu;
+PIC pic;
+Plugbox plugbox;
+Keyboard keyboard;
+CGA_Stream cga;
 
 int main() {
     cpu.enable_int();
     keyboard.plugin();
 
-    Application app = Application();
+    Application app;
 
     app.action();
 

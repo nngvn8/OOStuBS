@@ -9,7 +9,6 @@
 /* for every hardware and software interrupt and every CPU exception.        */
 /*****************************************************************************/
 #include "plugbox.h"
-#include "device/panic.h"
 
 Plugbox::Plugbox() {
     for (int i = 0; i < TABLE_SIZE; i++) {
