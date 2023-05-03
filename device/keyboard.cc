@@ -8,6 +8,30 @@
 /* Keyboard driver.                                                          */
 /*****************************************************************************/
 
-/* Add your code here */ 
-/* Add your code here */ 
- 
+#include "keyboard.h"
+
+void Keyboard::plugin(){
+    // Connect to plugbox
+    plugbox.assign(plugbox.keyboard, *this);
+    // Tell pic to allow interrupts
+    pic.allow(PIC::KEYBOARD);
+}
+
+void Keyboard::trigger(){
+    // Rerun until keyboard buffer is definitely empty
+    while(true){
+        Key key = keyboard_ctr.key_hit();
+
+        // Check for ctrl + alt + del
+        if (key.ctrl() && key.alt() && key.scancode()==Key::scan::del){
+            keyboard_ctr.reboot();
+        }
+
+        // Immediately print the character to the screen for now
+        if (key.valid()){
+            cga << key.ascii() << CGA_Stream::inst_print;
+        } else{
+            return;
+        }
+    }
+}

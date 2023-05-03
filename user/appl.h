@@ -11,15 +11,13 @@
 #ifndef __application_include__
 #define __application_include__
 
-class Application
- 
-{
+class Application{
 
 public:
-	Application (const Application &copy) = delete; // prevent copying
-/* Add your code here */ 
+    Application(){}
+    Application(const Application &copy) = delete; // prevent copying
  
-	void action ();
+	void action();
 };
 
 #endif

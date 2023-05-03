@@ -12,6 +12,7 @@
 
 #include "cgascr.h"
 #include "io_port.h"
+#include "cpu.h"
 
 void CGA_Screen::clear_screen_with(unsigned char color){
     for (int i = 0; i < 25; ++i) {
@@ -58,16 +59,19 @@ void CGA_Screen::setpos (int x, int y){
     // Use IO_Port to write offset (set register then write to it)
     IO_Port index(INDEX_REGISTER_PORT);
     IO_Port data(DATA_REGISTER_PORT);
+    cpu.disable_int();
     index.outb(CURSOR_ADDRESS_LOW_INDEX);
     data.outb(rel_pos & 0xFF);
     index.outb(CURSOR_ADDRESS_HIGH_INDEX);
     data.outb((rel_pos >> 8) & 0xFF);
+    cpu.enable_int();
 }
 
 void CGA_Screen::getpos (int &x, int &y){
     // Use IO_Port to read offset (set register then read from it)
     IO_Port index(INDEX_REGISTER_PORT);
     IO_Port data(DATA_REGISTER_PORT);
+    cpu.disable_int();
     index.outb(CURSOR_ADDRESS_HIGH_INDEX);
     int rel_pos_high = data.inb();
     index.outb(CURSOR_ADDRESS_LOW_INDEX);
@@ -76,6 +80,7 @@ void CGA_Screen::getpos (int &x, int &y){
     // Calculate x and y from offset
     x = rel_pos % LINE_WIDTH;
     y = (rel_pos - x) / LINE_WIDTH;
+    cpu.enable_int();
 }
 
 void CGA_Screen::line_break(int &current_x, int &current_y, unsigned char attrib){
@@ -92,6 +97,7 @@ void CGA_Screen::line_break(int &current_x, int &current_y, unsigned char attrib
 void CGA_Screen::print (char* text, int length, unsigned char attrib){
     // Find and copy current x and y coordinates
     int current_x, current_y;
+    cpu.disable_int();
     getpos(current_x, current_y);
     // Print all the characters
     for (int i = 0; i < length; ++i) {
@@ -107,4 +113,5 @@ void CGA_Screen::print (char* text, int length, unsigned char attrib){
     }
     // Set current cursor position once to be more performant
     setpos(current_x, current_y);
+    cpu.enable_int();
 }

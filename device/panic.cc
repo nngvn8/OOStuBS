@@ -7,6 +7,9 @@
 /*---------------------------------------------------------------------------*/
 /* Default interrupt handler.                                                */
 /*****************************************************************************/
-/* Add your code here */ 
-/* Add your code here */ 
- 
+#include "panic.h"
+
+void Panic::trigger() {
+    cga << msg << CGA_Stream::endl;
+    cpu.halt();
+}

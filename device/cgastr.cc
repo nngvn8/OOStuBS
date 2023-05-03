@@ -12,11 +12,14 @@
 /*****************************************************************************/
 
 #include "device/cgastr.h"
+#include "machine/cpu.h"
 
 void CGA_Stream::flush(){
     //this->string ohne irgendwas gibt mir den pointer auf den anfang
+    cpu.disable_int();
     this->print(this->string, this->index, this->current_text_colour);
     this->index = 0;
+    cpu.enable_int();
 }
 
 void CGA_Stream::set_current_text_colour(CGA_COLORS foreground, CGA_COLORS background, bool is_blinking){

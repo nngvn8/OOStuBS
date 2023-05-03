@@ -12,15 +12,12 @@
 
 #include "user/appl.h"
 #include "device/cgastr.h"
-/* Add your code here */ 
  
-/* GLOBAL VARIABLES */
+void Application::action(){
+    cga.clear_screen();
 
-extern CGA_Stream kout;
-/* Add your code here */ 
- 
-void Application::action()
-{
-/* Add your code here */ 
- 
+    while(true){
+        cga.setpos(35, 11);
+        cga << "Hello World!" << CGA_Stream::inst_print;
+    }
 }

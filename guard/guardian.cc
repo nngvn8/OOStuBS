@@ -9,16 +9,14 @@
 /* The parameter specifies the number of the interrupt that occurred.        */
 /*****************************************************************************/
 
-/* INCLUDES */
-
-/* FUNCTIONS */
+#include "machine/keyctrl.h"
+#include "machine/plugbox.h"
 
 extern "C" void guardian (unsigned int slot);
 
 /* GUARDIAN: Low-level interrupt handling. We will extend this function at */
 /*           a later point in time.                                        */
 
-void guardian (unsigned int slot)
-{
- 
+void guardian (unsigned int slot){
+    plugbox.report(slot).trigger();
 }

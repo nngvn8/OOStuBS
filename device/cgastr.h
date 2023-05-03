@@ -42,7 +42,7 @@ private:
     unsigned char current_text_colour = 0x0F; // Initialize to white on black
 
 public:
-  CGA_Stream(){};
+    CGA_Stream(){};
 	CGA_Stream(CGA_Stream &copy) = delete; // prevent copying
 
     /**
@@ -65,5 +65,7 @@ public:
      */
     void clear_screen();
 };
+
+extern CGA_Stream cga;
 
 #endif

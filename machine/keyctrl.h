@@ -13,6 +13,7 @@
 
 #include "machine/io_port.h"
 #include "machine/key.h"
+#include "machine/pic.h"
 
 class Keyboard_Controller {
 public:

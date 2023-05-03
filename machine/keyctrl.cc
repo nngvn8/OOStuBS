@@ -8,12 +8,8 @@
 /* The PC's keyboard controller.                                             */
 /*****************************************************************************/
 
-/* INCLUDES */
-
 #include "machine/keyctrl.h"
-#include "device/cgastr.h"
 
-/* STATIC MEMBERS */
 
 unsigned char Keyboard_Controller::normal_tab[] = {
     0,   0,   '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', 225, 39,   '\b',
@@ -254,28 +250,31 @@ Keyboard_Controller::Keyboard_Controller() : ctrl_port(0x64), data_port(0x60)
 Key Keyboard_Controller::key_hit() {
     Key invalid; // not explicitly initialized Key objects are invalid
 
-//    CGA_Stream cga = CGA_Stream();
-    bool is_from_mouse;
-    // run until full key is decoded and saved in gather
-    do {
-        unsigned char status;
-        // block until outb-bit of status register is 1 aka output available
-        while (true) {
-            status = ctrl_port.inb();
-            if (status & outb) {
-                break;
-            }
-        }
-        is_from_mouse = (bool)(status & auxb);
-//        cga << "Keypress is from mouse: " << is_from_mouse << CGA_Stream::endl;
-        // read and save make/break-code
-        code = data_port.inb();
-    } while (is_from_mouse || !key_decoded());
+    // Spurious interrupt will be caught here
+    while(true){
+        unsigned char status = ctrl_port.inb();
 
-    if (gather.valid()) {
-        return gather;
+        // Catch spurious interrupts or empty buffer
+        if (!(status & outb)){
+            return invalid;
+        }
+
+        // Check if the available code is from the mouse
+        if(status & auxb){
+            data_port.inb(); // read the data to clear the flag (but discard it)
+            continue; // Retry
+        }
+
+        // Now the new data is definitely a scan code from the keyboard
+        code = data_port.inb();
+
+        // Decode the scan code and check if it is already valid
+        if(key_decoded() && gather.valid()){
+            return gather;
+        }
     }
 
+    // Otherwise return invalid key
 	return invalid;
 }
 
@@ -314,6 +313,12 @@ void Keyboard_Controller::set_repeat_rate(int speed, int delay){
         return;
     }
 
+    // Check if keyboard is already forbidden in pic
+    bool was_forbidden = pic.is_masked(PIC::KEYBOARD);
+    if(!was_forbidden){
+        pic.forbid(PIC::KEYBOARD);
+    }
+
     // send command code for "speed and delay"
     wait_until_input_buffer_empty();
     data_port.outb(kbd_cmd::set_speed);
@@ -326,6 +331,10 @@ void Keyboard_Controller::set_repeat_rate(int speed, int delay){
     wait_until_input_buffer_empty();
     data_port.outb(usr_data);
     wait_until_byte_acknowledged();
+
+    if(!was_forbidden){
+        pic.allow(PIC::KEYBOARD);
+    }
 }
 
 // SET_LED: sets or clears the specified LED
@@ -334,6 +343,12 @@ void Keyboard_Controller::set_led(char led, bool on){
     if (led != led::caps_lock && led != led::num_lock && led != led::scroll_lock) {
         // insert error message, when possible
         return;
+    }
+
+    // Check if keyboard is already forbidden in pic
+    bool was_forbidden = pic.is_masked(PIC::KEYBOARD);
+    if(!was_forbidden){
+        pic.forbid(PIC::KEYBOARD);
     }
 
     // send command code for "led"
@@ -353,4 +368,8 @@ void Keyboard_Controller::set_led(char led, bool on){
     wait_until_input_buffer_empty();
     data_port.outb(leds);
     wait_until_byte_acknowledged();
+
+    if(!was_forbidden){
+        pic.allow(PIC::KEYBOARD);
+    }
 }
