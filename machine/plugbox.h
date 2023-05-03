@@ -19,7 +19,7 @@
 
 class Plugbox {
 private:
-    Panic global_panic = Panic("Error: Gate not initialized!");
+    Panic global_panic{"Error: Gate not initialized!"};
     Gate* interrupt_vector_table[TABLE_SIZE];
 
 public:
