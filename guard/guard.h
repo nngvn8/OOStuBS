@@ -2,15 +2,24 @@
 /* Operating-System Construction                                             */
 /*---------------------------------------------------------------------------*/
 /*                                                                           */
-/*                                 P A N I C                                 */
+/*                                G U A R D                                  */
 /*                                                                           */
 /*---------------------------------------------------------------------------*/
-/* Default interrupt handler.                                                */
+/* Using this class, we can synchronize activities with a critical section   */
+/* with interrupt handlers that also access this critical section. This      */
+/* synchronization takes place along the prologue/epilogue model.            */
 /*****************************************************************************/
 
-#include "panic.h"
+#ifndef __Guard_include__
+#define __Guard_include__
 
-void Panic::trigger() {
-    cga << msg << CGA_Stream::endl;
-    cpu.halt();
-}
+/* Add your code here */ 
+
+class Guard : public Locker {
+public:
+	Guard (const Guard &copy) = delete; // prevent copying
+	Guard () {}
+/* Add your code here */ 
+};
+
+#endif

@@ -2,15 +2,23 @@
 /* Operating-System Construction                                             */
 /*---------------------------------------------------------------------------*/
 /*                                                                           */
-/*                                 P A N I C                                 */
+/*                              C H A I N                                    */
 /*                                                                           */
 /*---------------------------------------------------------------------------*/
-/* Default interrupt handler.                                                */
+/* By inheriting from the Chain class, the derived class inherits a chain    */
+/* pointer that allows its instances to be enqueued in a linked list         */
+/* (implemented in the Queue class).                                         */
 /*****************************************************************************/
 
-#include "panic.h"
+#ifndef __chain_include__
+#define __chain_include__
 
-void Panic::trigger() {
-    cga << msg << CGA_Stream::endl;
-    cpu.halt();
-}
+class Chain {
+
+public:
+	Chain(const Chain &copy) = delete; // prevent copying
+	Chain() {}
+	Chain *next;
+};
+
+#endif
