@@ -27,4 +27,6 @@ public:
  
 };
 
+extern Panic global_panic;
+
 #endif

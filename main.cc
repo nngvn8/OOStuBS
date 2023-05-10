@@ -11,6 +11,7 @@ PIC pic;
 Plugbox plugbox;
 Keyboard keyboard;
 CGA_Stream cga;
+Panic global_panic{"Error: Gate not initialized!"};
 
 int main() {
     cpu.enable_int();
