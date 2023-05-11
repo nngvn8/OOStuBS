@@ -23,8 +23,9 @@ public:
     Panic (char* message) : msg(message){}
     Panic (const Panic &copy) = delete; // prevent copying
 
-    void trigger();
- 
+    bool prologue ();
+
+
 };
 
 extern Panic global_panic;

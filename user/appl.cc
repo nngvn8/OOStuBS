@@ -46,7 +46,7 @@ void Application::test_prologue_keyboard_char_buffer(){
     cga << ch_buf.consume() << CGA_Stream::endl;
     cga << "Consume second char, now should be c" << CGA_Stream::endl;
     cga << ch_buf.consume() << CGA_Stream::endl;
-    cga << "Consume second char, nothing more in the bffer" << CGA_Stream::endl;
+    cga << "Consume second char, nothing more in the buffer" << CGA_Stream::endl;
     cga << ch_buf.consume() << CGA_Stream::endl;
 
 

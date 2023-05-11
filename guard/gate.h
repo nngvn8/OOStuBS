@@ -14,7 +14,10 @@
 class Gate {
 
 public:
-    virtual void trigger() = 0;
+    virtual bool prologue () = 0;
+    virtual void epilogue (){};
+    void queued (bool q){};
+    bool queued (){};
 };
 
 #endif

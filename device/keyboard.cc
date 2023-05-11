@@ -17,7 +17,7 @@ void Keyboard::plugin(){
     pic.allow(PIC::KEYBOARD);
 }
 
-void Keyboard::trigger(){
+bool Keyboard::prologue() {
     // Rerun until keyboard buffer is definitely empty
     while(true){
         Key key = keyboard_ctr.key_hit();
@@ -32,7 +32,7 @@ void Keyboard::trigger(){
             cga.setpos(0,0);
             cga << key.ascii() << CGA_Stream::inst_print;
         } else{
-            return;
+            return true;
         }
     }
 }

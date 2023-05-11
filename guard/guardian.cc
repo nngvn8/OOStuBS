@@ -18,5 +18,5 @@ extern "C" void guardian (unsigned int slot);
 /*           a later point in time.                                        */
 
 void guardian (unsigned int slot){
-    plugbox.report(slot).trigger();
+    plugbox.report(slot).prologue();
 }

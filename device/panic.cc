@@ -9,8 +9,10 @@
 /*****************************************************************************/
 
 #include "panic.h"
+#include "../object/o_stream.h"
 
-void Panic::trigger() {
+bool Panic::prologue() {
     cga << msg << CGA_Stream::endl;
     cpu.halt();
+    return true;
 }
