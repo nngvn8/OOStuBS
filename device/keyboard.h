@@ -30,7 +30,7 @@ public:
     Kb_prologue_char_buf prol_buf;
     void plugin();
     virtual bool prologue ();
-    virtual void epilogue (){};
+    virtual void epilogue ();
 
 };
 

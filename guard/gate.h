@@ -25,7 +25,7 @@ public:
         if(is_in_q == q){
             //error case!
             cga << "In Gate: Error on queued, state: " << is_in_q << CGA_Stream::endl;
-            //TODO : right error case, cannot use panic since its dervied from Gate so
+            //TODO : right error case, cannot use panic since its dervied from Gate
             cpu.halt();
         }
         else{

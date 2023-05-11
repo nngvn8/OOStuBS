@@ -40,3 +40,8 @@ bool Keyboard::prologue() {
         }
     }
 }
+
+void Keyboard::epilogue() {
+    //TODO: when the queue is finished this has to be implemented
+    return;
+}
