@@ -9,6 +9,10 @@
 /*****************************************************************************/
 
 #include "keyboard.h"
+#include "../machine/key.h"
+#include "../machine/plugbox.h"
+#include "../machine/pic.h"
+
 
 void Keyboard::plugin(){
     // Connect to plugbox
@@ -29,8 +33,8 @@ bool Keyboard::prologue() {
 
         // Immediately print the character to the screen for now
         if (key.valid()){
-            cga.setpos(0,0);
-            cga << key.ascii() << CGA_Stream::inst_print;
+            prol_buf.produce(key.ascii());
+
         } else{
             return true;
         }

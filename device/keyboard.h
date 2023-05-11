@@ -17,17 +17,18 @@
 #include "machine/plugbox.h"
 #include "machine/pic.h"
 #include "cgastr.h"
+#include "utils/kb_prologue_char_buf.h"
  
 class Keyboard : public Gate{
 private:
     Keyboard_Controller keyboard_ctr = Keyboard_Controller();
-
 public:
 	Keyboard(){}
     Keyboard(const Keyboard &copy) = delete; // prevent copying
  
 	// PLUGIN: "Plugs in" the keyboard (driver). From now on, keypresses are handled.
-	void plugin();
+    Kb_prologue_char_buf prol_buf;
+    void plugin();
     virtual bool prologue ();
     virtual void epilogue (){};
 
