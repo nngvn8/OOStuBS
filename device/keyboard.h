@@ -18,8 +18,9 @@
 #include "machine/pic.h"
 #include "cgastr.h"
 #include "utils/kb_prologue_char_buf.h"
+#include "../object/chain.h"
  
-class Keyboard : public Gate{
+class Keyboard : public Gate, public Chain{
 private:
     Keyboard_Controller keyboard_ctr = Keyboard_Controller();
 public:

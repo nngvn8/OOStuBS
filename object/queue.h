@@ -35,4 +35,6 @@ public:
 	void remove(Chain *);
 };
 
+extern Queue queue;
+
 #endif

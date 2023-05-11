@@ -22,7 +22,11 @@ void Application::action(){
     while(true){
         cpu.disable_int();
         cga.setpos(35, 11);
+        //enter
+        //prolog wird der buffer gefüllt weil ein interrupt vom keyboard kommt mit ascii zeichen
         cga << "Hello World!" << CGA_Stream::inst_print;
+        //hier kann der Buffer nicth gestört
+        //epilogue: buffer wird gelehrt und allesgedruckt
         cpu.enable_int();
     }
 }

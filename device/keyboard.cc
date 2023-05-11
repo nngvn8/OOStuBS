@@ -12,6 +12,9 @@
 #include "../machine/key.h"
 #include "../machine/plugbox.h"
 #include "../machine/pic.h"
+#include "../guard/gate.h"
+#include "../object/queue.h"
+
 
 
 void Keyboard::plugin(){
@@ -32,8 +35,13 @@ bool Keyboard::prologue() {
         }
 
         // Immediately print the character to the screen for now
+        //TODO enqueue when first character inserted and not enqueued
+
         if (key.valid()){
             prol_buf.produce(key.ascii());
+            if(!this->queued()){
+                queue.enqueue(this);
+            }
 
         } else{
             return true;
