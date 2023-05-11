@@ -7,10 +7,10 @@
 
 class Kb_prologue_char_buf{
 private:
-    int size;
+    int size = 8;
     char buffer[8];
-    int next_in;
-    int next_out;
+    int next_in ;
+    int next_out ;
 public:
     Kb_prologue_char_buf();
     void produce(char c);
@@ -23,9 +23,11 @@ Kb_prologue_char_buf::Kb_prologue_char_buf() {
 }
 
 void Kb_prologue_char_buf::produce(char c) {
+
     if((next_in+1) % size == next_out) return;
     buffer[next_in] = c;
     next_in = (next_in+1)%size;
+
 }
 
 

@@ -11,7 +11,7 @@ PIC pic;
 Plugbox plugbox;
 Keyboard keyboard;
 CGA_Stream cga;
-Panic global_panic{"Error: Gate not initialized!"};
+Panic global_panic{"Error?: Gate not initialized, Panic Obejct launched, see main()!"};
 
 int main() {
     cpu.enable_int();
@@ -19,7 +19,7 @@ int main() {
 
     Application app;
 
-    app.action();
+    app.test_prologue_keyboard_char_buffer();
 
     while (1){}
 

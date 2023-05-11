@@ -18,6 +18,7 @@ public:
     Application(const Application &copy) = delete; // prevent copying
  
 	void action();
+    void test_prologue_keyboard_char_buffer();
 };
 
 #endif
