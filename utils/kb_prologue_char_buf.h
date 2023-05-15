@@ -30,6 +30,8 @@ public:
         next_out = (next_out +1) % size;
         return result;
     }
-
+    int buffer_size(){
+        return this->size;
+    }
 };
 #endif //OOSTUBBS_MBJ_KB_PROLOGUE_CHAR_BUF_H

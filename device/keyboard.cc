@@ -14,7 +14,7 @@
 #include "../machine/pic.h"
 #include "../guard/gate.h"
 #include "../object/queue.h"
-
+#include "../object/o_stream.h"
 
 
 void Keyboard::plugin(){
@@ -38,9 +38,13 @@ bool Keyboard::prologue() {
         //TODO enqueue when first character inserted and not enqueued
 
         if (key.valid()){
-            prol_buf.produce(key.ascii());
+
+            this->prol_buf.produce(key.ascii());
             if(!this->queued()){
+                cpu.disable_int();
                 queue.enqueue(this);
+                cpu.enable_int();
+                this->queued(true);
             }
 
         } else{
@@ -50,6 +54,13 @@ bool Keyboard::prologue() {
 }
 
 void Keyboard::epilogue() {
-    //TODO: when the queue is finished this has to be implemented
-    return;
+
+    cga.setpos(0, 0);
+    for(int i = 0; i < this->prol_buf.buffer_size(); i++){
+        cga << this->prol_buf.consume() << CGA_Stream::inst_print;
+    }
+    cpu.disable_int();
+    queue.remove(this);
+    cpu.enable_int();
+
 }

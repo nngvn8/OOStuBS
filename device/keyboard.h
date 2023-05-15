@@ -23,12 +23,12 @@
 class Keyboard : public Gate, public Chain{
 private:
     Keyboard_Controller keyboard_ctr = Keyboard_Controller();
+    Kb_prologue_char_buf prol_buf;
 public:
 	Keyboard(){}
     Keyboard(const Keyboard &copy) = delete; // prevent copying
  
 	// PLUGIN: "Plugs in" the keyboard (driver). From now on, keypresses are handled.
-    Kb_prologue_char_buf prol_buf;
     void plugin();
     virtual bool prologue ();
     virtual void epilogue ();
