@@ -16,9 +16,9 @@
 class Chain {
 
 public:
-	Chain(const Chain &copy) = delete; // prevent copying
-	Chain() {}
-	Chain *next;
+    Chain() {}
+    Chain(const Chain &copy) = delete; // prevent copying
+	Chain *next = 0;
 };
 
 #endif

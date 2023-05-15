@@ -9,6 +9,10 @@
 /* with interrupt handlers that also access this critical section. This      */
 /* synchronization takes place along the prologue/epilogue model.            */
 #include "guard.h"
+#include "../object/chain.h"
+#include "../machine/cpu.h"
+#include "secure.h"
+#include "../guard/locker.h"
 
 /*****************************************************************************/
 
@@ -32,13 +36,19 @@ void Guard::leave(){
 
 void Guard::relay(Gate* item){
     if (this->avail()) {
-        item->epilogue();
-    }
-    else {
+        { //TODO review it!
+            Secure section;
+          item->epilogue();
+        }
+    } else {
+        cpu.disable_int();
         if (!item->queued()) {
             item->queued(true);
-            queue.enqueue((Chain*)item);
+            //TODO maybe too much, ask the tutors
+            this->queue.enqueue((Chain*) item);
+            cpu.enable_int();
         }
+
     }
 
 }

@@ -15,19 +15,19 @@
 #include "machine/cpu.h"
 #include "machine/pic.h"
 #include "../utils/kb_prologue_char_buf.h"
+#include "guard/secure.h"
+#include "machine/plugbox.h"
 
 void Application::action(){
     cga.clear_screen();
 
     while(true){
-        cpu.disable_int();
-        cga.setpos(35, 11);
-        //enter
-        //prolog wird der buffer gefüllt weil ein interrupt vom keyboard kommt mit ascii zeichen
-        cga << "Hello World!" << CGA_Stream::inst_print;
-        //hier kann der Buffer nicth gestört
-        //epilogue: buffer wird gelehrt und allesgedruckt
-        cpu.enable_int();
+        {  Secure section;
+            //enter
+            cga.setpos(35, 11);
+            cga << "Hello World!" << CGA_Stream::inst_print;
+            //leave
+        }
     }
 }
 

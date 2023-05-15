@@ -18,12 +18,14 @@
 class Panic : public Gate{
 private:
     char* msg;
+    char* id = "panic";
 
 public:
     Panic (char* message) : msg(message){}
     Panic (const Panic &copy) = delete; // prevent copying
 
     bool prologue ();
+    char* getID(){return id;}
 
 
 };

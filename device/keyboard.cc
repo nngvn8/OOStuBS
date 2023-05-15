@@ -41,7 +41,7 @@ bool Keyboard::prologue() {
         if (key.valid()){
 
             this->prol_buf.produce(key.ascii());
-            guard.relay(this);
+
 
         } else{
             return true;

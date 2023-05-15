@@ -14,7 +14,7 @@
 #ifndef __queue_include__
 #define __queue_include__
 
-#include "object/chain.h"
+#include "../object/chain.h"
 
 class Queue {
 
@@ -32,7 +32,7 @@ public:
 	}
 	void enqueue(Chain *item);
 	Chain *dequeue();
-	void remove(Chain *);
+	void remove(Chain * item);
 };
 
 extern Queue queue;

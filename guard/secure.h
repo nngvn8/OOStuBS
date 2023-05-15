@@ -15,7 +15,11 @@
 #ifndef __Secure_include__
 #define __Secure_include__
 
+//TODO why do we have to include guard
+#include "guard.h"
+
 class Secure {
+public:
     Secure()  {guard.enter();};
     ~Secure() {guard.leave();};
 };

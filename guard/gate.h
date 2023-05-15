@@ -13,9 +13,10 @@
 
 #include "device/cgastr.h"
 #include "machine/cpu.h"
+#include "object/chain.h"
 
 //wird irgednwie ehe initialisiert als andere in der main
-class Gate {
+class Gate : public Chain{
 private:
     bool is_in_q = 0;
 public:
@@ -35,7 +36,7 @@ public:
     bool queued (){
         return is_in_q;
     }
-
+    virtual char* getID() = 0;
 };
 
 

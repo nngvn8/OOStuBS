@@ -22,8 +22,8 @@ int main() {
     keyboard.plugin();
 
     Application app;
-
-    app.test_prologue_keyboard_char_buffer();
+    app.action();
+    //app.test_prologue_keyboard_char_buffer();
 
     while (1){}
 
