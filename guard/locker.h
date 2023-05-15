@@ -15,9 +15,23 @@
 #define __Locker_include__
 
 class Locker {
+private:
+    bool available = true;
+
 public:
 	Locker(const Locker &copy) = delete; // prevent copying
-/* Add your code here */ 
+    void enter() {
+        if (!available) {cga << "enter called although already not \"available\"" << CGA_Stream::endl;}
+        available = false;
+    };
+    void retne() {
+        if (available) {cga << "retne called although already \"available\"" << CGA_Stream::endl;}
+        available = true;
+    };
+    bool avail() {
+        return available;
+    };
+
 };
 
 #endif
