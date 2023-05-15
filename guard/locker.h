@@ -17,15 +17,18 @@
 class Locker {
 private:
     bool available = true;
+//    CGA_Screen& cga;
 
 public:
 	Locker(const Locker &copy) = delete; // prevent copying
+//    Locker(CGA_Screen& cga){};
+    Locker(){};
     void enter() {
-        if (!available) {cga << "enter called although already not \"available\"" << CGA_Stream::endl;}
+        if (!available) {}//cga << "enter called although already not \"available\"" << CGA_Stream::endl;}
         available = false;
     };
     void retne() {
-        if (available) {cga << "retne called although already \"available\"" << CGA_Stream::endl;}
+        if (available) {} //cga << "retne called although already \"available\"" << CGA_Stream::endl;}
         available = true;
     };
     bool avail() {

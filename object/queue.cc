@@ -32,7 +32,7 @@ void Queue::enqueue(Chain *item)
 // DEQUEUE: Returns the list's first element and removes it from the list.
 //          If the list does not contain any elements, it returns a nullptr.
 
-Chain *Queue::dequeue()
+Chain* Queue::dequeue()
 {
 	Chain *item;
 

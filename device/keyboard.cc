@@ -15,6 +15,7 @@
 #include "../guard/gate.h"
 #include "../object/queue.h"
 #include "../object/o_stream.h"
+#include "../guard/guard.h"
 
 
 void Keyboard::plugin(){
@@ -40,12 +41,7 @@ bool Keyboard::prologue() {
         if (key.valid()){
 
             this->prol_buf.produce(key.ascii());
-            if(!this->queued()){
-                cpu.disable_int();
-                queue.enqueue(this);
-                cpu.enable_int();
-                this->queued(true);
-            }
+            guard.relay(this);
 
         } else{
             return true;
@@ -59,8 +55,6 @@ void Keyboard::epilogue() {
     for(int i = 0; i < this->prol_buf.buffer_size(); i++){
         cga << this->prol_buf.consume() << CGA_Stream::inst_print;
     }
-    cpu.disable_int();
-    queue.remove(this);
-    cpu.enable_int();
+
 
 }

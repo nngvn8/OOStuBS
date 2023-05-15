@@ -11,6 +11,7 @@
 
 #include "machine/keyctrl.h"
 #include "machine/plugbox.h"
+#include "guard.h"
 
 extern "C" void guardian (unsigned int slot);
 
@@ -18,5 +19,9 @@ extern "C" void guardian (unsigned int slot);
 /*           a later point in time.                                        */
 
 void guardian (unsigned int slot){
-    plugbox.report(slot).prologue();
+    bool prologue_done = plugbox.report(slot).prologue();
+    if (prologue_done) {
+        //TODO call relay function
+        //Guard::relay(plugbox.report(slot));
+    }
 }

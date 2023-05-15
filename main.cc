@@ -5,6 +5,7 @@
 #include "device/cgastr.h"
 #include "user/appl.h"
 #include "object/queue.h"
+#include "guard/guard.h"
 
 // Objects used everywhere => make them global
 CPU cpu;
@@ -13,7 +14,7 @@ Plugbox plugbox;
 Keyboard keyboard;
 CGA_Stream cga;
 Panic global_panic{"Error?: Gate not initialized, Panic Obejct launched, see main()!"};
-Queue queue;
+Guard guard;
 
 
 int main() {
