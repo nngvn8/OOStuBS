@@ -21,8 +21,11 @@ void Guard::leave(){
     while(true) {
         cpu.disable_int();
         g = (Gate*) queue.dequeue();
+       // cpu.enable_int();
+
         if (g) {
-            cpu.enable_int();
+           cpu.enable_int();
+
             g->queued(false);
             g->epilogue();
         }
@@ -32,21 +35,20 @@ void Guard::leave(){
     }
     this->retne();
     cpu.enable_int();
+
 }
 
 void Guard::relay(Gate* item){
     if (this->avail()) {
-        { //TODO review it!
+        {
             Secure section;
+            cpu.enable_int();
           item->epilogue();
         }
     } else {
-        cpu.disable_int();
         if (!item->queued()) {
             item->queued(true);
-            //TODO maybe too much, ask the tutors
             this->queue.enqueue((Chain*) item);
-            cpu.enable_int();
         }
 
     }

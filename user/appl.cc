@@ -24,7 +24,9 @@ void Application::action(){
     while(true){
         {  Secure section;
             //enter
+            //cpu.disable_int();
             cga.setpos(35, 11);
+            //cpu.enable_int();
             cga << "Hello World!" << CGA_Stream::inst_print;
             //leave
         }

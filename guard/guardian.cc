@@ -12,6 +12,7 @@
 #include "machine/keyctrl.h"
 #include "machine/plugbox.h"
 #include "guard.h"
+#include "secure.h"
 
 extern "C" void guardian (unsigned int slot);
 
@@ -19,12 +20,16 @@ extern "C" void guardian (unsigned int slot);
 /*           a later point in time.                                        */
 
 void guardian (unsigned int slot){
-    cpu.disable_int();
-    Gate* gate_ptr = &plugbox.report(slot);
-    cga << "Das ist die ID: " << gate_ptr->getID() << CGA_Stream::endl;
+    //cpu.disable_int();
+    Gate* gate_ptr = &plugbox.report(slot) ;
 
-    if (gate_ptr->prologue()) {
-        cpu.enable_int();
+    {   //TODO @ Julius bitte drin lassen!!
+        //cga.setpos(0,0);
+        //cga << "We are in the guardian" << CGA_Stream::endl;
+
+    }
+    if (gate_ptr->prologue())
         guard.relay(gate_ptr);
-    } else cpu.enable_int();
+
+
 }

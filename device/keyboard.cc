@@ -52,8 +52,10 @@ bool Keyboard::prologue() {
 void Keyboard::epilogue() {
 
     cga.setpos(0, 0);
-    for(int i = 0; i < this->prol_buf.buffer_size(); i++){
-        cga << this->prol_buf.consume() << CGA_Stream::inst_print;
+    char c = this->prol_buf.consume();
+    while(c != 0) {
+        cga << c << CGA_Stream::endl;
+        c = this->prol_buf.consume();
     }
 
 
