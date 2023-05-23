@@ -15,11 +15,11 @@
 #include "guard/gate.h"
 #include "device/panic.h"
 
+
 #define TABLE_SIZE 64
 
 class Plugbox {
 private:
-    Panic global_panic{"Error: Gate not initialized!"};
     Gate* interrupt_vector_table[TABLE_SIZE];
 
 public:

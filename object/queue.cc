@@ -18,22 +18,24 @@
 /* when removing elements, we cannot do without this conditional.            */
 /*****************************************************************************/
 
-#include "object/queue.h"
+#include "queue.h"
+#include "chain.h"
+#include "../device/cgastr.h"
+#include "o_stream.h"
 
 // ENQUEUE: Append the Chain object at the end of the list.
 
-void Queue::enqueue(Chain *item)
-{
-	item->next = 0; // The new element has no successor yet.
+void Queue::enqueue(Chain *item) {
+    item->next = 0; // The new element has no successor yet.
 	*tail = item;   // Append at the end of the list
-	tail = &(item->next); // and update the tail pointer.
+    tail = &(item->next); // and update the tail pointer.
+
 }
 
 // DEQUEUE: Returns the list's first element and removes it from the list.
 //          If the list does not contain any elements, it returns a nullptr.
 
-Chain *Queue::dequeue()
-{
+Chain* Queue::dequeue(){
 	Chain *item;
 
 	item = head; // The head pointer denotes the first element  
@@ -49,8 +51,7 @@ Chain *Queue::dequeue()
 
 // REMOVE: Searches the supplied Chain element and removes it.
 
-void Queue::remove(Chain *item)
-{
+void Queue::remove(Chain *item){
 	Chain *cur;
 
 	if (head) {

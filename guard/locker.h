@@ -14,10 +14,36 @@
 #ifndef __Locker_include__
 #define __Locker_include__
 
+#include "../device/cgastr.h"
+#include "device/panic.h"
+
 class Locker {
+private:
+    bool available = true;
+
 public:
 	Locker(const Locker &copy) = delete; // prevent copying
-/* Add your code here */ 
+    Locker(){};
+
+    void enter() {
+        if (!available) {
+            cga << "enter called although already not \"available\"" << CGA_Stream::endl;
+            global_panic.prologue();
+        }
+        available = false;
+    };
+
+    void retne() {
+        if (available) {
+            cga << "retne called although already \"available\"" << CGA_Stream::endl;
+            global_panic.prologue();
+        }
+        available = true;
+    };
+
+    bool avail() {
+        return available;
+    };
 };
 
 #endif

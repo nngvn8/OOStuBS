@@ -9,6 +9,14 @@
 /*****************************************************************************/
 
 #include "keyboard.h"
+#include "../machine/key.h"
+#include "../machine/plugbox.h"
+#include "../machine/pic.h"
+#include "../guard/gate.h"
+#include "../object/queue.h"
+#include "../object/o_stream.h"
+#include "../guard/guard.h"
+
 
 void Keyboard::plugin(){
     // Connect to plugbox
@@ -17,7 +25,7 @@ void Keyboard::plugin(){
     pic.allow(PIC::KEYBOARD);
 }
 
-void Keyboard::trigger(){
+bool Keyboard::prologue() {
     // Rerun until keyboard buffer is definitely empty
     while(true){
         Key key = keyboard_ctr.key_hit();
@@ -27,12 +35,20 @@ void Keyboard::trigger(){
             keyboard_ctr.reboot();
         }
 
-        // Immediately print the character to the screen for now
+        // Add to buffer, for later printing
         if (key.valid()){
-            cga.setpos(0,0);
-            cga << key.ascii() << CGA_Stream::inst_print;
-        } else{
-            return;
+            this->prol_buf.produce(key.ascii());
+        } else {
+            return true;
         }
+    }
+}
+
+void Keyboard::epilogue() {
+    cga.setpos(0, 0); // TODO: Change to something more sensible later
+    char c = this->prol_buf.consume();
+    while(c != 0) {
+        cga << c << CGA_Stream::endl;
+        c = this->prol_buf.consume();
     }
 }

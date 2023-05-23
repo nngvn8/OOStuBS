@@ -14,7 +14,7 @@
 #ifndef __queue_include__
 #define __queue_include__
 
-#include "object/chain.h"
+#include "../object/chain.h"
 
 class Queue {
 
@@ -24,15 +24,17 @@ protected:
 
 public:
 	Queue(const Queue &copy) = delete; // prevent copying
-
-	Queue()
-	{
+    
+	Queue(){
 		head = 0;
 		tail = &head;
 	}
+
 	void enqueue(Chain *item);
 	Chain *dequeue();
-	void remove(Chain *);
+	void remove(Chain * item);
 };
+
+extern Queue queue;
 
 #endif

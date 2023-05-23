@@ -15,16 +15,19 @@
 #include "machine/cpu.h"
 #include "guard/gate.h"
 
-class Panic : public Gate{
+class Panic : public Gate {
 private:
     char* msg;
+    char* id = "panic";
 
 public:
-    Panic (char* message) : msg(message){}
-    Panic (const Panic &copy) = delete; // prevent copying
+    Panic(char* message) : msg(message){}
+    Panic(const Panic &copy) = delete; // prevent copying
 
-    void trigger();
- 
+    bool prologue();
+    char* getID(){return id;}
 };
+
+extern Panic global_panic;
 
 #endif
