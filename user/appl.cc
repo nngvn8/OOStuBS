@@ -8,7 +8,6 @@
 /* The Application class defines the (only) application for OOStuBS.         */
 /*****************************************************************************/
 
-/* INCLUDES */
 
 #include "user/appl.h"
 #include "device/cgastr.h"
@@ -22,14 +21,12 @@ void Application::action(){
     cga.clear_screen();
 
     while(true){
-        {  Secure section;
-            //enter
-            //cpu.disable_int();
+        {
+            Secure section; // guard enter aka setting it unavailable
             cga.setpos(35, 11);
-            //cpu.enable_int();
             cga << "Hello World!" << CGA_Stream::inst_print;
-            //leave
-        }
+
+        } // On destruction of Secure, the guard, will call all epilogues and set itself available
     }
 }
 
@@ -54,10 +51,4 @@ void Application::test_prologue_keyboard_char_buffer(){
     cga << ch_buf.consume() << CGA_Stream::endl;
     cga << "Consume second char, nothing more in the buffer" << CGA_Stream::endl;
     cga << ch_buf.consume() << CGA_Stream::endl;
-
-
-
-
-
 }
-

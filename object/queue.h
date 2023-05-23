@@ -24,12 +24,12 @@ protected:
 
 public:
 	Queue(const Queue &copy) = delete; // prevent copying
-
-	Queue()
-	{
+    
+	Queue(){
 		head = 0;
 		tail = &head;
 	}
+
 	void enqueue(Chain *item);
 	Chain *dequeue();
 	void remove(Chain * item);

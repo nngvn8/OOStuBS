@@ -35,8 +35,7 @@ void Queue::enqueue(Chain *item) {
 // DEQUEUE: Returns the list's first element and removes it from the list.
 //          If the list does not contain any elements, it returns a nullptr.
 
-Chain* Queue::dequeue()
-{
+Chain* Queue::dequeue(){
 	Chain *item;
 
 	item = head; // The head pointer denotes the first element  
@@ -52,8 +51,7 @@ Chain* Queue::dequeue()
 
 // REMOVE: Searches the supplied Chain element and removes it.
 
-void Queue::remove(Chain *item)
-{
+void Queue::remove(Chain *item){
 	Chain *cur;
 
 	if (head) {

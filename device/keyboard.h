@@ -20,17 +20,18 @@
 #include "utils/kb_prologue_char_buf.h"
 #include "../object/chain.h"
  
-class Keyboard : public Gate{
+class Keyboard : public Gate {
 private:
     Keyboard_Controller keyboard_ctr = Keyboard_Controller();
     Kb_prologue_char_buf prol_buf;
 
     char* id = "keyboard";
+
 public:
 	Keyboard(){}
     Keyboard(const Keyboard &copy) = delete; // prevent copying
  
-	// PLUGIN: "Plugs in" the keyboard (driver). From now on, keypresses are handled.
+	// PLUGIN: "Plugs in" the keyboard (driver). From now on, key presses are handled.
     void plugin();
     virtual bool prologue ();
     virtual void epilogue ();
@@ -38,7 +39,6 @@ public:
     char* getID(){return id;}
 
 };
-
 
 extern Keyboard keyboard;
 

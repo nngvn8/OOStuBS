@@ -35,28 +35,20 @@ bool Keyboard::prologue() {
             keyboard_ctr.reboot();
         }
 
-        // Immediately print the character to the screen for now
-        //TODO enqueue when first character inserted and not enqueued
-
+        // Add to buffer, for later printing
         if (key.valid()){
-
             this->prol_buf.produce(key.ascii());
-
-
-        } else{
+        } else {
             return true;
         }
     }
 }
 
 void Keyboard::epilogue() {
-
-    cga.setpos(0, 0);
+    cga.setpos(0, 0); // TODO: Change to something more sensible later
     char c = this->prol_buf.consume();
     while(c != 0) {
         cga << c << CGA_Stream::endl;
         c = this->prol_buf.consume();
     }
-
-
 }

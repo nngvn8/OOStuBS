@@ -57,7 +57,6 @@ public:
     static O_Stream& dec (O_Stream& os);
     static O_Stream& hex (O_Stream& os);
     static O_Stream& inst_print (O_Stream& os);
-
 };
 
 #endif
