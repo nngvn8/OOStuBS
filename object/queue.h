@@ -24,8 +24,6 @@ protected:
 
 public:
 	Queue(const Queue &copy) = delete; // prevent copying
-<<<<<<< HEAD
-    
 	Queue(){
 		head = 0;
 		tail = &head;
@@ -38,17 +36,4 @@ public:
 
 extern Queue queue;
 
-=======
-
-	Queue()
-	{
-		head = 0;
-		tail = &head;
-	}
-	void enqueue(Chain *item);
-	Chain *dequeue();
-	void remove(Chain *);
-};
-
->>>>>>> f8f2d1b5a59e4110b895e4acef062a8f308354a0
 #endif
