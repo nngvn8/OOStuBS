@@ -25,7 +25,7 @@ public:
 
     /**
      * Initializes the stack pointer to point to tos and on first activation execution begins with the kickoff function
-     * @param tos
+     * @param tos top o' stack
      */
     Coroutine(void* tos);
 

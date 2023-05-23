@@ -24,10 +24,14 @@ extern "C" {
     void toc_switch(struct toc* regs_now, struct toc* reg_then);
 }
 
+void Coroutine::Coroutine(void* tos){
+    // TODO: Call toc_settle() with parameters
+}
+
 void Coroutine::go() {
-    // TODO: call toc_go(); with parameter
+    // TODO: Call toc_go(); with parameter
 }
 
 void Coroutine::resume(Coroutine& next) {
-    // TODO: call toc_switch() with parameters
+    // TODO: Call toc_switch() with parameters
 }
