@@ -2,22 +2,16 @@
 /* Operating-System Construction                                             */
 /*---------------------------------------------------------------------------*/
 /*                                                                           */
-/*                              C H A I N                                    */
+/*                            K I C K O F F                                  */
 /*                                                                           */
 /*---------------------------------------------------------------------------*/
-/* By inheriting from the Chain class, the derived class inherits a chain    */
-/* pointer that allows its instances to be enqueued in a linked list         */
-/* (implemented in the Queue class).                                         */
+/* Function to start a coroutine.                                            */
+/* Since this function is not really called, but only jumped to by a clever  */
+/* initialization of the stack of the coroutine, it must never terminate.    */
+/* Otherwise a meaningless value would be interpreted as a return address    */
+/* and the computer would crash.                                             */
 /*****************************************************************************/
 
-#ifndef __chain_include__
-#define __chain_include__
-
-class Chain {
-public:
-    Chain() {}
-    Chain(const Chain &copy) = delete; // prevent copying
-	Chain *next = 0;
-};
-
-#endif
+#include "thread/kickoff.h"
+/* Add your code here */ 
+ 

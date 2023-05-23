@@ -2,22 +2,17 @@
 /* Operating-System Construction                                             */
 /*---------------------------------------------------------------------------*/
 /*                                                                           */
-/*                              C H A I N                                    */
+/*                                 L O O P                                   */
 /*                                                                           */
 /*---------------------------------------------------------------------------*/
-/* By inheriting from the Chain class, the derived class inherits a chain    */
-/* pointer that allows its instances to be enqueued in a linked list         */
-/* (implemented in the Queue class).                                         */
+/* Loop is a thread that does nothing else but count upwards and print this  */
+/* on the screen. In between, it yields the CPU. The Scheduler then decides  */
+/* which thread shall run next.                                              */
 /*****************************************************************************/
 
-#ifndef __chain_include__
-#define __chain_include__
+#ifndef __loop_include__
+#define __loop_include__
 
-class Chain {
-public:
-    Chain() {}
-    Chain(const Chain &copy) = delete; // prevent copying
-	Chain *next = 0;
-};
-
+/* Add your code here */ 
+ 
 #endif

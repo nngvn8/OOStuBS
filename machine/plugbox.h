@@ -15,7 +15,6 @@
 #include "guard/gate.h"
 #include "device/panic.h"
 
-
 #define TABLE_SIZE 64
 
 class Plugbox {
@@ -28,10 +27,10 @@ public:
 
     Plugbox();
     Plugbox(const Plugbox &copy) = delete; // prevent copying
+
     void assign(unsigned int slot, Gate& gate);
     Gate& report(unsigned int slot);
 };
 
 extern Plugbox plugbox;
-
 #endif

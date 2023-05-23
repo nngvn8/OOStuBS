@@ -2,22 +2,24 @@
 /* Operating-System Construction                                             */
 /*---------------------------------------------------------------------------*/
 /*                                                                           */
-/*                              C H A I N                                    */
+/*                            E N T R A N T                                  */
 /*                                                                           */
 /*---------------------------------------------------------------------------*/
-/* By inheriting from the Chain class, the derived class inherits a chain    */
-/* pointer that allows its instances to be enqueued in a linked list         */
-/* (implemented in the Queue class).                                         */
+/* A coroutine that is managed by the Scheduler.                             */
 /*****************************************************************************/
 
-#ifndef __chain_include__
-#define __chain_include__
+#ifndef __entrant_include__
+#define __entrant_include__
 
-class Chain {
+/* Add your code here */ 
+
+class Entrant
+/* Add your code here */ 
+{
 public:
-    Chain() {}
-    Chain(const Chain &copy) = delete; // prevent copying
-	Chain *next = 0;
+	Entrant(const Entrant &copy) = delete; // prevent copying
+
+/* Add your code here */ 
 };
 
 #endif

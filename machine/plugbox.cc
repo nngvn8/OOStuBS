@@ -8,6 +8,7 @@
 /* Abstracts an interrupt vector table. Allows to configure handler routines */
 /* for every hardware and software interrupt and every CPU exception.        */
 /*****************************************************************************/
+
 #include "plugbox.h"
 
 Plugbox::Plugbox() {

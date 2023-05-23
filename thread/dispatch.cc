@@ -2,22 +2,14 @@
 /* Operating-System Construction                                             */
 /*---------------------------------------------------------------------------*/
 /*                                                                           */
-/*                              C H A I N                                    */
+/*                          D I S P A T C H E R                              */
 /*                                                                           */
 /*---------------------------------------------------------------------------*/
-/* By inheriting from the Chain class, the derived class inherits a chain    */
-/* pointer that allows its instances to be enqueued in a linked list         */
-/* (implemented in the Queue class).                                         */
+/* Dispatcher implementation.                                                */
+/* The Dispatcher maintains the life pointer that points to the currently    */
+/* active coroutine. go() initializes the life pointer and starts the first  */
+/* coroutine, all further context switches are triggered by dispatch().      */
+/* active() returns the life pointer.                                        */
 /*****************************************************************************/
 
-#ifndef __chain_include__
-#define __chain_include__
-
-class Chain {
-public:
-    Chain() {}
-    Chain(const Chain &copy) = delete; // prevent copying
-	Chain *next = 0;
-};
-
-#endif
+/* Add your code here */ 

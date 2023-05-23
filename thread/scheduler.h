@@ -2,22 +2,25 @@
 /* Operating-System Construction                                             */
 /*---------------------------------------------------------------------------*/
 /*                                                                           */
-/*                              C H A I N                                    */
+/*                          S C H E D U L E R                                */
 /*                                                                           */
 /*---------------------------------------------------------------------------*/
-/* By inheriting from the Chain class, the derived class inherits a chain    */
-/* pointer that allows its instances to be enqueued in a linked list         */
-/* (implemented in the Queue class).                                         */
+/* Scheduler implementation.                                                 */
 /*****************************************************************************/
 
-#ifndef __chain_include__
-#define __chain_include__
+#ifndef __schedule_include__
+#define __schedule_include__
 
-class Chain {
+#include "thread/dispatch.h"
+/* Add your code here */ 
+
+class Scheduler
+/* Add your code here */ 
+{
 public:
-    Chain() {}
-    Chain(const Chain &copy) = delete; // prevent copying
-	Chain *next = 0;
+	Scheduler (const Scheduler &copy) = delete; // prevent copying
+/* Add your code here */ 
+ 
 };
 
 #endif

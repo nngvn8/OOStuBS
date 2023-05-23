@@ -2,22 +2,13 @@
 /* Operating-System Construction                                             */
 /*---------------------------------------------------------------------------*/
 /*                                                                           */
-/*                              C H A I N                                    */
+/*                          S C H E D U L E R                                */
 /*                                                                           */
 /*---------------------------------------------------------------------------*/
-/* By inheriting from the Chain class, the derived class inherits a chain    */
-/* pointer that allows its instances to be enqueued in a linked list         */
-/* (implemented in the Queue class).                                         */
+/* Scheduler implementation.                                                 */
 /*****************************************************************************/
 
-#ifndef __chain_include__
-#define __chain_include__
-
-class Chain {
-public:
-    Chain() {}
-    Chain(const Chain &copy) = delete; // prevent copying
-	Chain *next = 0;
-};
-
-#endif
+/* Add your code here */ 
+ 
+/* Add your code here */ 
+/* Add your code here */ 

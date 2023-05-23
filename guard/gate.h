@@ -39,5 +39,4 @@ public:
     virtual char* getID() = 0;
 };
 
-
 #endif
