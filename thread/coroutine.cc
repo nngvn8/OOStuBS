@@ -17,9 +17,10 @@
 #include "thread/coroutine.h"
 #include "thread/kickoff.h"
 
-// Functions that are implemented at C or assembler level must be declared as
-// extern "C", because they do not conform to C++ name mangling.
-extern "C" {
-/* Add your code here */ 
+void Coroutine::go() {
+    // TODO: call toc_go(); with parameter
 }
-/* Add your code here */ 
+
+void Coroutine::resume(Coroutine& next) {
+    // TODO: call toc_switch() with parameters
+}
