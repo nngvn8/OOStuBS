@@ -7,6 +7,7 @@
 #include "object/queue.h"
 #include "guard/guard.h"
 #include "thread/coroutine.h"
+#include "thread/coroutine.h"
 
 // Objects used everywhere => make them global
 CPU cpu;
@@ -18,16 +19,19 @@ Panic global_panic{"Error?: Gate not initialized, Panic Obejct launched, see mai
 Guard guard;
 
 long stack[4096]; // the one global stack
-#define COROUTINE_TOS_ONE 0
-#define COROUTINE_TOS_TWO 1024
-#define COROUTINE_TOS_THREE 2048
-#define COROUTINE_TOS_FOUR 3072
+#define COROUTINE_TOS_ONE 1024
+#define COROUTINE_TOS_TWO 2048
+#define COROUTINE_TOS_THREE 3072
+#define COROUTINE_TOS_FOUR 4096
 
 int main() {
     cpu.enable_int();
     keyboard.plugin();
 
-    Coroutine c = Coroutine(&stack[COROUTINE_TOS_ONE]);
+    // Initial coroutine test
+    toc t1;
+    Coroutine c1 = Coroutine(&stack[COROUTINE_TOS_ONE]);
+    toc_settle(&t1, &COROUTINE_TOS_ONE, kickoff, &c1);
 
     Application app;
     app.action();
