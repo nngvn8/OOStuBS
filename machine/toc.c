@@ -14,9 +14,12 @@
 
 // TOC_SETTLE: Prepares a coroutine context for its first activation.
 void toc_settle(struct toc *regs, void *tos,
-		void (*kickoff)(void *, void *, void *, void *, void *, void *,
-				void *),
-		void *object)
-{
-/* Add your code here */ 
+		void (*kickoff)(void *, void *, void *, void *, void *, void *, void *),
+		void *object){
+    // Must be void** because void has no size => no pointer arithmetic, but void* has a size
+    void** p = (void**) tos;  // tos must be one larger than the last array element (because always decrement first)
+    *(--p) = object;  // seventh parameter for kickoff function
+    *(--p) = (void*) 0;  // return address, which should never be called
+    *(--p) = kickoff;  // return address, which should be called
+    toc->rsp = p;  // Saving the current stack pointer in the toc struct
 }

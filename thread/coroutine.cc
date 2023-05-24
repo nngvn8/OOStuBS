@@ -22,6 +22,9 @@
 extern "C" {
     void toc_go(struct toc* regs);
     void toc_switch(struct toc* regs_now, struct toc* reg_then);
+    void toc_settle(struct toc *regs, void *tos,
+                    void (*kickoff)(void *, void *, void *, void *, void *, void *, void *),
+                    void *object);
 }
 
 void Coroutine::Coroutine(void* tos){

@@ -24,7 +24,6 @@
 #define __toc_include__
 
 // TOC: ("thread of control")
-//
 
 struct toc {
 	void *rbx;
