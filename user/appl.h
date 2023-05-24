@@ -11,10 +11,13 @@
 #ifndef __application_include__
 #define __application_include__
 
-class Application{
+#include "thread/coroutine.h"
+
+/// CURRENTLY DIRECTLY DERIVES FROM COROUTINE
+class Application : public Coroutine {
 
 public:
-    Application(){}
+    explicit Application (void* tos) : Coroutine(tos) {} /// might not be inlined later on (explicit only because single argument)
     Application(const Application &copy) = delete; // prevent copying
  
 	void action();

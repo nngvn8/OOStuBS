@@ -21,6 +21,9 @@
 
 class Coroutine {
 public:
+    /// no getter so far because none prescribed by the task and no useful additional functionality needed currently
+    toc coroutine_regs;
+
     Coroutine(const Coroutine &copy) = delete; // prevent copying
 
     /**

@@ -7,7 +7,6 @@
 #include "object/queue.h"
 #include "guard/guard.h"
 #include "thread/coroutine.h"
-#include "thread/coroutine.h"
 
 // Objects used everywhere => make them global
 CPU cpu;
@@ -29,12 +28,13 @@ int main() {
     keyboard.plugin();
 
     // Initial coroutine test
-    toc t1;
-    Coroutine c1 = Coroutine(&stack[COROUTINE_TOS_ONE]);
-    toc_settle(&t1, &COROUTINE_TOS_ONE, kickoff, &c1);
+    Application app1(&stack[COROUTINE_TOS_ONE]);
+    Application app2(&stack[COROUTINE_TOS_TWO]);
+    Application app3(&stack[COROUTINE_TOS_THREE]);
+    Application app4(&stack[COROUTINE_TOS_FOUR]);
 
-    Application app;
-    app.action();
+//    Application app;
+    app1.action();
     //app.test_prologue_keyboard_char_buffer();
 
     while (1){}

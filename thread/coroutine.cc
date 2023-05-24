@@ -27,14 +27,15 @@ extern "C" {
                     void *object);
 }
 
-void Coroutine::Coroutine(void* tos){
-    // TODO: Call toc_settle() with parameters
+Coroutine::Coroutine(void* tos){
+    coroutine_regs = {0,0,0,0,0,0,0,0}; /// not sure whether or not initialization with zero or not
+    toc_settle(&coroutine_regs, tos, &kickoff, this);
 }
 
 void Coroutine::go() {
-    // TODO: Call toc_go(); with parameter
+    toc_go(&coroutine_regs);
 }
 
 void Coroutine::resume(Coroutine& next) {
-    // TODO: Call toc_switch() with parameters
+    toc_switch(&this->coroutine_regs, &next.coroutine_regs);
 }
