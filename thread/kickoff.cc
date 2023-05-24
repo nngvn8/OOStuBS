@@ -12,6 +12,17 @@
 /* and the computer would crash.                                             */
 /*****************************************************************************/
 
-#include "thread/kickoff.h"
-/* Add your code here */ 
+#include "../thread/kickoff.h"
+#include "coroutine.h"
+#include "../device/panic.h"
+
+
+/// "realizes jump from C to C++ level"?
+void kickoff(void* dummy1, void* dummy2, void* dummy3, void* dummy4, void* dummy5, void* dummy6, Coroutine* object) {
+    object->action();
+
+    // make sure the kickoff function can never return to the invalid value
+    Panic panic("Tried to leave kickoff function!");
+    panic.prologue();
+}
  
