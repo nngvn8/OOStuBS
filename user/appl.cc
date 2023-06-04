@@ -16,6 +16,7 @@
 #include "../utils/kb_prologue_char_buf.h"
 #include "guard/secure.h"
 #include "machine/plugbox.h"
+#include "thread/dispatch.h"
 
 void Application::action_interrupt_synchro(){
     cga.clear_screen();
@@ -36,19 +37,19 @@ void Application::action(){
         switch (this->c) {
             case 'a':
                 //if app 1
-                this->resume(app2);
+                dispatcher.dispatch(app2);
                 break;
             case 'b':
                 //if app 2
-                this->resume(app3);
+                dispatcher.dispatch(app3);
                 break;
             case 'c':
                 //if app 3
-                this->resume(app4);
+                dispatcher.dispatch(app4);
                 break;
             case 'd':
                 //if app 4
-                this->resume(app1);
+                dispatcher.dispatch(app1);
                 break;
         }
     }

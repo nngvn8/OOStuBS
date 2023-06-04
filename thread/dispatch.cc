@@ -26,9 +26,10 @@ void Dispatcher::go(Coroutine& first) {
 }
 
 void Dispatcher::dispatch(Coroutine& next) {
-    /// maybe call go() if life_pointer == null?
+    // maybe call go() if life_pointer == null?
+    auto intermediate_ptr = life_pointer;
     life_pointer = &next;
-    next.resume(next);
+    (*intermediate_ptr).resume(next);
 }
 
 Coroutine* Dispatcher::active() {

@@ -7,6 +7,7 @@
 #include "object/queue.h"
 #include "guard/guard.h"
 #include "thread/coroutine.h"
+#include "thread/dispatch.h"
 
 // Objects used everywhere => make them global
 CPU cpu;
@@ -16,6 +17,8 @@ Keyboard keyboard;
 CGA_Stream cga;
 Panic global_panic{"Error?: Gate not initialized, Panic Obejct launched, see main()!"};
 Guard guard;
+Dispatcher dispatcher;
+
 
 long stack[4096]; // the one global stack
 #define COROUTINE_TOS_ONE 1024
@@ -40,7 +43,7 @@ int main() {
     //app.test_prologue_keyboard_char_buffer();
 
 
-    app1.go();
+    dispatcher.go(app1);
 
 
     return 0;
