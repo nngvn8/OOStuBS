@@ -23,21 +23,25 @@ long stack[4096]; // the one global stack
 #define COROUTINE_TOS_THREE 3072
 #define COROUTINE_TOS_FOUR 4096
 
+Application app1(&stack[COROUTINE_TOS_ONE], 'a');
+Application app2(&stack[COROUTINE_TOS_TWO], 'b');
+Application app3(&stack[COROUTINE_TOS_THREE], 'c');
+Application app4(&stack[COROUTINE_TOS_FOUR], 'd');
+
+
 int main() {
     cpu.enable_int();
     keyboard.plugin();
 
     // Initial coroutine test
-    Application app1(&stack[COROUTINE_TOS_ONE]);
-    Application app2(&stack[COROUTINE_TOS_TWO]);
-    Application app3(&stack[COROUTINE_TOS_THREE]);
-    Application app4(&stack[COROUTINE_TOS_FOUR]);
 
-//    Application app;
-    app1.action();
+
+    //app1.action_interrupt_synchro();
     //app.test_prologue_keyboard_char_buffer();
 
-    while (1){}
+
+    app1.go();
+
 
     return 0;
 }

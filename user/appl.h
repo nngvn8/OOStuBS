@@ -15,13 +15,21 @@
 
 /// CURRENTLY DIRECTLY DERIVES FROM COROUTINE
 class Application : public Coroutine {
-
+private:
+    char c;
 public:
-    explicit Application (void* tos) : Coroutine(tos) {} /// might not be inlined later on (explicit only because single argument)
+    explicit Application (void* tos, char c) : Coroutine(tos), c(c){} /// might not be inlined later on (explicit only because single argument)
     Application(const Application &copy) = delete; // prevent copying
  
-	void action();
+	void action_interrupt_synchro();
+    void action();
     void test_prologue_keyboard_char_buffer();
 };
+
+extern Application app1;
+extern Application app2;
+extern Application app3;
+extern Application app4;
+
 
 #endif

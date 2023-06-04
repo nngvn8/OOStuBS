@@ -17,7 +17,7 @@
 #include "guard/secure.h"
 #include "machine/plugbox.h"
 
-void Application::action(){
+void Application::action_interrupt_synchro(){
     cga.clear_screen();
 
     while(true){
@@ -28,6 +28,31 @@ void Application::action(){
 
         } // On destruction of Secure, the guard, will call all epilogues and set itself available
     }
+}
+
+void Application::action(){
+    while(1) {
+        cga << this->c << CGA_Stream::inst_print;
+        switch (this->c) {
+            case 'a':
+                //if app 1
+                this->resume(app2);
+                break;
+            case 'b':
+                //if app 2
+                this->resume(app3);
+                break;
+            case 'c':
+                //if app 3
+                this->resume(app4);
+                break;
+            case 'd':
+                //if app 4
+                this->resume(app1);
+                break;
+        }
+    }
+
 }
 
 void Application::test_prologue_keyboard_char_buffer(){
