@@ -11,15 +11,22 @@
 #ifndef __schedule_include__
 #define __schedule_include__
 
-#include "thread/dispatch.h"
-/* Add your code here */ 
+#include "../thread/dispatch.h"
+#include "../object/chain.h"
+#include "entrant.h"
 
-class Scheduler
+/* Add your code here */
+
+class Scheduler: public Dispatcher
 /* Add your code here */ 
 {
 public:
 	Scheduler (const Scheduler &copy) = delete; // prevent copying
-/* Add your code here */ 
+    void ready (Entrant& that);
+    void schedule ();
+    void exit ();
+    void kill (Entrant& that);
+    void resume ();
  
 };
 

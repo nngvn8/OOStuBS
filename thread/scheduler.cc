@@ -8,7 +8,11 @@
 /* Scheduler implementation.                                                 */
 /*****************************************************************************/
 
-/* Add your code here */ 
- 
-/* Add your code here */ 
-/* Add your code here */ 
+#include "scheduler.h"
+
+void Scheduler::ready (Entrant& that){}
+void Scheduler::schedule (){}
+void Scheduler::exit (){}
+void Scheduler::kill (Entrant& that){}
+void Scheduler::resume (){}
+
