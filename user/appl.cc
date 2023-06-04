@@ -17,6 +17,7 @@
 #include "guard/secure.h"
 #include "machine/plugbox.h"
 #include "thread/dispatch.h"
+#include "thread/scheduler.h"
 
 void Application::action_interrupt_synchro(){
     cga.clear_screen();
@@ -34,24 +35,7 @@ void Application::action_interrupt_synchro(){
 void Application::action(){
     while(1) {
         cga << this->c << CGA_Stream::inst_print;
-        switch (this->c) {
-            case 'a':
-                //if app 1
-                dispatcher.dispatch(app2);
-                break;
-            case 'b':
-                //if app 2
-                dispatcher.dispatch(app3);
-                break;
-            case 'c':
-                //if app 3
-                dispatcher.dispatch(app4);
-                break;
-            case 'd':
-                //if app 4
-                dispatcher.dispatch(app1);
-                break;
-        }
+        scheduler.resume();
     }
 
 }

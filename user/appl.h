@@ -12,13 +12,14 @@
 #define __application_include__
 
 #include "thread/coroutine.h"
+#include "thread/entrant.h"
 
 /// CURRENTLY DIRECTLY DERIVES FROM COROUTINE
-class Application : public Coroutine {
+class Application : public Entrant {
 private:
     char c;
 public:
-    explicit Application (void* tos, char c) : Coroutine(tos), c(c){} /// might not be inlined later on (explicit only because single argument)
+    explicit Application (void* tos, char c) : Entrant(tos), c(c){} /// might not be inlined later on (explicit only because single argument)
     Application(const Application &copy) = delete; // prevent copying
  
 	void action_interrupt_synchro();
