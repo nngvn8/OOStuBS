@@ -33,6 +33,7 @@ void Application::action_interrupt_synchro(){
 }
 
 void Application::action(){
+    cga << "Hello World" << CGA_Stream::inst_print;
     while(1) {
         cga << this->c << CGA_Stream::inst_print;
         scheduler.resume();

@@ -16,7 +16,7 @@ void Scheduler::ready (Entrant& that){
 }
 void Scheduler::schedule(){
     auto activated_obj = this->rdy_list.dequeue();
-  //TODO morgen in der Übg durchquatschen
+    dispatcher.dispatch(*(Coroutine*)(Entrant*)(activated_obj)); /// why doesnt work other casting?
 }
 void Scheduler::exit (){
     this->schedule();

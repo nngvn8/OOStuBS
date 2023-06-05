@@ -25,7 +25,7 @@ private:
     Queue rdy_list;
 public:
 	Scheduler (const Scheduler &copy) = delete; // prevent copying
-    Scheduler();
+    Scheduler(){}
     void ready (Entrant& that);
     void schedule ();
     void exit ();

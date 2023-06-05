@@ -19,7 +19,11 @@ class Application : public Entrant {
 private:
     char c;
 public:
-    explicit Application (void* tos, char c) : Entrant(tos), c(c){} /// might not be inlined later on (explicit only because single argument)
+    Application(void* tos, char c) : Entrant(tos){
+        //TODO warum kann man das nicht einfach so in den Konstruktr schreiben?
+        this->c = c;
+
+    } /// might not be inlined later on (explicit only because single argument)
     Application(const Application &copy) = delete; // prevent copying
  
 	void action_interrupt_synchro();

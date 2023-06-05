@@ -20,8 +20,10 @@ class Entrant: public Coroutine, Chain
 /* Add your code here */ 
 {
 public:
+
 	Entrant(const Entrant &copy) = delete; // prevent copying
-    Entrant (void* tos);
+    Entrant (void* tos) : Coroutine(tos){};
+
 /* Add your code here */ 
 };
 
