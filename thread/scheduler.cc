@@ -15,8 +15,15 @@ void Scheduler::ready (Entrant& that){
     this->rdy_list.enqueue( (Chain*)&that);
 }
 void Scheduler::schedule(){
-    auto activated_obj = this->rdy_list.dequeue();
-    dispatcher.dispatch(*(Coroutine*)(Entrant*)(activated_obj)); /// why doesnt work other casting?
+    Chain* activated_obj = this->rdy_list.dequeue();
+    if(activated_obj != nullptr){
+        if(this->active() == nullptr){
+            this->go(*(Coroutine*)(Entrant*)(activated_obj));
+        } else{
+            this->dispatch(*(Coroutine*)(Entrant*)(activated_obj)); /// why doesnt work other casting?
+        }
+    }
+
 }
 void Scheduler::exit (){
     this->schedule();
@@ -24,8 +31,14 @@ void Scheduler::exit (){
 void Scheduler::kill (Entrant& that){
     this->rdy_list.remove( (Chain*)&that);
 }
+
+
 void Scheduler::resume(){
-    this->rdy_list.enqueue(((Chain*)dispatcher.active()));
-    this->schedule();
+    Entrant* entrant = static_cast<Entrant*>(this->active());
+    if(entrant){
+        this->ready(*entrant);
+        this->schedule();
+    }
+
 }
 

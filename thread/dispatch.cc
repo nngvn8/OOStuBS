@@ -16,22 +16,17 @@
 
 void Dispatcher::go(Coroutine& first) {
     // check if go has been called although a coroutine is already running -> call dispatch() instead
-    if (life_pointer != nullptr) {
-        life_pointer = &first;
-        first.go();
-    }
-    else {
-        dispatch(first);
-    }
+    life_pointer = &first;
+    first.action();
+
 }
 
 void Dispatcher::dispatch(Coroutine& next) {
-    // maybe call go() if life_pointer == null?
-    auto intermediate_ptr = life_pointer;
+    Coroutine* life_ptr_prev = life_pointer;
     life_pointer = &next;
-    (*intermediate_ptr).resume(next);
+    life_ptr_prev->resume(next);
 }
 
 Coroutine* Dispatcher::active() {
-    return life_pointer;
+    return this->life_pointer;
 }

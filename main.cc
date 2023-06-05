@@ -44,11 +44,11 @@ int main() {
     //app1.action_interrupt_synchro();
     //app.test_prologue_keyboard_char_buffer();
 
-
     scheduler.ready(app1);
     scheduler.ready(app2);
     scheduler.ready(app3);
     scheduler.ready(app4);
+
     scheduler.schedule();
 
 
