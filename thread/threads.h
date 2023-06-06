@@ -11,6 +11,8 @@
 #include "../object/o_stream.h"
 #include "../device/cgastr.h"
 
+
+
 class Thread1: public Application
 {
 private:
@@ -18,22 +20,7 @@ private:
 
 public:
     Thread1(void* tos): Application(tos){}
-    void action(){
-        int timer = 0;
-        while(1) {
-
-            cga << this->name << ' ' << CGA_Stream::endl;
-            int ctr = 20000000;
-            while(ctr){
-                ctr--;
-            }
-            scheduler.resume();
-            if (timer == 4){
-                cga << "Thrad1.kill(Thread3)" <<CGA_Stream::endl;
-                scheduler.kill(thread3);
-            }
-        }
-    }
+    void action();
 
 };
 
@@ -43,24 +30,7 @@ private:
     char* name = "Thread 2";
 public:
     Thread2(void* tos): Application(tos){}
-    void action(){
-        int timer = 0;
-        while(1) {
-            timer++;
-            cga << this->name << ' ' <<CGA_Stream::endl;
-            int ctr = 20000000;
-            while(ctr){
-                ctr--;
-            }
-            scheduler.resume();
-            if (timer == 2){
-                cga << "Thread2.exit" <<CGA_Stream::endl;
-                scheduler.exit();
-            }
-
-
-        }
-    }
+    void action();
 };
 
 class Thread3: public Application
@@ -69,18 +39,7 @@ private:
     char* name = "Thread 3";
 public:
     Thread3(void* tos): Application(tos){}
-    void action(){
-        while(1) {
-
-            cga << this->name << ' ' << CGA_Stream::endl;
-            int ctr = 20000000;
-            while(ctr){
-                ctr--;
-            }
-            scheduler.resume();
-
-        }
-    }
+    void action();
 };
 
 class Thread4: public Application
@@ -89,24 +48,14 @@ private:
     char* name = "Thread 4";
 public:
     Thread4(void* tos): Application(tos){}
-    void action(){
-        while(1) {
-
-            cga << this->name << ' ' << CGA_Stream::endl;
-            int ctr = 20000000;
-            while(ctr){
-                ctr--;
-            }
-            scheduler.resume();
-
-        }
-    }
+    void action();
 };
 
 extern Thread1 thread1;
 extern Thread2 thread2;
 extern Thread3 thread3;
 extern Thread4 thread4;
+
 
 
 #endif //OOSTUBBS_MBJ_THREADS_H

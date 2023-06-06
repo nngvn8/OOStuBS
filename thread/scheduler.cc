@@ -29,7 +29,7 @@ void Scheduler::exit (){
     this->schedule();
 }
 void Scheduler::kill (Entrant& that){
-    this->ready(  *(Entrant*)this->active());
+    //this->ready(  *(Entrant*)this->active());
     this->rdy_list.remove( (Chain*)&that);
 }
 
