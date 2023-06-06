@@ -32,20 +32,7 @@ void Application::action_interrupt_synchro(){
     }
 }
 
-void Application::action(){
-    //cga << "Hello World" << CGA_Stream::inst_print;
-    while(1) {
-        cga << this->c << '1' << CGA_Stream::inst_print;
-        int ctr = 10000000;
-        while(ctr){
-            ctr--;
-        }
-        scheduler.resume();
-        cga << this->c << '2' << CGA_Stream::inst_print;
 
-    }
-
-}
 
 void Application::test_prologue_keyboard_char_buffer(){
     cga.clear_screen();
