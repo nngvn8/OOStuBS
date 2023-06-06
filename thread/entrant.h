@@ -17,8 +17,7 @@
 class Entrant : public Coroutine, public Chain {
 public:
 	Entrant(const Entrant &copy) = delete; // prevent copying
-//    Entrant (void* tos) : Coroutine(tos) {};
-    using Coroutine :: Coroutine;
+    using Coroutine :: Coroutine; // deriving constructor from Coroutine; equivalent to Entrant (void* tos) : Coroutine(tos) {};
 };
 
 #endif

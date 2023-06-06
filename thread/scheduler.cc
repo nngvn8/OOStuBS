@@ -11,32 +11,33 @@
 #include "scheduler.h"
 
 
-void Scheduler::ready (Entrant& that){
+void Scheduler::ready(Entrant& that) {
     this->rdy_list.enqueue(&that);
 }
-void Scheduler::schedule(){
+
+void Scheduler::schedule() {
     Chain* activated_obj = this->rdy_list.dequeue();
-    if(activated_obj != nullptr){
+    if (activated_obj != nullptr) {
         if (this->active() == nullptr) {
-            this->go((Entrant&)(*activated_obj));
+            this->go((Entrant&)(*activated_obj)); /// can cast on reference of abstract class (due pointer internally)
         }
         else {
-            this->dispatch(*(Entrant*)(activated_obj)); /// why doesnt work other casting? : abstract class
+            this->dispatch(*(Entrant*)(activated_obj)); /// cant cast on abstract class
         }
     }
 }
-void Scheduler::exit(){
+
+void Scheduler::exit() {
     this->schedule();
 }
 
-void Scheduler::kill(Entrant& that){
+void Scheduler::kill(Entrant& that) {
     this->rdy_list.remove((Chain*)&that);
 }
 
-
-void Scheduler::resume(){
-    Entrant* entrant = (Entrant*)(this->active());
-    if(entrant){
+void Scheduler::resume() {
+    auto entrant = (Entrant*)(this->active());
+    if (entrant) {
         this->ready(*entrant);
         this->schedule();
     }

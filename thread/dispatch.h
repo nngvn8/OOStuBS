@@ -25,10 +25,21 @@ public:
 	Dispatcher(const Dispatcher &copy) = delete; // prevent copying
     Dispatcher() : life_pointer(nullptr){}
 
+    /**
+     * Sets life_pointer to first and starts it (call toc_settle())
+     * @param first Coroutine to be executed
+     */
     void go(Coroutine& first);
 
+    /**
+     * Sets life_pointer to next and switches from current coroutine to next
+     * @param next Coroutine to be executed
+     */
     void dispatch(Coroutine& next);
 
+    /**
+     * Returns currently running coroutine
+     */
     Coroutine* active();
 };
 

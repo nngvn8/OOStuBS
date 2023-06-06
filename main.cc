@@ -33,17 +33,10 @@ Thread2 thread2(&stack[COROUTINE_TOS_TWO]);
 Thread3 thread3(&stack[COROUTINE_TOS_THREE]);
 Thread4 thread4(&stack[COROUTINE_TOS_FOUR]);
 
-
-
 int main() {
     cpu.enable_int();
     keyboard.plugin();
 
-    // Initial coroutine test
-
-
-    //app1.action_interrupt_synchro();
-    //app.test_prologue_keyboard_char_buffer();
     cga.clear_screen();
     scheduler.ready(thread1);
     scheduler.ready(thread2);
@@ -51,8 +44,6 @@ int main() {
     scheduler.ready(thread4);
 
     scheduler.schedule();
-
-
 
     return 0;
 }

@@ -25,7 +25,7 @@ public:
     Application(const Application &copy) = delete; // prevent copying
  
 	void action_interrupt_synchro();
-     virtual void action() = 0;
+    virtual void action() = 0;
     void test_prologue_keyboard_char_buffer();
 };
 

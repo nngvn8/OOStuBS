@@ -21,7 +21,6 @@
 
 void Application::action_interrupt_synchro(){
     cga.clear_screen();
-
     while(true){
         {
             Secure section; // guard enter aka setting it unavailable
@@ -32,16 +31,6 @@ void Application::action_interrupt_synchro(){
     }
 }
 
-void Application::action(){
-    //cga << "Hello World" << CGA_Stream::inst_print;
-    while(true) {
-        cga << this->c << '1' << CGA_Stream::inst_print;
-        int ctr = 100000000;
-        while(ctr){
-            ctr--;
-        }
-        scheduler.resume();
-        cga << this->c << '2' << CGA_Stream::inst_print;
 
 void Application::test_prologue_keyboard_char_buffer(){
     cga.clear_screen();

@@ -13,8 +13,7 @@
 
 
 
-class Thread1: public Application
-{
+class Thread1 : public Application {
 private:
     char* name = "Thread 1";
 
@@ -24,8 +23,7 @@ public:
 
 };
 
-class Thread2: public Application
-{
+class Thread2: public Application {
 private:
     char* name = "Thread 2";
 public:
@@ -33,8 +31,7 @@ public:
     void action();
 };
 
-class Thread3: public Application
-{
+class Thread3: public Application {
 private:
     char* name = "Thread 3";
 public:
@@ -42,8 +39,7 @@ public:
     void action();
 };
 
-class Thread4: public Application
-{
+class Thread4: public Application {
 private:
     char* name = "Thread 4";
 public:
