@@ -21,7 +21,7 @@ void toc_settle(struct toc *regs, void *tos,
     *(--p) = object;
      // seventh parameter for kickoff function (probably pointer to coroutine-object)
     *(--p) = (void*) 0;
-    regs->rbp = p;  // return address of kickoff, which should never be called
+    // regs->rbp = p;  // return address of kickoff, which should never be called
     *(--p) = kickoff;  // return address, which should be called (call kickoff)
     regs->rsp = p;  // Saving the current stack pointer in the toc struct
 }

@@ -17,7 +17,7 @@
 void Dispatcher::go(Coroutine& first) {
     // check if go has been called although a coroutine is already running -> call dispatch() instead
     life_pointer = &first;
-    first.action();
+    first.go();
 
 }
 
