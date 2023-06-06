@@ -28,6 +28,7 @@ void Scheduler::schedule(){
 void Scheduler::exit(){
     this->schedule();
 }
+
 void Scheduler::kill(Entrant& that){
     this->rdy_list.remove((Chain*)&that);
 }

@@ -43,10 +43,6 @@ void Application::action(){
         scheduler.resume();
         cga << this->c << '2' << CGA_Stream::inst_print;
 
-    }
-
-}
-
 void Application::test_prologue_keyboard_char_buffer(){
     cga.clear_screen();
 

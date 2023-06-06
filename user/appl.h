@@ -17,24 +17,19 @@
 /// CURRENTLY DIRECTLY DERIVES FROM COROUTINE
 class Application : public Entrant {
 private:
-    char c;
 public:
-    Application(void* tos, char c) : Entrant(tos){
+    Application(void* tos) : Entrant(tos){
         //TODO warum kann man das nicht einfach so in den Konstruktr schreiben?
-        this->c = c;
 
     } /// might not be inlined later on (explicit only because single argument)
     Application(const Application &copy) = delete; // prevent copying
  
 	void action_interrupt_synchro();
-    void action();
+     virtual void action() = 0;
     void test_prologue_keyboard_char_buffer();
 };
 
-extern Application app1;
-extern Application app2;
-extern Application app3;
-extern Application app4;
+
 
 
 #endif
