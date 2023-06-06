@@ -20,10 +20,10 @@
 #include "machine/toc.h"
 
 class Coroutine {
-public:
-    /// no getter so far because none prescribed by the task and no useful additional functionality needed currently
+private:
     toc coroutine_regs;
 
+public:
     Coroutine(const Coroutine &copy) = delete; // prevent copying
 
     /**

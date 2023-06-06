@@ -12,34 +12,32 @@
 
 
 void Scheduler::ready (Entrant& that){
-    this->rdy_list.enqueue( (Chain*)&that);
+    this->rdy_list.enqueue(&that);
 }
 void Scheduler::schedule(){
     Chain* activated_obj = this->rdy_list.dequeue();
     if(activated_obj != nullptr){
-        if(this->active() == nullptr){
-            this->go(*(Coroutine*)(Entrant*)(activated_obj));
-        } else{
-            this->dispatch(*(Coroutine*)(Entrant*)(activated_obj)); /// why doesnt work other casting?
+        if (this->active() == nullptr) {
+            this->go((Entrant&)(*activated_obj));
+        }
+        else {
+            this->dispatch(*(Entrant*)(activated_obj)); /// why doesnt work other casting? : abstract class
         }
     }
-
 }
-void Scheduler::exit (){
+void Scheduler::exit(){
     this->schedule();
 }
-void Scheduler::kill (Entrant& that){
-    this->ready(  *(Entrant*)this->active());
-    this->rdy_list.remove( (Chain*)&that);
+void Scheduler::kill(Entrant& that){
+    this->rdy_list.remove((Chain*)&that);
 }
 
 
 void Scheduler::resume(){
-    Entrant* entrant = static_cast<Entrant*>(this->active());
+    Entrant* entrant = (Entrant*)(this->active());
     if(entrant){
         this->ready(*entrant);
         this->schedule();
     }
-
 }
 

@@ -18,10 +18,8 @@ void toc_settle(struct toc *regs, void *tos,
 		void *object){
     // Must be void** because void has no size => no pointer arithmetic, but void* has a size
     void** p = (void**) tos;  // tos must be one larger than the last array element (because always decrement first)
-    *(--p) = object;
-     // seventh parameter for kickoff function (probably pointer to coroutine-object)
+    *(--p) = object; // seventh parameter for kickoff function (probably pointer to coroutine-object)
     *(--p) = (void*) 0;
-    // regs->rbp = p;  // return address of kickoff, which should never be called
     *(--p) = kickoff;  // return address, which should be called (call kickoff)
     regs->rsp = p;  // Saving the current stack pointer in the toc struct
 }

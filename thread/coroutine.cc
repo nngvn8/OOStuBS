@@ -27,8 +27,7 @@ extern "C" {
                     void *object);
 }
 
-Coroutine::Coroutine(void* tos){
-    coroutine_regs = {0,0,0,0,0,0,0,0}; /// not sure whether or not initialization with zero or not
+Coroutine::Coroutine(void* tos) {
     toc_settle(&coroutine_regs, tos, &kickoff, this);
 }
 

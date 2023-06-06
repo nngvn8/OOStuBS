@@ -14,17 +14,11 @@
 #include "coroutine.h"
 #include "../object/chain.h"
 
-/* Add your code here */
-
-class Entrant: public Coroutine, Chain
-/* Add your code here */ 
-{
+class Entrant : public Coroutine, public Chain {
 public:
-
 	Entrant(const Entrant &copy) = delete; // prevent copying
-    Entrant (void* tos) : Coroutine(tos){};
-
-/* Add your code here */ 
+//    Entrant (void* tos) : Coroutine(tos) {};
+    using Coroutine :: Coroutine;
 };
 
 #endif

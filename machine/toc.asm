@@ -27,12 +27,6 @@ toc_go:
     ; The one argument (pointer to toc struct) is in the rdi register
     ; The toc.inc defines the offsets for each register in the toc
     ; Now write all toc struct values into the registers
-    mov rbx, [rdi + rbx_offset]
-    mov r12, [rdi + r12_offset]
-    mov r13, [rdi + r13_offset]
-    mov r14, [rdi + r14_offset]
-    mov r15, [rdi + r15_offset]
-    mov rbp, [rdi + rbp_offset]
     mov rsp, [rdi + rsp_offset]
     ret
 
