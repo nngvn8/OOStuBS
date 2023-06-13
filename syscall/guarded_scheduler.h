@@ -22,4 +22,6 @@ public:
 /* Add your code here */ 
 };
 
+Guarded_Scheduler guarded_scheduler;
+
 #endif
