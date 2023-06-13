@@ -14,7 +14,7 @@
 #define F 1.19318
 #define MAX_US 54925
 
-PIT::interval(int us){
+void PIT::interval(int us){
     _us = us;
 
     // Check size of us value
@@ -35,8 +35,8 @@ PIT::interval(int us){
     int pit_number = us * F;
 
     // Take apart the us value
-    char lsb = us & 0xFF;
-    char msb = (us>>8) & 0xFF;
+    char lsb = pit_number & 0xFF;
+    char msb = (pit_number>>8) & 0xFF;
 
     // Setup PIT
     /* Explanation:
