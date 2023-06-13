@@ -23,6 +23,7 @@ public:
     /**
      * Initialised in such a way that it regularly triggers interrupts at intervals of approx. us microseconds.
      * @warning The resolution of the timer component is a maximum of 838 nanoseconds.
+     * @warning Clamps to given value to between 0 and 54925
      * @param us number of microseconds
      */
 	PIT(int us) {

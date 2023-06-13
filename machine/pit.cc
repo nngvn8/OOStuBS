@@ -13,17 +13,18 @@
 
 #define F 1.19318
 #define MAX_US 54925
+#define PIT1_CONTROL_REG 0x43
+#define PIT1_COUNTER0 0x40
 
 void PIT::interval(int us){
-    _us = us;
-
-    // Check size of us value
+    // Check size of us value (just clamping, no error)
     if (us > MAX_US) {
-        // TODO: throw error or set to MAX_US
+        us = MAX_US;
     }
     if (us < 0) {
-        // TODO: throw other error or set to 0
+        us = 0;
     }
+    _us = us;  // for returning the current value later
 
     // Converting us to PIT number
     /* Explanation
@@ -46,11 +47,11 @@ void PIT::interval(int us){
      * 0 for selecting 16-bits binary counting
      */
     char register_value = 0b00110100;
-    IO_Port pit1_control_reg = IO_Port(0x43);
+    IO_Port pit1_control_reg = IO_Port(PIT1_CONTROL_REG);
     pit1_control_reg.outb(register_value);
 
     // Send lsb and msb to PIT
-    IO_Port pit1_counter0 = IO_Port(0x40);
+    IO_Port pit1_counter0 = IO_Port(PIT1_COUNTER0);
     pit1_counter0.outb(lsb);
     pit1_counter0.outb(msb);
 }
