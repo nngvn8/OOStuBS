@@ -11,6 +11,7 @@
 #include "thread/scheduler.h"
 #include "thread/threads.h"
 #include "device/watch.h"
+
 // Objects used everywhere => make them global
 CPU cpu;
 PIC pic;
@@ -37,12 +38,14 @@ int main() {
     cpu.enable_int();
     keyboard.plugin();
 
+    cga.clear_screen();
+
+    // Testing the watch class
     Watch watch{50000}; // close to maximum with 1/20 of a second
     watch.windup();
-
     while(1);
 
-    cga.clear_screen();
+    // Testing the threads
     scheduler.ready(thread1);
     scheduler.ready(thread2);
     scheduler.ready(thread3);

@@ -46,6 +46,10 @@ public:
      */
 	void epilogue();
 
+    /**
+     * A debug tool to distinguish the different threads
+     * @return ID as string
+     */
     char* getID(){
         return id;
     }
