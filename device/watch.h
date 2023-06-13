@@ -18,6 +18,9 @@
 #include "machine/pit.h"
 
 class Watch : public Gate, public PIT {
+private:
+    char* id = "timer";
+
 public:
 	Watch(const Watch &copy) = delete; // prevent copying
 
@@ -42,6 +45,10 @@ public:
      * Triggers the process switch.
      */
 	void epilogue();
+
+    char* getID(){
+        return id;
+    }
 };
 
 #endif
