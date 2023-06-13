@@ -19,19 +19,28 @@
 
 class Watch : public Gate, public PIT {
 public:
-	// WATCH: Timer initialization, see PIT.
 	Watch(const Watch &copy) = delete; // prevent copying
-	Watch(int us) : PIT(us) {}
 
-	// WINDUP: "Winds up" the clock. To do this, the watch object must register
-	//         with the Plugbox plugbox and allow the interrupts of the timer
-	//         module with the help of the global pic object. 
-	void windup();
+    /**
+     * Initializes a timer, which periodically interrupts at intervals of approximately us microseconds
+     * @param us  number of microseconds
+     */
+    Watch(int us) : PIT(us) {}
 
-	// PROLOGUE: Contains the prologue of the interrupt handler.
+	/**
+	 * "Winds up" the clock, by registering with the plugbox and allow the interrupts of the timer
+	 * module with the help of the global pic object.
+	 */
+    void windup();
+
+	/**
+	 * ???
+	 */
 	bool prologue();
 
-	// EPILOGUE: This method triggers the process switch.
+    /**
+     * Triggers the process switch.
+     */
 	void epilogue();
 };
 
