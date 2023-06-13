@@ -8,4 +8,10 @@
 /* Programmable Interval Timer.                                              */
 /*****************************************************************************/
 
-/* Add your code here */ 
+#include "pit.h"
+
+PIT::interval(int us){
+    _us = us;
+
+    // TODO: actually set the time in the PIT
+}
