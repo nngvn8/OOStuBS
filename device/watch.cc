@@ -17,6 +17,7 @@
 // For debugging
 #include "cgastr.h"
 int counter = 0;
+int y =0;
 
 void Watch::windup(){
     plugbox.assign(plugbox.timer, *this);
@@ -30,6 +31,8 @@ bool Watch::prologue(){
 
 void Watch::epilogue(){
     if (counter == 20) {
+        cga.setpos(0, y);
+        y++;
         cga << "Timer interrupted!" << CGA_Stream::endl;
         counter = 0;
     }else{

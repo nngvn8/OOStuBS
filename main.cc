@@ -11,6 +11,7 @@
 #include "thread/scheduler.h"
 #include "thread/threads.h"
 #include "device/watch.h"
+#include "guard/secure.h"
 
 // Objects used everywhere => make them global
 CPU cpu;
@@ -43,7 +44,13 @@ int main() {
     // Testing the watch class
     Watch watch{50000}; // close to maximum with 1/20 of a second
     watch.windup();
-    while(1);
+    while(1){
+        {
+            Secure section; // guard enter aka setting it unavailable
+            cga.setpos(35, 11);
+            cga << "Hello World!" << CGA_Stream::inst_print;
+        }
+    };
 
     // Testing the threads
     scheduler.ready(thread1);

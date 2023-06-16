@@ -40,6 +40,7 @@ void Guard::leave(){
 void Guard::relay(Gate* item){
     if (this->avail()) {
         {
+            //TODO do we need the secure section? Interrupts are disabled anyways i think !?
             Secure section;
             cpu.enable_int();
             item->epilogue();

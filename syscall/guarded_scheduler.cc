@@ -7,5 +7,31 @@
 /*---------------------------------------------------------------------------*/
 /* Implements the system-call interface to the Scheduler.                    */
 /*****************************************************************************/
+#include "guarded_scheduler.h"
+#include "thread.h"
+#include "../guard/secure.h"
 
-/* Add your code here */ 
+void Guarded_Scheduler::ready (Thread& that){
+    Thread* t_ptr = &that;
+    {Secure section;
+        this->Scheduler::ready (*(Entrant*)(t_ptr));
+    }
+}
+void Guarded_Scheduler::exit (){
+    {Secure section;
+        this->Scheduler::exit();
+
+    }
+}
+void Guarded_Scheduler::kill (Thread& that){
+    Thread* t_ptr = &that;
+    {Secure section;
+        this->Scheduler::kill(*(Entrant*)(t_ptr));
+
+    }
+}
+void Guarded_Scheduler::resume (){
+    {Secure section;
+        this->Scheduler::resume();
+    }
+}
