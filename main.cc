@@ -12,6 +12,7 @@
 #include "thread/threads.h"
 #include "device/watch.h"
 #include "guard/secure.h"
+#include "syscall/guarded_scheduler.h"
 
 // Objects used everywhere => make them global
 CPU cpu;
@@ -23,6 +24,7 @@ Panic global_panic{"Error?: Gate not initialized, Panic Obejct launched, see mai
 Guard guard;
 Dispatcher dispatcher;
 Scheduler scheduler;
+Guarded_Scheduler guarded_scheduler;
 
 long stack[4096]; // the one global stack
 #define COROUTINE_TOS_ONE 1024
@@ -30,10 +32,10 @@ long stack[4096]; // the one global stack
 #define COROUTINE_TOS_THREE 3072
 #define COROUTINE_TOS_FOUR 4096
 
-Thread1 thread1(&stack[COROUTINE_TOS_ONE]);
-Thread2 thread2(&stack[COROUTINE_TOS_TWO]);
-Thread3 thread3(&stack[COROUTINE_TOS_THREE]);
-Thread4 thread4(&stack[COROUTINE_TOS_FOUR]);
+Thread1 thread1(&stack[COROUTINE_TOS_ONE], 100000000);
+Thread2 thread2(&stack[COROUTINE_TOS_TWO],100000000);
+Thread3 thread3(&stack[COROUTINE_TOS_THREE],100000000);
+Thread4 thread4(&stack[COROUTINE_TOS_FOUR],100000000);
 
 int main() {
     cpu.enable_int();
@@ -42,23 +44,20 @@ int main() {
     cga.clear_screen();
 
     // Testing the watch class
-    Watch watch{50000}; // close to maximum with 1/20 of a second
-    watch.windup();
-    while(1){
-        {
-            Secure section; // guard enter aka setting it unavailable
-            cga.setpos(35, 11);
-            cga << "Hello World!" << CGA_Stream::inst_print;
-        }
-    };
+    //Watch watch{50000}; // close to maximum with 1/20 of a second
+    //watch.windup();
 
     // Testing the threads
-    scheduler.ready(thread1);
-    scheduler.ready(thread2);
-    scheduler.ready(thread3);
-    scheduler.ready(thread4);
+    guarded_scheduler.ready(thread1);
+    guarded_scheduler.ready(thread2);
+    guarded_scheduler.ready(thread3);
+    guarded_scheduler.ready(thread4);
 
-    scheduler.schedule();
+    guarded_scheduler.schedule();
+    while(1){
+
+
+    };
 
     return 0;
 }

@@ -13,12 +13,13 @@
 
 #include "thread/coroutine.h"
 #include "thread/entrant.h"
+#include "syscall/thread.h"
 
 /// CURRENTLY DIRECTLY DERIVES FROM COROUTINE
-class Application : public Entrant {
+class Application : public Thread {
 private:
 public:
-    Application(void* tos) : Entrant(tos){
+    Application(void* tos) : Thread(tos){
         //TODO warum kann man das nicht einfach so in den Konstruktr schreiben?
 
     } /// might not be inlined later on (explicit only because single argument)

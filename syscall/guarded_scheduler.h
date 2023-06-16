@@ -24,10 +24,11 @@ public:
     void exit ();
     void kill (Thread& that);
     void resume ();
+    void schedule();
 
 
 };
 
-//Guarded_Scheduler guarded_scheduler;
+extern Guarded_Scheduler guarded_scheduler;
 
 #endif
