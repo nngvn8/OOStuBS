@@ -21,7 +21,7 @@ public:
     Stringbuffer(){}
     Stringbuffer(const Stringbuffer &copy) = delete; // prevent copying
 
-    char string[8]; // seems ok
+    char string[32]; // seems ok
     int index = 0;
     void put(char c);
     virtual void flush() = 0;

@@ -10,24 +10,22 @@ void Thread1::action() {
 
 
     while(true) {
-        cga << this->name << ' '<< CGA_Stream::endl;
 
-        int ctr = this->wait_timer;
-            /*while (ctr) {
-                ctr--;
-            }*/
+        cga << this->name << ' '<< CGA_Stream::endl;
+        int ctr = 5000000;
+        while (ctr) {
+            ctr--;
+        }
             //guarded_scheduler.resume();
         }
 }
 
 void Thread2::action() {
 
-
     while(true) {
-        //cpu.disable_int();
         cga.clear_screen();
-        //cpu.enable_int();
-
+        //cga << CGA_Stream::inst_print;
+        //cga << "Das was oben ist war noch im Buffer" << CGA_Stream::endl;
         cga << this->name << ' ' << CGA_Stream::endl;
         int ctr = this->wait_timer;
         while (ctr) {
