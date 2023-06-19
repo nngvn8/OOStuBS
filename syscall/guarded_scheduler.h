@@ -24,7 +24,7 @@ public:
     void exit ();
     void kill (Thread& that);
     void resume ();
-    void schedule();
+    //void schedule();
 
 
 };

@@ -35,9 +35,10 @@ void Guarded_Scheduler::resume (){
         this->Scheduler::resume();
     }
 }
-//TODO do we need this?
+/*
 void Guarded_Scheduler::schedule(){
     {Secure section;
         this->Scheduler::schedule();
     }
 }
+ */

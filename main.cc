@@ -32,32 +32,38 @@ long stack[4096]; // the one global stack
 #define COROUTINE_TOS_THREE 3072
 #define COROUTINE_TOS_FOUR 4096
 
-Thread1 thread1(&stack[COROUTINE_TOS_ONE], 100000000);
-Thread2 thread2(&stack[COROUTINE_TOS_TWO],100000000);
-Thread3 thread3(&stack[COROUTINE_TOS_THREE],100000000);
-Thread4 thread4(&stack[COROUTINE_TOS_FOUR],100000000);
+Thread1 thread1(&stack[COROUTINE_TOS_ONE], 400000000);
+Thread2 thread2(&stack[COROUTINE_TOS_TWO],400000000);
+Thread3 thread3(&stack[COROUTINE_TOS_THREE],25000000);
+Thread4 thread4(&stack[COROUTINE_TOS_FOUR],25000000);
 
 int main() {
+    Secure section;
     cpu.enable_int();
     keyboard.plugin();
 
     cga.clear_screen();
 
     // Testing the watch class
-    //Watch watch{50000}; // close to maximum with 1/20 of a second
-    //watch.windup();
+    Watch watch{50000}; // close to maximum with 1/20 of a second
+    watch.windup();
+
 
     // Testing the threads
-    guarded_scheduler.ready(thread1);
-    guarded_scheduler.ready(thread2);
-    guarded_scheduler.ready(thread3);
-    guarded_scheduler.ready(thread4);
+
+    guarded_scheduler.Scheduler::ready(thread1);
+    guarded_scheduler.Scheduler::ready(thread2);
+    //guarded_scheduler.Scheduler::ready(thread3);
+    //guarded_scheduler.Scheduler::ready(thread4);
+
 
     guarded_scheduler.schedule();
+
     while(1){
 
 
     };
 
     return 0;
+
 }

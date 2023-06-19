@@ -15,10 +15,12 @@
 #include "../thread/kickoff.h"
 #include "coroutine.h"
 #include "../device/panic.h"
+#include "../guard/guard.h"
 
 
 /// "realizes jump from C to C++ level"?
 void kickoff(void* dummy1, void* dummy2, void* dummy3, void* dummy4, void* dummy5, void* dummy6, Coroutine* object) {
+    guard.leave();
     object->action();
 
     // make sure the kickoff function can never return to the invalid value
