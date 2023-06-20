@@ -12,24 +12,21 @@
 #include "../guard/secure.h"
 
 void Guarded_Scheduler::ready (Thread& that){
-    Thread* t_ptr = &that;
-    {Secure section;
-        this->Scheduler::ready (*(Entrant*)(t_ptr));
-    }
+    Secure section;
+    Scheduler::ready(that);
 }
+
 void Guarded_Scheduler::exit (){
-    {Secure section;
-        this->Scheduler::exit();
-    }
+    Secure section;
+    Scheduler::exit();
 }
+
 void Guarded_Scheduler::kill (Thread& that){
-    Thread* t_ptr = &that;
-    {Secure section;
-        this->Scheduler::kill(*(Entrant*)(t_ptr));
-    }
+    Secure section;
+    Scheduler::kill(that);
 }
+
 void Guarded_Scheduler::resume (){
-    {Secure section;
-        this->Scheduler::resume();
-    }
+    Secure section;
+    Scheduler::resume();
 }

@@ -13,18 +13,23 @@
 
 
 
-class Thread : public Application {
+class UserThread : public Application {
 private:
-    char* name;
     int wait_timer;
-    void* action_pointer(*Thread);
-
+    void (*action_pointer) (UserThread*) ;
 public:
-    Thread(void* tos, int wait_timer, char* name, void* action_pointer) :
-        Application(tos), wait_timer(wait_timer), name(name), action_pointer(action_pointer){}
+    char* name;
+
+    UserThread(void* tos, int wait_timer, char* name, void (*action_pointer) (UserThread*) ) :
+        Application(tos), wait_timer(wait_timer), name(name) {
+        this->action_pointer = action_pointer;
+    }
 
     void action(){
-        action_pointer(this);
+        while (true) {
+            action_pointer(this);
+            for (int i = 0; i < wait_timer; i++);
+        }
     }
 };
 

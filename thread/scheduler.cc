@@ -31,7 +31,7 @@ void Scheduler::exit() {
     this->schedule();
 }
 
-void Scheduler::kill(Entrant&1 that) {
+void Scheduler::kill(Entrant& that) {
     this->rdy_list.remove((Chain*)&that);
 }
 
