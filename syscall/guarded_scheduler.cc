@@ -20,14 +20,12 @@ void Guarded_Scheduler::ready (Thread& that){
 void Guarded_Scheduler::exit (){
     {Secure section;
         this->Scheduler::exit();
-
     }
 }
 void Guarded_Scheduler::kill (Thread& that){
     Thread* t_ptr = &that;
     {Secure section;
         this->Scheduler::kill(*(Entrant*)(t_ptr));
-
     }
 }
 void Guarded_Scheduler::resume (){
@@ -35,10 +33,3 @@ void Guarded_Scheduler::resume (){
         this->Scheduler::resume();
     }
 }
-/*
-void Guarded_Scheduler::schedule(){
-    {Secure section;
-        this->Scheduler::schedule();
-    }
-}
- */

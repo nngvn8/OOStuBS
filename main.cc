@@ -57,7 +57,7 @@ int main() {
     //guarded_scheduler.Scheduler::ready(thread4);
 
 
-    guarded_scheduler.schedule();
+    guarded_scheduler.Scheduler::schedule();
 
     while(1){
 
