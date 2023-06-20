@@ -32,10 +32,14 @@ long stack[4096]; // the one global stack
 #define COROUTINE_TOS_THREE 3072
 #define COROUTINE_TOS_FOUR 4096
 
-Thread1 thread1(&stack[COROUTINE_TOS_ONE], 400000000);
-Thread2 thread2(&stack[COROUTINE_TOS_TWO],400000000);
-Thread3 thread3(&stack[COROUTINE_TOS_THREE],25000000);
-Thread4 thread4(&stack[COROUTINE_TOS_FOUR],25000000);
+void printName(Thread* t){
+    cga << t->name << CGA_Stream::inst_print();
+}
+
+Thread thread1(&stack[COROUTINE_TOS_ONE], 400000000, "a", &printName);
+Thread thread2(&stack[COROUTINE_TOS_TWO], 400000000, "b", &printName);
+Thread thread3(&stack[COROUTINE_TOS_THREE], 25000000, "c", &printName);
+Thread thread4(&stack[COROUTINE_TOS_FOUR], 25000000, "d", &printName);
 
 int main() {
     Secure section;
