@@ -42,4 +42,3 @@ void Scheduler::resume() {
         this->schedule();
     }
 }
-

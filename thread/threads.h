@@ -13,45 +13,24 @@
 
 
 
-class Thread1 : public Application {
+class UserThread : public Application {
 private:
-    char* name = "Thread 1";
-
+    int wait_timer;
+    void (*action_pointer) (UserThread*) ;
 public:
-    Thread1(void* tos): Application(tos){}
-    void action();
+    char* name;
 
+    UserThread(void* tos, int wait_timer, char* name, void (*action_pointer) (UserThread*) ) :
+        Application(tos), wait_timer(wait_timer), name(name) {
+        this->action_pointer = action_pointer;
+    }
+
+    void action(){
+        while (true) {
+            action_pointer(this);
+            for (int i = 0; i < wait_timer; i++);
+        }
+    }
 };
-
-class Thread2: public Application {
-private:
-    char* name = "Thread 2";
-public:
-    Thread2(void* tos): Application(tos){}
-    void action();
-};
-
-class Thread3: public Application {
-private:
-    char* name = "Thread 3";
-public:
-    Thread3(void* tos): Application(tos){}
-    void action();
-};
-
-class Thread4: public Application {
-private:
-    char* name = "Thread 4";
-public:
-    Thread4(void* tos): Application(tos){}
-    void action();
-};
-
-extern Thread1 thread1;
-extern Thread2 thread2;
-extern Thread3 thread3;
-extern Thread4 thread4;
-
-
 
 #endif //OOSTUBBS_MBJ_THREADS_H

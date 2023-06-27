@@ -27,6 +27,7 @@ public:
 
     void enter() {
         if (!available) {
+
             cga << "enter called although already not \"available\"" << CGA_Stream::endl;
             global_panic.prologue();
         }
