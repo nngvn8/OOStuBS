@@ -11,15 +11,12 @@
 #ifndef __thread_include__
 #define __thread_include__
 
-#include "../thread/entrant.h"
+#include "../thread/customer.h"
 
-/* Add your code here */
- 
-class Thread: public Entrant
 
-{
+class Thread: public Customer {
 public:
-    Thread (void* tos): Entrant(tos){}
+    using Customer::Customer;
 	Thread(const Thread &copy) = delete; // prevent copying
 /* Add your code here */ 
  

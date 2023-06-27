@@ -11,14 +11,13 @@
 
 #ifndef __organizer_include__
 #define __organizer_include__
-/* Add your code here */ 
-class Organizer
-/* Add your code here */ 
+
+#include "scheduler.h"
+class Organizer : public Scheduler
 {
 public:
 	Organizer(const Organizer &copy) = delete; // prevent copying
 	Organizer() {}
-/* Add your code here */ 
 };
 
 #endif

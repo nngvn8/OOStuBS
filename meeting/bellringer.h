@@ -13,15 +13,13 @@
 #ifndef __Bellringer_include__
 #define __Bellringer_include__
 
-/* Add your code here */ 
+#include "../object/list.h"
 
-class Bellringer
-/* Add your code here */ 
+class Bellringer : public List
 {
 public:
 	Bellringer(const Bellringer &copy) = delete; // prevent copying
 	Bellringer() {}
-/* Add your code here */ 
 };
 
 #endif

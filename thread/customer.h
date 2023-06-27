@@ -12,13 +12,11 @@
 #ifndef __customer_include__
 #define __customer_include__
 
-/* Add your code here */ 
-
-class Customer
-/* Add your code here */ 
-{
+#include "entrant.h"
+class Customer : public Entrant {
 public:
 	Customer (const Customer &copy) = delete; // prevent copying
+    using Entrant::Entrant;
 private:
 /* Add your code here */ 
 };

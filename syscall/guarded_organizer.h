@@ -12,8 +12,8 @@
 #ifndef __Guarded_Organizer_include__
 #define __Guarded_Organizer_include__
 
-#include "syscall/thread.h"
-#include "thread/organizer.h"
+#include "../syscall/thread.h"
+#include "../   thread/organizer.h"
 
 class Guarded_Organizer : public Organizer {
 public:

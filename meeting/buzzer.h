@@ -12,14 +12,14 @@
 #ifndef __Buzzer_include__
 #define __Buzzer_include__
 
-/* Add your code here */ 
+#include "waitingroom.h"
+#include "bell.h"
 
-class Buzzer
-/* Add your code here */ 
+class Buzzer : public Waitingroom, public Bell
 {
 public:
 	Buzzer(const Buzzer &copy) = delete; // prevent copying
-/* Add your code here */ 
+    Buzzer(){};
 };
 
 #endif
