@@ -37,7 +37,7 @@ bool Keyboard::prologue() {
 
         // Add to buffer, for later printing
         if (key.valid()){
-            this->prol_buf.produce(key.ascii());
+            this->prol_buf.produce(key);
         } else {
             return true;
         }
@@ -45,10 +45,10 @@ bool Keyboard::prologue() {
 }
 
 void Keyboard::epilogue() {
-    cga.setpos(0, 0); // TODO: Change to something more sensible later
-    char c = this->prol_buf.consume();
-    while(c != 0) {
-        cga << c << CGA_Stream::endl;
-        c = this->prol_buf.consume();
-    }
+    semaphore.signal();
+}
+
+Key Keyboard::getkey(){
+    semaphore.wait();
+    return this->prol_buf.consume();
 }

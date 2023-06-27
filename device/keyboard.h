@@ -19,11 +19,14 @@
 #include "cgastr.h"
 #include "utils/kb_prologue_char_buf.h"
 #include "../object/chain.h"
+#include "meeting/semaphore.h"
  
 class Keyboard : public Gate {
 private:
     Keyboard_Controller keyboard_ctr = Keyboard_Controller();
     Kb_prologue_char_buf prol_buf;
+
+    Semaphore semaphore;
 
     char* id = "keyboard";
 
@@ -35,6 +38,7 @@ public:
     void plugin();
     virtual bool prologue ();
     virtual void epilogue ();
+    Key getkey();
 
     char* getID(){return id;}
 
