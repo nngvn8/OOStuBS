@@ -14,12 +14,17 @@
 #define __Bellringer_include__
 
 #include "../object/list.h"
+#include "bell.h"
 
 class Bellringer : public List
 {
 public:
 	Bellringer(const Bellringer &copy) = delete; // prevent copying
 	Bellringer() {}
+
+    void check ();
+    void job (Bell* bell, int ticks);
+    void cancel (Bell* bell);
 };
 
 #endif

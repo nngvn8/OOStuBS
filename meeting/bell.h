@@ -13,15 +13,21 @@
 #ifndef __Bell_include__
 #define __Bell_include__
 
-/* Add your code here */ 
+#include "../object/chain.h"
 
-class Bell
-/* Add your code here */ 
-{
+class Bell : public Chain {
+private:
+    int ring_counter;
+
 public:
 	Bell(const Bell &copy) = delete; // prevent copying
 	Bell() {}
-/* Add your code here */ 
+
+    void wait(int value) { ring_counter = value; };
+    int wait() { return ring_counter; };
+    void tick() { ring_counter--;};
+    bool run_down() { return ring_counter == 0; };
+    virtual void ring() = 0;
 };
 
 #endif

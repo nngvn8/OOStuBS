@@ -13,7 +13,7 @@
 #ifndef __List_include__
 #define __List_include__
 
-#include "object/queue.h"
+#include "../object/queue.h"
 
 class List : public Queue {
 
