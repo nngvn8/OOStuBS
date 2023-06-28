@@ -26,7 +26,7 @@ void Semaphore::p() {
     }
     else {
         auto* active_customer = (Customer*)organizer.Dispatcher::active();
-        organizer.block(*active_customer, *this)
+        organizer.block(*active_customer, *this);
     }
 }
 
