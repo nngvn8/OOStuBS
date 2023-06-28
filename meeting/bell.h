@@ -25,9 +25,17 @@ public:
 
     void wait(int value) { ring_counter = value; };
     int wait() { return ring_counter; };
-    void tick() { ring_counter--;};
+    void tick() { ring_counter--; };
     bool run_down() { return ring_counter == 0; };
     virtual void ring() = 0;
+    void ring_and_next() {
+        if (ring_counter == 0) {
+            ring();
+        }
+        if (next != nullptr) {
+            ((Bell*)next)->ring_and_next();
+        }
+    }
 };
 
 #endif
