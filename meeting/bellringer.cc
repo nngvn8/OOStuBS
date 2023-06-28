@@ -25,8 +25,8 @@ void Bellringer::check () {
 }
 
 void Bellringer::job(Bell* bell, int ticks) {
-    insert_first(bell);
     bell->wait(ticks);
+    insert_first(bell);
 }
 
 void Bellringer::cancel(Bell* bell) {

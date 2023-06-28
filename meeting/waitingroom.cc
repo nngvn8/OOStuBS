@@ -9,4 +9,16 @@
 /* for a specific event.                                                     */
 /*****************************************************************************/
 
-/* Add your code here */ 
+#include "waitingroom.h"
+#include "../thread/organizer.h"
+
+Waitingroom::~Waitingroom() {
+   while (head) {
+       auto* customer = (Customer*)dequeue(); // since all members in the waitingroom are Customers it is auto = Customer
+       organizer.wakeup(*customer);
+   }
+}
+
+void Waitingroom::remove(Customer* customer) {
+    Queue::remove(customer); // Customer is indirectly derived from Chain
+}

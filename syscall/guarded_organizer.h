@@ -13,13 +13,16 @@
 #define __Guarded_Organizer_include__
 
 #include "../syscall/thread.h"
-#include "../   thread/organizer.h"
+#include "../thread/organizer.h"
 
 class Guarded_Organizer : public Organizer {
 public:
 	Guarded_Organizer() {}
 	Guarded_Organizer(const Guarded_Organizer &copy) = delete; // prevent copying
-/* Add your code here */ 
+
+    void block(Customer& customer, Waitingroom& waitingroom);
+    void wakeup(Customer& customer);
+    void kill(Customer& that);
 };
 
 #endif

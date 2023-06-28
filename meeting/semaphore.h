@@ -14,10 +14,17 @@
 
 #include "waitingroom.h"
 
-class Semaphore : public Waitingroom
-{
+class Semaphore : public Waitingroom {
+private:
+    int semaphore_val;
 public:
 	Semaphore(const Semaphore &copy) = delete; // prevent copying
+
+    Semaphore(int c);
+    void p();
+    void v();
+    void wait();
+    void signal();
 };
 
 #endif

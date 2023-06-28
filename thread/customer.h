@@ -13,12 +13,25 @@
 #define __customer_include__
 
 #include "entrant.h"
+#include "meeting/waitingroom.h"
+
+class Waitingroom; // TODO remove this (currently does not work without)
+
 class Customer : public Entrant {
 public:
 	Customer (const Customer &copy) = delete; // prevent copying
+    /// constructor taking @parameter tos
     using Entrant::Entrant;
+
+    void waiting_in(Waitingroom* w) { waitingroom = w; }
+    Waitingroom* waiting_in () {
+        /* TODO return 0 when not waiting for any event (bestcase: waitingroom == nullptr iff not waiting for event)
+        otherwise case distinction */
+        return waitingroom;
+    }
+
 private:
-/* Add your code here */ 
+    Waitingroom* waitingroom;
 };
 
 #endif

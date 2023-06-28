@@ -13,6 +13,7 @@
 #include "device/watch.h"
 #include "guard/secure.h"
 #include "syscall/guarded_scheduler.h"
+#include "thread/organizer.h"
 
 // Objects used everywhere => make them global
 CPU cpu;
@@ -25,6 +26,7 @@ Guard guard;
 Dispatcher dispatcher;
 Scheduler scheduler;
 Guarded_Scheduler guarded_scheduler;
+Organizer organizer;
 
 long stack[4096]; // the one global stack
 #define COROUTINE_TOS_ONE 1024

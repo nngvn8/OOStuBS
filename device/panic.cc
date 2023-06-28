@@ -18,3 +18,9 @@ bool Panic::prologue() {
     cpu.halt();
     return true;
 }
+
+bool Panic::prologue(char* message) {
+    cga << message << CGA_Stream::endl;
+    cpu.halt();
+    return true;
+}

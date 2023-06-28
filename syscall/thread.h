@@ -18,8 +18,6 @@ class Thread: public Customer {
 public:
     using Customer::Customer;
 	Thread(const Thread &copy) = delete; // prevent copying
-/* Add your code here */ 
- 
 };
 
 #endif
