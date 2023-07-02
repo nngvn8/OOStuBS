@@ -40,9 +40,20 @@ void Semaphore::v() {
 }
 
 void Semaphore::wait() {
-
+    if (semaphore_val) {
+        semaphore_val--;
+    }
+    else {
+        auto* active_customer = (Customer*)organizer.Dispatcher::active();
+        organizer.block(*active_customer, *this);
+    }
 }
 
-void signal() {
-
+void Semaphore::signal() {
+    if (head) {
+        organizer.wakeup(*(Customer*)head);
+    }
+    else {
+        semaphore_val++;
+    }
 }

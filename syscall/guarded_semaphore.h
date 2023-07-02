@@ -17,6 +17,12 @@
 class Guarded_Semaphore : public Semaphore {
 public:
 	Guarded_Semaphore(const Guarded_Semaphore &copy) = delete; // prevent copying
+    using Semaphore::Semaphore;
+
+    void p();
+    void v();
+    void wait();
+    void signal();
 };
 
 #endif
