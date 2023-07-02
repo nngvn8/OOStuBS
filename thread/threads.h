@@ -19,9 +19,10 @@ private:
     void (*action_pointer) (UserThread*) ;
 public:
     char* name;
+    char* msg;
 
-    UserThread(void* tos, int wait_timer, char* name, void (*action_pointer) (UserThread*) ) :
-        Application(tos), wait_timer(wait_timer), name(name) {
+    UserThread(void* tos, int wait_timer, char* name, char* msg, void (*action_pointer) (UserThread*) ) :
+        Application(tos), wait_timer(wait_timer), name(name), msg(msg) {
         this->action_pointer = action_pointer;
     }
 
@@ -31,6 +32,10 @@ public:
             for (int i = 0; i < wait_timer; i++);
         }
     }
+
+    char* getName() { return name; };
+
+    char* getMsg() { return msg; };
 };
 
 #endif //OOSTUBBS_MBJ_THREADS_H

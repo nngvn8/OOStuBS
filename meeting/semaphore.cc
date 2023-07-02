@@ -12,6 +12,7 @@
 #include "semaphore.h"
 #include "../device/panic.h"
 #include "../thread/organizer.h"
+#include "../thread/threads.h"
 
 
 Semaphore::Semaphore(int c) : semaphore_val(c) {
@@ -23,10 +24,18 @@ Semaphore::Semaphore(int c) : semaphore_val(c) {
 void Semaphore::p() {
     if (semaphore_val) {
         semaphore_val--;
+        auto* active_customer = (Customer*)organizer.active();
+        cga << "Active Customer (semaphore_val > 0): " << active_customer << CGA_Stream::endl;
     }
     else {
-        auto* active_customer = (Customer*)organizer.Dispatcher::active();
+        auto* active_customer = (Customer*)organizer.active();
+//        cga << "Active Customer Before: " << organizer.Dispatcher::active() << CGA_Stream::endl;
+        cga << "Active Customer (semaphore_val = 0, BEFORE Block): " << active_customer << CGA_Stream::endl;
         organizer.block(*active_customer, *this);
+//        cga << ((UserThread*)active_customer)->getName() << CGA_Stream::endl;
+//        ((UserThread*)active_customer)->getName();
+        cga << "Active Customer (semaphore_val = 0, BEFORE Block): " << active_customer << CGA_Stream::endl;
+        cga << "Waiting_in after block: " << active_customer->waiting_in() << CGA_Stream::endl;
     }
 }
 

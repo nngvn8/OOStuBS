@@ -32,7 +32,12 @@ void Scheduler::exit() {
 }
 
 void Scheduler::kill(Entrant& that) {
-    this->rdy_list.remove((Chain*)&that);
+    if (&that == active()) {
+        this->exit();
+    }
+    else {
+        this->rdy_list.remove((Chain*)&that);
+    }
 }
 
 void Scheduler::resume() {

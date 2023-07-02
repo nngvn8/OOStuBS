@@ -32,16 +32,16 @@ bool Watch::prologue(){
 }
 
 void Watch::epilogue(){
-    if (counter == 60) {
+//    if (counter == 60) {
         //cga.setpos(0, y);
-        y++;
+//        y++;
         //cga << "Timer interrupted!" << CGA_Stream::endl;
-        counter = 0;
+//        counter = 0;
 
         guarded_scheduler.Scheduler::resume();
 
-    }else{
-        counter++;
-    }
+//    }else{
+//        counter++;
+//    }
 
 }

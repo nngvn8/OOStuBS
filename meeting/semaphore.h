@@ -15,7 +15,7 @@
 #include "waitingroom.h"
 
 class Semaphore : public Waitingroom {
-private:
+protected:
     int semaphore_val;
 public:
 	Semaphore(const Semaphore &copy) = delete; // prevent copying

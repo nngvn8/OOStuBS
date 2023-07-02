@@ -13,6 +13,7 @@
 #define __Guarded_Semaphore_include__
 
 #include "../meeting/semaphore.h"
+#include "../guard/secure.h"
 
 class Guarded_Semaphore : public Semaphore {
 public:
@@ -23,6 +24,7 @@ public:
     void v();
     void wait();
     void signal();
+    int get_val() {Secure section; return semaphore_val;}
 };
 
 #endif

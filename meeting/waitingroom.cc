@@ -21,4 +21,5 @@ Waitingroom::~Waitingroom() {
 
 void Waitingroom::remove(Customer* customer) {
     Queue::remove(customer); // Customer is indirectly derived from Chain
+    customer->waiting_in(nullptr);
 }
