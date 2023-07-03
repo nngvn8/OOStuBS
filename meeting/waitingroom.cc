@@ -10,16 +10,17 @@
 /*****************************************************************************/
 
 #include "waitingroom.h"
-#include "../thread/organizer.h"
+#include "../syscall/guarded_organizer.h"
 
 Waitingroom::~Waitingroom() {
    while (head) {
        auto* customer = (Customer*)dequeue(); // since all members in the waitingroom are Customers it is auto = Customer
-       organizer.wakeup(*customer);
+       guarded_organizer.wakeup(*customer);
    }
 }
 
 void Waitingroom::remove(Customer* customer) {
-    Queue::remove(customer); // Customer is indirectly derived from Chain
+    Queue::remove((Chain*)(Entrant*)customer); // Customer is indirectly derived from Chain
+    //set waiting room in removed item to NULLPTR
     customer->waiting_in(nullptr);
 }

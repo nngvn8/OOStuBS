@@ -14,6 +14,8 @@
 
 #include "entrant.h"
 #include "meeting/waitingroom.h"
+#include "../device/cgastr.h"
+#include "../device/panic.h"
 
 
 class Customer : public Entrant {
@@ -25,13 +27,15 @@ public:
     using Entrant::Entrant;
 
     void waiting_in(Waitingroom* w) {
-        if (waitingroom) {
-            if (waitingroom == w) {
-                return;
-            }
-            else {
-                w->remove(this);
-            }
+        if (w == nullptr) {
+            this->waitingroom = nullptr;
+            return;
+        }
+        else if (w == waitingroom) {
+            return;
+        }
+        else if (waitingroom) {
+            w->remove(this);
         }
         waitingroom = w;
         w->enqueue(this);

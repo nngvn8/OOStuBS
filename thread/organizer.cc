@@ -13,17 +13,18 @@
 
 void Organizer::block(Customer& customer, Waitingroom& waitingroom) {
     /// Order?
-    Scheduler::kill(customer);
     customer.waiting_in(&waitingroom);
+    Scheduler::kill(customer);
     Scheduler::schedule();
 }
 
 void Organizer::wakeup(Customer& customer) {
     /// Order?
     /// merge lines two and three?
-    Scheduler::ready(customer);
     Waitingroom* waitingroom = customer.waiting_in();
     waitingroom->remove(&customer);
+    Scheduler::ready((Entrant&)customer);
+
 }
 
 void Organizer::kill(Customer& that) {

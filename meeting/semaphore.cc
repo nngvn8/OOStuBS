@@ -11,7 +11,7 @@
 
 #include "semaphore.h"
 #include "../device/panic.h"
-#include "../thread/organizer.h"
+#include "../syscall/guarded_organizer.h"
 #include "../thread/threads.h"
 
 
@@ -24,24 +24,16 @@ Semaphore::Semaphore(int c) : semaphore_val(c) {
 void Semaphore::p() {
     if (semaphore_val) {
         semaphore_val--;
-        auto* active_customer = (Customer*)organizer.active();
-        cga << "Active Customer (semaphore_val > 0): " << active_customer << CGA_Stream::endl;
     }
     else {
-        auto* active_customer = (Customer*)organizer.active();
-//        cga << "Active Customer Before: " << organizer.Dispatcher::active() << CGA_Stream::endl;
-        cga << "Active Customer (semaphore_val = 0, BEFORE Block): " << active_customer << CGA_Stream::endl;
-        organizer.block(*active_customer, *this);
-//        cga << ((UserThread*)active_customer)->getName() << CGA_Stream::endl;
-//        ((UserThread*)active_customer)->getName();
-        cga << "Active Customer (semaphore_val = 0, BEFORE Block): " << active_customer << CGA_Stream::endl;
-        cga << "Waiting_in after block: " << active_customer->waiting_in() << CGA_Stream::endl;
+        auto* active_customer = (Customer*)guarded_organizer.active();
+        guarded_organizer.block(*active_customer, *this);
     }
 }
 
 void Semaphore::v() {
     if (head) {
-        organizer.wakeup(*(Customer*)head);
+        guarded_organizer.wakeup(*(Customer*)head);
     }
     else {
         semaphore_val++;
@@ -53,14 +45,14 @@ void Semaphore::wait() {
         semaphore_val--;
     }
     else {
-        auto* active_customer = (Customer*)organizer.Dispatcher::active();
-        organizer.block(*active_customer, *this);
+        auto* active_customer = (Customer*)guarded_organizer.Dispatcher::active();
+        guarded_organizer.block(*active_customer, *this);
     }
 }
 
 void Semaphore::signal() {
     if (head) {
-        organizer.wakeup(*(Customer*)head);
+        guarded_organizer.wakeup(*(Customer*)head);
     }
     else {
         semaphore_val++;

@@ -16,6 +16,7 @@
 #include "thread/organizer.h"
 #include "meeting/semaphore.h"
 #include "syscall/guarded_semaphore.h"
+#include "syscall/guarded_organizer.h"
 
 // Objects used everywhere => make them global
 CPU cpu;
@@ -28,7 +29,7 @@ Guard guard;
 Dispatcher dispatcher;
 Scheduler scheduler;
 Guarded_Scheduler guarded_scheduler;
-Organizer organizer;
+Guarded_Organizer guarded_organizer;
 Guarded_Semaphore printing_semaph(1);
 
 long stack[4096]; // the one global stack
@@ -39,17 +40,16 @@ long stack[4096]; // the one global stack
 
 void printName(UserThread* t){
     int i = 0;
-    int slowing_factor = 2000000000;
+    int slowing_factor = 20000000;
     while (true) {
         cga << "Current Semaphore Value 1: " << printing_semaph.get_val() << CGA_Stream::endl;
         printing_semaph.p();
         while (t->msg[i] != '\0') {
-//                cga << t->msg[i] << CGA_Stream::inst_print;
+                cga << t->msg[i] << CGA_Stream::inst_print;
             i++;
             for (int j=0; j < slowing_factor; j++);
-            cga << "Current Semaphore Value 2: " <<printing_semaph.get_val() << CGA_Stream::endl;
-            cga << t->msg[0] << t->msg[1] << t->msg[2] << ": " << "Waitingroom: " << t->waiting_in() << CGA_Stream::endl;
         }
+
         i = 0;
         printing_semaph.v();
     }
@@ -80,13 +80,13 @@ int main() {
 
     // Testing the threads
 
-    guarded_scheduler.Scheduler::ready(thread1);
-    guarded_scheduler.Scheduler::ready(thread2);
-    //guarded_scheduler.Scheduler::ready(thread3);
-    //guarded_scheduler.Scheduler::ready(thread4);
+    guarded_organizer.Scheduler::ready(thread1);
+    guarded_organizer.Scheduler::ready(thread2);
+    //guarded_organizer.Scheduler::ready(thread3);
+    //guarded_organizer.Scheduler::ready(thread4);
 
 
-    guarded_scheduler.Scheduler::schedule();
+    guarded_organizer.Scheduler::schedule();
 
     while(1){
 

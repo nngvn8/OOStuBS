@@ -25,4 +25,6 @@ public:
     void kill(Customer& that);
 };
 
+extern Guarded_Organizer guarded_organizer;
+
 #endif
