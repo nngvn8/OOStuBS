@@ -34,7 +34,7 @@ bool Watch::prologue(){
 }
 
 void Watch::epilogue(){
-    if (counter ==20) {
+    if (counter ==1) {
         //cga.setpos(0, y);
         //y++;
         cga << "Timer interrupted!" << CGA_Stream::endl;

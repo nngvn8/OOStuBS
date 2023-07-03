@@ -27,6 +27,7 @@ Dispatcher dispatcher;
 Scheduler scheduler;
 Guarded_Scheduler guarded_scheduler;
 Bellringer bellringer;
+Watch watch{50000};
 
 long stack[4096]; // the one global stack
 #define COROUTINE_TOS_ONE 1024
@@ -52,7 +53,7 @@ int main() {
 
 
     // Testing the watch class
-    Watch watch{50000}; // close to maximum with 1/20 of a second
+    // close to maximum with 1/20 of a second
     watch.windup();
 
 

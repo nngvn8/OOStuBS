@@ -20,14 +20,14 @@
 class Bell: public Chain
 /* Add your code here */
 {
-private:
+protected:
     int internal_counter;
 
 public:
 
     Bell(const Bell &copy) = delete; // prevent copying
     Bell() {
-        int internal_counter = 0;
+        this->internal_counter = 0;
     }
 
     void wait (int value){
@@ -43,7 +43,7 @@ public:
     bool run_down(){
         return this->internal_counter == 0;
     }
-    //virtual void ring () = 0;
+    virtual void ring () = 0;
 
 };
 
