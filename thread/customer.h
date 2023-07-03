@@ -15,7 +15,6 @@
 #include "entrant.h"
 #include "meeting/waitingroom.h"
 
-class Waitingroom; // TODO remove this (currently does not work without)
 
 class Customer : public Entrant {
 private:
@@ -25,7 +24,19 @@ public:
     /// constructor taking @parameter tos
     using Entrant::Entrant;
 
-    void waiting_in(Waitingroom* w) { waitingroom = w; }
+    void waiting_in(Waitingroom* w) {
+        if (waitingroom) {
+            if (waitingroom == w) {
+                return;
+            }
+            else {
+                w->remove(this);
+            }
+        }
+        waitingroom = w;
+        w->enqueue(this);
+    }
+
     Waitingroom* waiting_in() {
         /// nullptr return with: setting it initially to nullptr and setting it to nullptr in Waitingroom::remove()
         /// -> thereby value should always be consistent
