@@ -17,6 +17,7 @@
 // For debugging
 #include "cgastr.h"
 #include "../syscall/guarded_scheduler.h"
+#include "../syscall/guarded_organizer.h"
 
 int counter = 0;
 int y =0;
@@ -38,7 +39,9 @@ void Watch::epilogue(){
         //cga << "Timer interrupted!" << CGA_Stream::endl;
 //        counter = 0;
 
-        guarded_scheduler.Scheduler::resume();
+        guarded_organizer.Scheduler::resume();
+
+        //guarded_scheduler.Scheduler::resume();
 
 //    }else{
 //        counter++;

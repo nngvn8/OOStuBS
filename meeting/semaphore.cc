@@ -32,6 +32,7 @@ void Semaphore::p() {
 }
 
 void Semaphore::v() {
+
     if (head) {
         guarded_organizer.wakeup(*(Customer*)head);
     }

@@ -40,15 +40,15 @@ long stack[4096]; // the one global stack
 
 void printName(UserThread* t){
     int i = 0;
-    int slowing_factor = 20000000;
+    int slowing_factor = 6000000;
     while (true) {
-        cga << "Current Semaphore Value 1: " << printing_semaph.get_val() << CGA_Stream::endl;
         printing_semaph.p();
         while (t->msg[i] != '\0') {
                 cga << t->msg[i] << CGA_Stream::inst_print;
             i++;
             for (int j=0; j < slowing_factor; j++);
         }
+        cga << '\n' << CGA_Stream::inst_print;
 
         i = 0;
         printing_semaph.v();
@@ -57,8 +57,8 @@ void printName(UserThread* t){
 }
 
 
-UserThread thread1(&stack[COROUTINE_TOS_ONE], 100, "ONE", "ONE: Hello I am thread one! I have a very cool and very long string to that is supposed not to be interrupted by another stupid thread. :ONE\0", &printName);
-UserThread thread2(&stack[COROUTINE_TOS_TWO], 100, "TWO", "TWO: Hello I am thread two! I have a very cool and very long string to that is supposed not to be interrupted by another stupid thread. :TWO\0", &printName);
+UserThread thread1(&stack[COROUTINE_TOS_ONE], 100, "ONE", "ONE: Hello I am thread one,ONE: \0", &printName);
+UserThread thread2(&stack[COROUTINE_TOS_TWO], 100, "TWO", "TWO: Hello I am thread two,TWO: \0", &printName);
 UserThread thread3(&stack[COROUTINE_TOS_THREE], 25000000, "c", "c", &printName);
 UserThread thread4(&stack[COROUTINE_TOS_FOUR], 25000000, "d", "d", &printName);
 

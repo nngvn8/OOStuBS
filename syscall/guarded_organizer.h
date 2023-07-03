@@ -20,9 +20,13 @@ public:
 	Guarded_Organizer() {}
 	Guarded_Organizer(const Guarded_Organizer &copy) = delete; // prevent copying
 
-    void block(Customer& customer, Waitingroom& waitingroom);
-    void wakeup(Customer& customer);
-    void kill(Customer& that);
+    //void block(Customer& customer, Waitingroom& waitingroom);
+    //void wakeup(Customer& customer);
+    //void kill(Customer& that);
+    void ready (Thread& that);
+    void exit ();
+    void kill (Thread& that);
+    void resume ();
 };
 
 extern Guarded_Organizer guarded_organizer;
