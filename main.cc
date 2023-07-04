@@ -71,20 +71,12 @@ int main() {
     keyboard.plugin();
     cga.clear_screen();
 
-//    // show address of printing_semaphore
-//    cga << "Printing_semaphore: " << &printing_semaph << CGA_Stream::endl;
-//    cga << "Adress Thread1: " << &thread1 << CGA_Stream::endl;
-//    cga << "Adress Thread2: " << &thread2 << CGA_Stream::endl;
-
 
     // Testing the watch class
     // close to maximum with 1/20 of a second
     watch.windup();
 
-
-    bellringer_test();
-
-    // Testing the threads
+//    bellringer_test();
 
     guarded_organizer.Scheduler::ready(thread1);
     guarded_organizer.Scheduler::ready(thread2);
@@ -94,10 +86,7 @@ int main() {
 
     guarded_organizer.Scheduler::schedule();
 
-    while(1){
-
-
-    };
+    while(1);
 
     return 0;
 

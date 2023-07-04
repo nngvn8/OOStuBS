@@ -31,7 +31,7 @@ private:
     char* id = "keyboard";
 
 public:
-	Keyboard(){}
+	Keyboard() : semaphore(1){}
     Keyboard(const Keyboard &copy) = delete; // prevent copying
  
 	// PLUGIN: "Plugs in" the keyboard (driver). From now on, key presses are handled.

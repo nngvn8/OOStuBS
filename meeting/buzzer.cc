@@ -14,6 +14,7 @@
 #include "bellringer.h"
 #include "../thread/customer.h"
 #include "../thread/entrant.h"
+#include "../syscall/guarded_organizer.h"
 
 Buzzer::Buzzer() {
     this->internal_counter = 0;
@@ -30,8 +31,8 @@ void Buzzer::set (int ms){
 
 }
 void Buzzer::sleep (){
-    Customer* active_customer = (Customer*)(Entrant*)organizer.Dispatcher::active();
-    organizer.block(*active_customer, this);
+    Customer* active_customer = (Customer*)(Entrant*)guarded_organizer.Dispatcher::active();
+    guarded_organizer.block(*active_customer, *this);
 }
 
 void Buzzer::ring() {

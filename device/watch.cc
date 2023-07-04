@@ -42,4 +42,5 @@ void Watch::epilogue(){
 
         bellringer.check();
         //guarded_scheduler.Scheduler::resume();
+    }
 }
