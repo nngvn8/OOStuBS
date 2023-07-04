@@ -23,8 +23,13 @@ public:
 	Bellringer() {}
 
     void check ();
-    void job (Bell* bell, int ticks);
-    void cancel (Bell* bell);
+    
+    void job (Bell *bell, int ticks);
+    void cancel (Bell *bell);
 };
+
+extern Bellringer bellringer;
+
+
 
 #endif

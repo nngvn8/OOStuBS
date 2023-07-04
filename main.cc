@@ -13,6 +13,7 @@
 #include "device/watch.h"
 #include "guard/secure.h"
 #include "syscall/guarded_scheduler.h"
+#include "tests/bellringer_test.h"
 #include "thread/organizer.h"
 #include "meeting/semaphore.h"
 #include "syscall/guarded_semaphore.h"
@@ -29,6 +30,8 @@ Guard guard;
 Dispatcher dispatcher;
 Scheduler scheduler;
 Guarded_Scheduler guarded_scheduler;
+Bellringer bellringer;
+Watch watch{50000};
 Guarded_Organizer guarded_organizer;
 Guarded_Semaphore printing_semaph(1);
 
@@ -73,10 +76,13 @@ int main() {
 //    cga << "Adress Thread1: " << &thread1 << CGA_Stream::endl;
 //    cga << "Adress Thread2: " << &thread2 << CGA_Stream::endl;
 
+
     // Testing the watch class
-    Watch watch{50000}; // close to maximum with 1/20 of a second
+    // close to maximum with 1/20 of a second
     watch.windup();
 
+
+    bellringer_test();
 
     // Testing the threads
 

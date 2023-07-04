@@ -55,4 +55,6 @@ public:
     }
 };
 
+extern Watch watch;
+
 #endif

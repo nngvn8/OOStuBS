@@ -14,11 +14,13 @@
 
 #include "../meeting/buzzer.h"
 
-
-class Guarded_Buzzer : public Buzzer {
+class Guarded_Buzzer: public Buzzer {
 public:
-	Guarded_Buzzer(const Guarded_Buzzer &copy) = delete; // prevent copying
-	Guarded_Buzzer() {}
+	  Guarded_Buzzer(const Guarded_Buzzer &copy) = delete; // prevent copying
+  	Guarded_Buzzer() {}
+    virtual ~Guarded_Buzzer();
+    void set (int ms);
+    void sleep ();
 };
 
 #endif

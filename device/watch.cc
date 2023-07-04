@@ -13,10 +13,11 @@
 #include "machine/plugbox.h"
 #include "machine/pic.h"
 #include "syscall/guarded_scheduler.h"
+#include "../meeting/bellringer.h"
 
 // For debugging
 #include "cgastr.h"
-#include "../syscall/guarded_scheduler.h"
+#include "../object/o_stream.h"
 #include "../syscall/guarded_organizer.h"
 
 int counter = 0;
@@ -33,18 +34,12 @@ bool Watch::prologue(){
 }
 
 void Watch::epilogue(){
-//    if (counter == 60) {
+    if (counter ==1) {
         //cga.setpos(0, y);
-//        y++;
-        //cga << "Timer interrupted!" << CGA_Stream::endl;
-//        counter = 0;
+        //y++;
+        cga << "Timer interrupted!" << CGA_Stream::endl;
+        counter = 0;
 
-        guarded_organizer.Scheduler::resume();
-
+        bellringer.check();
         //guarded_scheduler.Scheduler::resume();
-
-//    }else{
-//        counter++;
-//    }
-
 }

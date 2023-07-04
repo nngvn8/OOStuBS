@@ -11,6 +11,19 @@
 
 /* INCLUDES */
 
-#include "syscall/guarded_buzzer.h"
-#include "guard/secure.h"
-/* Add your code here */ 
+#include "../guard/secure.h"
+#include "guarded_buzzer.h"
+
+Guarded_Buzzer::~Guarded_Buzzer(){
+    Secure section;
+    this->Buzzer::~Buzzer();
+}
+void Guarded_Buzzer::set (int ms){
+    Secure section;
+    this->Buzzer::set(ms);
+}
+void Guarded_Buzzer::sleep (){
+    Secure section;
+    this->Buzzer::sleep();
+
+}

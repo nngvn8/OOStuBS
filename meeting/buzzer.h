@@ -15,11 +15,15 @@
 #include "waitingroom.h"
 #include "bell.h"
 
-class Buzzer : public Waitingroom, public Bell
-{
+class Buzzer : public Waitingroom, public Bell {
+private:
 public:
-	Buzzer(const Buzzer &copy) = delete; // prevent copying
-    Buzzer(){};
+	  Buzzer(const Buzzer &copy) = delete; // prevent copying
+    Buzzer ();
+    virtual ~Buzzer();
+    virtual void ring();
+    void set (int ms);
+    void sleep ();
 };
 
 #endif

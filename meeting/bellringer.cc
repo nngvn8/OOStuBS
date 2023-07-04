@@ -10,25 +10,27 @@
 /* bellringer manages.                                                       */
 /*****************************************************************************/
 #include "bellringer.h"
+#include "../device/cgastr.h"
+#include "../object/o_stream.h"
 
-void Bellringer::check () {
-/// recursive version that probably is not in O(1) either
-//    if (head) {
-//        ((Bell*)head)->ring_and_next();
-//    }
-/// O(n) variant
-    Chain* cur_bell = head; // always casted on Bell because Bell is abstract
-    while (cur_bell) {
-        ((Bell*)cur_bell)->ring();
-        cur_bell = cur_bell->next;
+
+void Bellringer::check (){
+    Chain* iterator;
+    iterator = this->head;
+    while(iterator){
+        Bell* activated_iterator = (Bell*)iterator;
+        activated_iterator->tick();
+        if(activated_iterator->run_down()) {
+            //cga << "A process had to jingle its bells" << CGA_Stream::endl;
+            activated_iterator->ring();
+        }
+        iterator = iterator->next;
     }
 }
-
-void Bellringer::job(Bell* bell, int ticks) {
-    bell->wait(ticks);
-    insert_first(bell);
+void Bellringer::job (Bell *bell, int ticks){
+        bell->wait(ticks);
+        this->insert_first((Chain*)bell);
 }
-
-void Bellringer::cancel(Bell* bell) {
-    remove(bell);
+void Bellringer::cancel (Bell *bell){
+    this->remove((Chain*)bell);
 }
