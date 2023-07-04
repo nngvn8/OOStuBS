@@ -9,4 +9,26 @@
 /* Semaphore class.                                                          */
 /*****************************************************************************/
 
-/* Add your code here */ 
+#include "guarded_semaphore.h"
+#include "../guard/secure.h"
+
+void Guarded_Semaphore::p() {
+    Secure section;
+    Semaphore::p();
+}
+
+void Guarded_Semaphore::v() {
+    Secure section;
+    Semaphore::v();
+
+}
+
+void Guarded_Semaphore::wait() {
+    Secure section;
+    Semaphore::wait();
+}
+
+void Guarded_Semaphore::signal() {
+    Secure section;
+    Semaphore::signal();
+}

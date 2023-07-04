@@ -34,5 +34,3 @@ void Bellringer::job (Bell *bell, int ticks){
 void Bellringer::cancel (Bell *bell){
     this->remove((Chain*)bell);
 }
-
-

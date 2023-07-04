@@ -17,8 +17,8 @@
 
 // For debugging
 #include "cgastr.h"
-#include "../syscall/guarded_scheduler.h"
 #include "../object/o_stream.h"
+#include "../syscall/guarded_organizer.h"
 
 int counter = 0;
 int y =0;
@@ -42,9 +42,4 @@ void Watch::epilogue(){
 
         bellringer.check();
         //guarded_scheduler.Scheduler::resume();
-
-    }else{
-        counter++;
-    }
-
 }

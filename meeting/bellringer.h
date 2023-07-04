@@ -16,16 +16,14 @@
 #include "../object/list.h"
 #include "bell.h"
 
-/* Add your code here */
-
 class Bellringer : public List
-/* Add your code here */ 
 {
 public:
 	Bellringer(const Bellringer &copy) = delete; // prevent copying
 	Bellringer() {}
 
     void check ();
+    
     void job (Bell *bell, int ticks);
     void cancel (Bell *bell);
 };
