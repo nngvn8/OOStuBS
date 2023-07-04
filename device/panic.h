@@ -25,6 +25,7 @@ public:
     Panic(const Panic &copy) = delete; // prevent copying
 
     bool prologue();
+    bool prologue(char* message);
     char* getID(){return id;}
 };
 

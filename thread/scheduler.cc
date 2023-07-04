@@ -19,10 +19,10 @@ void Scheduler::schedule() {
     Chain* activated_obj = this->rdy_list.dequeue();
     if (activated_obj != nullptr) {
         if (this->active() == nullptr) {
-            this->go((Entrant&)(*activated_obj)); /// can cast on reference of abstract class (due pointer internally)
+            this->go((Coroutine&)(Entrant&)(*activated_obj)); /// can cast on reference of abstract class (due pointer internally)
         }
         else {
-            this->dispatch(*(Entrant*)(activated_obj)); /// cant cast on abstract class
+            this->dispatch((Coroutine&)*(Entrant*)(activated_obj)); /// cant cast on abstract class
         }
     }
 }
@@ -32,7 +32,12 @@ void Scheduler::exit() {
 }
 
 void Scheduler::kill(Entrant& that) {
-    this->rdy_list.remove((Chain*)&that);
+    if ((Coroutine*)&that == active()) {
+        this->exit();
+    }
+    else {
+        this->rdy_list.remove((Chain*)&that);
+    }
 }
 
 void Scheduler::resume() {

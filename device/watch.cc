@@ -17,6 +17,7 @@
 // For debugging
 #include "cgastr.h"
 #include "../syscall/guarded_scheduler.h"
+#include "../syscall/guarded_organizer.h"
 
 int counter = 0;
 int y =0;
@@ -32,16 +33,18 @@ bool Watch::prologue(){
 }
 
 void Watch::epilogue(){
-    if (counter == 60) {
+//    if (counter == 60) {
         //cga.setpos(0, y);
-        y++;
+//        y++;
         //cga << "Timer interrupted!" << CGA_Stream::endl;
-        counter = 0;
+//        counter = 0;
 
-        guarded_scheduler.Scheduler::resume();
+        guarded_organizer.Scheduler::resume();
 
-    }else{
-        counter++;
-    }
+        //guarded_scheduler.Scheduler::resume();
+
+//    }else{
+//        counter++;
+//    }
 
 }
