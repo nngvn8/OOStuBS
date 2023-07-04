@@ -34,13 +34,11 @@ bool Watch::prologue(){
 }
 
 void Watch::epilogue(){
-    if (counter ==1) {
-        //cga.setpos(0, y);
-        //y++;
-        cga << "Timer interrupted!" << CGA_Stream::endl;
-        counter = 0;
-
+//    if (counter ==1) {
+//        cga << "Timer interrupted!" << CGA_Stream::endl;
+//        counter = 0;
+//
         bellringer.check();
-        //guarded_scheduler.Scheduler::resume();
-    }
+        guarded_organizer.Scheduler::resume();
+//    }
 }

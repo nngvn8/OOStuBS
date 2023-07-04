@@ -15,9 +15,9 @@
 
 class UserThread : public Application {
 private:
-    int wait_timer;
     void (*action_pointer) (UserThread*) ;
 public:
+    int wait_timer;
     char* name;
     char* msg;
 

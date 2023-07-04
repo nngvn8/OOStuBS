@@ -23,10 +23,10 @@ Buzzer::Buzzer() {
 Buzzer::~Buzzer(){
     bellringer.cancel(this);
 }
-void Buzzer::set (int ms){
+void Buzzer::set(int ms){
     //interval < ms in the normal case!
-    int watch_interval = watch.interval()/1000;
-    int factor = ms/watch_interval;
+    int watch_interval_ms = watch.interval()/1000;
+    int factor = ms/watch_interval_ms;
     bellringer.job((Bell*) this, factor);
 
 }
