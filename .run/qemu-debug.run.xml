@@ -1,6 +1,6 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="qemu-debug" type="com.jetbrains.cidr.embedded.customgdbserver.type" factoryName="com.jetbrains.cidr.embedded.customgdbserver.factory" PROGRAM_PARAMS="-drive file=build/bootdisk.iso,format=raw -k en-us -S -gdb tcp::2024" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" WORKING_DIR="file://$PROJECT_DIR$" PASS_PARENT_ENVS_2="true" PROJECT_NAME="OOStubBS_MBJ" TARGET_NAME="all" CONFIG_NAME="all" version="1" RUN_PATH="$PROJECT_DIR$/build/system">
-    <custom-gdb-server version="1" gdb-connect="localhost:2024" executable="qemu-system-x86_64" warmup-ms="0" download-type="UPDATED_ONLY" reset-cmd="monitor reset" reset-type="NEVER">
+    <custom-gdb-server version="1" gdb-connect="localhost:2024" executable="qemu-system-x86_64" warmup-ms="0" download-type="NONE" reset-cmd="monitor reset" reset-type="NEVER">
       <debugger kind="GDB" isBundled="true" />
     </custom-gdb-server>
     <method v="2">

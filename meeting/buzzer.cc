@@ -15,6 +15,7 @@
 #include "../thread/customer.h"
 #include "../thread/entrant.h"
 #include "../syscall/guarded_organizer.h"
+#include "../thread/threads.h"
 
 Buzzer::Buzzer() {
     this->internal_counter = 0;
@@ -32,9 +33,13 @@ void Buzzer::set(int ms){
 }
 void Buzzer::sleep (){
     Customer* active_customer = (Customer*)(Entrant*)guarded_organizer.Dispatcher::active();
+//    cga << "Active customer" << ((UserThread*)active_customer)->name << CGA_Stream::endl;
     guarded_organizer.block(*active_customer, *this);
 }
 
 void Buzzer::ring() {
-    this->~Buzzer();
+    while (Queue::head) {
+        guarded_organizer.wakeup(*(Customer*)head);
+        Queue::dequeue();
+    }
 }

@@ -25,5 +25,5 @@ void Guarded_Buzzer::set (int ms){
 void Guarded_Buzzer::sleep (){
     Secure section;
     this->Buzzer::sleep();
-
+//    cga << "done with sleep" << CGA_Stream::endl;
 }

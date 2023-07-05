@@ -19,6 +19,7 @@
 #include "syscall/guarded_organizer.h"
 #include "meeting/bellringer.h"
 #include "meeting/buzzer.h"
+#include "syscall/guarded_buzzer.h"
 
 // Objects used everywhere => make them global
 CPU cpu;
@@ -32,7 +33,7 @@ Dispatcher dispatcher;
 Scheduler scheduler;
 Guarded_Scheduler guarded_scheduler;
 Bellringer bellringer;
-Watch watch{50000};
+Watch watch{1000000};
 Guarded_Organizer guarded_organizer;
 Guarded_Semaphore printing_semaph(1);
 
@@ -44,7 +45,7 @@ long stack[4096]; // the one global stack
 
 void printName(UserThread* t){
     int i = 0;
-    int slowing_factor = 6000000;
+    int slowing_factor = 3000000;
     while (true) {
         printing_semaph.p();
         while (t->msg[i] != '\0') {
@@ -56,8 +57,8 @@ void printName(UserThread* t){
 
         t->wait_timer--;
         if (!t->wait_timer) {
-            Buzzer buzzer;
-            buzzer.set(100000);
+            Guarded_Buzzer buzzer;
+            buzzer.set(1000);
             cga << t->name << " sleeping now" << CGA_Stream::endl;
             buzzer.sleep();
             cga << t->name << " awake now" << CGA_Stream::endl;
@@ -69,11 +70,17 @@ void printName(UserThread* t){
 
 }
 
+void idle(UserThread* t) {
+    while (true) {
+//        cga << "I dont do anything" << CGA_Stream::endl;
+    }
+}
+
 
 UserThread thread1(&stack[COROUTINE_TOS_ONE], 2, "ONE", "ONE: Hello I am thread one,ONE: \0", &printName);
 UserThread thread2(&stack[COROUTINE_TOS_TWO], 3, "TWO", "TWO: Hello I am thread two,TWO: \0", &printName);
 UserThread thread3(&stack[COROUTINE_TOS_THREE], 5, "THREE", "THREE: Hello I am thread three,THREE: \0", &printName);
-UserThread thread4(&stack[COROUTINE_TOS_FOUR], 25000000, "d", "d", &printName);
+UserThread thread4(&stack[COROUTINE_TOS_FOUR], 5, "FOUR", "THREE: Hello I am thread three,THREE: \0", &idle);
 
 int main() {
     Secure section;
@@ -90,7 +97,7 @@ int main() {
     guarded_organizer.Scheduler::ready(thread1);
     guarded_organizer.Scheduler::ready(thread2);
     guarded_organizer.Scheduler::ready(thread3);
-    //guarded_organizer.Scheduler::ready(thread4);
+    guarded_organizer.Scheduler::ready(thread4);
 
     guarded_organizer.Scheduler::schedule();
 

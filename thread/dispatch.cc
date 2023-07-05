@@ -11,6 +11,7 @@
 /* coroutine, all further context switches are triggered by dispatch().      */
 /* active() returns the life pointer.                                        */
 #include "dispatch.h"
+#include "threads.h"
 
 /*****************************************************************************/
 
@@ -22,6 +23,7 @@ void Dispatcher::go(Coroutine& first) {
 }
 
 void Dispatcher::dispatch(Coroutine& next) {
+//    cga << "live: " << ((UserThread*)life_pointer)->name << "  next " << ((UserThread&)next).name;
     Coroutine* life_ptr_prev = life_pointer;
     life_pointer = &next;
     life_ptr_prev->resume(next);

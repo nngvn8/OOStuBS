@@ -34,9 +34,9 @@ bool Watch::prologue(){
 }
 
 void Watch::epilogue(){
-//    if (counter ==1) {
-//        cga << "Timer interrupted!" << CGA_Stream::endl;
-//        counter = 0;
+//    if (counter % 20 == 0) {
+//        cga << CGA_Stream::endl << "tick" << CGA_Stream::endl;
+//        counter++;
 //
         bellringer.check();
         guarded_organizer.Scheduler::resume();

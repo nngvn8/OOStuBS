@@ -10,11 +10,16 @@
 /*****************************************************************************/
 
 #include "organizer.h"
+#include "../syscall/thread.h"
+#include "threads.h"
 
 void Organizer::block(Customer& customer, Waitingroom& waitingroom) {
     /// Order?
     customer.waiting_in(&waitingroom);
-    Scheduler::kill(customer);
+//    cga << "Customer waiting: " << ((UserThread&)customer).name << CGA_Stream::endl;
+//    cga << "Waitingroom: " << &waitingroom << CGA_Stream::endl;
+//    cga << "waiting_in: " << customer.waiting_in() << CGA_Stream::endl;
+//    Scheduler::kill(customer);
     Scheduler::schedule();
 }
 
