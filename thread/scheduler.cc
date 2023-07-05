@@ -11,6 +11,7 @@
 #include "scheduler.h"
 #include "device/cgastr.h"
 #include "threads.h"
+#include "syscall/guarded_organizer.h"
 
 
 void Scheduler::ready(Entrant& that) {
@@ -18,20 +19,19 @@ void Scheduler::ready(Entrant& that) {
 }
 
 void Scheduler::schedule() {
-    Chain* activated_obj = this->rdy_list.dequeue();
-    if (activated_obj != nullptr) {
-        if (this->active() == nullptr) {
+    auto* activated_obj = (Entrant*)this->rdy_list.dequeue();
+    if (activated_obj == nullptr) {
+        activated_obj = &guarded_organizer.idle_thread;
+    }
+    if (this->active() == nullptr) {
 //            cga << "In GO " << ((UserThread*)activated_obj)->name << CGA_Stream::endl;
-            this->go((Coroutine&)(Entrant&)(*activated_obj)); /// can cast on reference of abstract class (due pointer internally)
-        }
-        else {
-//            cga << "In DISPATCH " << ((UserThread*)activated_obj)->name << CGA_Stream::endl;
-            this->dispatch((Coroutine&)*(Entrant*)(activated_obj)); /// cant cast on abstract class
-        }
+        this->go(*activated_obj); /// can cast on reference of abstract class (due pointer internally)
     }
     else {
-        cga << "tried to schedule NULL" << CGA_Stream::endl;
+//            cga << "In DISPATCH " << ((UserThread*)activated_obj)->name << CGA_Stream::endl;
+        this->dispatch(*activated_obj); /// cant cast on abstract class
     }
+
 }
 
 void Scheduler::exit() {

@@ -80,7 +80,7 @@ void printName(UserThread* t){
 UserThread thread1(&stack[COROUTINE_TOS_ONE], 2, "ONE", "ONE: Hello I am thread one,ONE: \0", &printName);
 UserThread thread2(&stack[COROUTINE_TOS_TWO], 3, "TWO", "TWO: Hello I am thread two,TWO: \0", &printName);
 UserThread thread3(&stack[COROUTINE_TOS_THREE], 5, "THREE", "THREE: Hello I am thread three,THREE: \0", &printName);
-UserThread thread4(&stack[COROUTINE_TOS_FOUR], 5, "FOUR", "THREE: Hello I am thread three,THREE: \0", &idle);
+//UserThread thread4(&stack[COROUTINE_TOS_FOUR], 5, "FOUR", "THREE: Hello I am thread three,THREE: \0", &idle);
 
 int main() {
     Secure section;
@@ -97,7 +97,7 @@ int main() {
     guarded_organizer.Scheduler::ready(thread1);
     guarded_organizer.Scheduler::ready(thread2);
     guarded_organizer.Scheduler::ready(thread3);
-    guarded_organizer.Scheduler::ready(thread4);
+//    guarded_organizer.Scheduler::ready(thread4);
 
     guarded_organizer.Scheduler::schedule();
 

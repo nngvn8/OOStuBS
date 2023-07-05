@@ -27,9 +27,9 @@ public:
     }
 
     void action(){
+        // while loop guards that no action is able to leave or terminate
         while (true) {
             action_pointer(this);
-            for (int i = 0; i < wait_timer; i++);
         }
     }
 

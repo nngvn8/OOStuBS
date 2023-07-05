@@ -28,7 +28,7 @@ void Organizer::wakeup(Customer& customer) {
     Waitingroom* waitingroom = customer.waiting_in();
     waitingroom->remove(&customer);
     Scheduler::ready((Entrant&)customer);
-    if (Dispatcher::active() == &idle_thread) {
+    if (Dispatcher::active() == &(Coroutine&)idle_thread) {
         Scheduler::schedule();
     }
 
