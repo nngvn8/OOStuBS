@@ -15,10 +15,14 @@
 #include "scheduler.h"
 #include "customer.h"
 #include "../meeting/waitingroom.h"
-
+#include "../thread/threads.h"
+void idle(UserThread* t);
 class Organizer : public Scheduler
 {
 public:
+    long stack_idle_thread[1024];
+    UserThread idle_thread{&stack_idle_thread[1024], 0, "idle", "", &idle};
+
 	Organizer(const Organizer &copy) = delete; // prevent copying
 	Organizer() {}
 

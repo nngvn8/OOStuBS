@@ -19,7 +19,6 @@ void Organizer::block(Customer& customer, Waitingroom& waitingroom) {
 //    cga << "Customer waiting: " << ((UserThread&)customer).name << CGA_Stream::endl;
 //    cga << "Waitingroom: " << &waitingroom << CGA_Stream::endl;
 //    cga << "waiting_in: " << customer.waiting_in() << CGA_Stream::endl;
-//    Scheduler::kill(customer);
     Scheduler::schedule();
 }
 
@@ -29,6 +28,9 @@ void Organizer::wakeup(Customer& customer) {
     Waitingroom* waitingroom = customer.waiting_in();
     waitingroom->remove(&customer);
     Scheduler::ready((Entrant&)customer);
+    if (Dispatcher::active() == &idle_thread) {
+        Scheduler::schedule();
+    }
 
 }
 
@@ -41,3 +43,5 @@ void Organizer::kill(Customer& that) {
         Scheduler::kill(that);
     }
 }
+
+void idle(UserThread*) { cpu_idle(); }

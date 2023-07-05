@@ -70,11 +70,11 @@ void printName(UserThread* t){
 
 }
 
-void idle(UserThread* t) {
-    while (true) {
+//void idle(UserThread* t) {
+//    while (true) {
 //        cga << "I dont do anything" << CGA_Stream::endl;
-    }
-}
+//    }
+//}
 
 
 UserThread thread1(&stack[COROUTINE_TOS_ONE], 2, "ONE", "ONE: Hello I am thread one,ONE: \0", &printName);
